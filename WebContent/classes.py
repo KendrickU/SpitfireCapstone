@@ -34,8 +34,3 @@ class users(db.Model):
 #db.session.commit()
 #db.session.query.filter_by(attribute).delete()
 #db.session.commit()
-
-#{"user":"hello", "pass":"test}
-#{"command":"update/remove/add", "table":"users/items", (whatever information is used)}
-
-#request.form['username'] != 'admin' or request.form['password'] != 'admin'
