@@ -29,16 +29,16 @@
     <th>Barcode</th>
     <th>Actions</th>
 </tr>
-{% for item in items %}
+{% for items in itemList %}
 <tr>
-	<td>{{ item.idItems }}</td>
-	<td>{{ item.Name }}</td>
-	<td>{{ item.Quantity }}</td>
-	<td>{{ item.Barcode }}</td>
+	<td>{{ items.idItems }}</td>
+	<td>{{ items.Name }}</td>
+	<td>{{ items.Quantity }}</td>
+	<td>{{ items.Barcode }}</td>
 	<td>
-		<a href="{{ url_for('delete', idItems=item.idItems) }}">Delete</a>
+		<a href="{{ url_for('delete', idItems=items.idItems) }}">Delete</a>
 		&nbsp;||&nbsp;
-		<a href="{{ url_for('update', idItems=item.idItems) }}">Update</a>
+		<a href="{{ url_for('update', idItems=items.idItems) }}">Update</a>
 	</td>
 </tr>
 {% endfor %}
