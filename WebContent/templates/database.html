@@ -1,21 +1,48 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Flask Intro</title>
+    <title>Items List Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="static/bootstrap.min.css" rel="stylesheet" media="screen">
+	<!-- <link href="static/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">-->
+	<link href="static/ad.css" rel="stylesheet" media="screen">
   </head>
-  <body>
-    <div class="container">
-      <h1>Welcome to the Database!</h2>
-      <br>
-	  <form action="" method="post">
-        <input type="text" placeholder="UserID" name="username" value="{{
-          request.form.username }}">
-         <input type="password" placeholder="Password" name="password" value="{{
-          request.form.password }}">
-        <input class="btn btn-default" type="submit" value="Login">
-      </form>
-    </div>
-  </body>
+   <body>
+  <div id="header-wrapper">
+  <h1>Welcome to Items List Page!</h1>
+      <p>Click <a href="/welcome">here</a> to go back to the Home page.</p>
+  </div>
+  
+           <table>
+<tr>
+	<th colspan="4">List of Items</th>
+	<th>
+		<form action="/add">
+		<div class="btn-group">
+    	<input type="submit" value="Add" />
+    	</div>
+		</form>
+	</th>
+<tr>
+    <th>Item Id</th>
+    <th>Name</th>
+    <th>Quantity</th>
+    <th>Barcode</th>
+    <th>Actions</th>
+</tr>
+{% for item in items %}
+<tr>
+	<td>{{ item.idItems }}</td>
+	<td>{{ item.Name }}</td>
+	<td>{{ item.Quantity }}</td>
+	<td>{{ item.Barcode }}</td>
+	<td>
+		<a href="{{ url_for('delete', idItems=item.idItems) }}">Delete</a>
+		&nbsp;||&nbsp;
+		<a href="{{ url_for('update', idItems=item.idItems) }}">Update</a>
+	</td>
+</tr>
+{% endfor %}
+</table>
+
+</body>
 </html>

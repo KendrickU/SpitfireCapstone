@@ -3,13 +3,93 @@
   <head>
     <title>Flask Intro</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="static/bootstrap.min.css" rel="stylesheet" media="screen">
+	<!-- <link href="static/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">-->
+	<link href="static/ad.css" rel="stylesheet" media="screen">
   </head>
-  <body>
-    <div class="container">
-      <h1>Welcome to Flask!</h2>
-      <br>
+   <body class="container-fluid">
+  <div id="header-wrapper">
+  <h1>Welcome to Spitfire!</h1>
       <p>Click <a href="/login">here</a> to go login.</p>
+  </div>
+  <div class="row">
+    <div class="col col-3 left">
+      <div class="panel panel-left">
+        <div class="panel-label">
+        <h1>Inventory List</h1>   
+        </div>
+	<div class="accordianBody">
+        <div class="block">
+  			<input type="radio" name="city" id="option1" checked />   
+  			<label for="option1"><span>Lighting</span></label>
+  				<div class="info">
+    				<p>Lighting Info</p>
+  				</div>
+		</div>
+		<div class="block">
+  				<input type="radio" name="city" id="option2"/>
+  				<label for="option2"><span>Truss</span></label>
+  					<div class="info">
+    					<p>Truss Info</p>
+  					</div>
+		</div>
+		<div class="block">
+  			<input type="radio" name="city" id="option3" />
+  			<label for="option3"><span>Rigging</span></label>
+  				<div class="info">
+    				<p>Rigging Info</p>  
+  				</div>
+		</div>
+	</div>
+      </div>
     </div>
-  </body>
+    <div class="col col-6">
+      <div class="row">
+        <div class="col col-12">
+          <div class="panel">
+            <div class="panel-label">
+            <div class="btn-group" style="width:100%">
+  			<button style="width:33.3%">Start Date</button>
+  			<button style="width:33.3%">End Date</button>
+  			<button style="width:33.3%">Calendar View</button>
+				</div>
+            </div>
+           <table>
+<tr>
+	<th colspan="6">List of Shows</th>
+<tr>
+	<th>Show Id</th>
+    <th>Name</th>
+    <th>Start Date</th>
+    <th>End Date</th>
+    <th>Production</th>
+</tr>
+<tr>
+	<td colspan="6">No Shows Found</td>
+</tr>
+</table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col col-3 right">
+      <div class="panel panel-right">
+        <div class="panel-label">
+		<h1>Quicklinks</h1>        
+        </div>
+        <div class="quicklinks">
+        <ul>
+        	<a href="/database"><li>Items List Page</li></a>
+        	<a href="/contacts"><li>Contacts</li></a>
+        	<a href="/schedules"><li>Schedules</li></a>
+        	<a href="/reports"><li>Reports</li></a>
+        	<a href="/forms"><li>Forms</li></a>
+        </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
 </html>
+
