@@ -1,7 +1,8 @@
 # import the Flask class from the flask module
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import classes as c
+import json
 
 # create the application object
 app = Flask(__name__)
@@ -68,6 +69,10 @@ def delete(idItems):
 	c.db.session.delete(deleteItem)
 	c.db.session.commit()
 	return redirect('/database')
+
+@app.route('/calendar')
+def calendar():
+    return render_template("calendar.html")
 
 # start the server with the 'run()' method
 if __name__ == '__main__':

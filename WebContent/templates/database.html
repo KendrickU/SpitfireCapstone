@@ -3,24 +3,104 @@
   <head>
     <title>Items List Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!-- <link href="static/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">-->
+	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Quicksand" />
 	<link href="static/ad.css" rel="stylesheet" media="screen">
   </head>
+  <style>
+  .modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    padding-top: 80px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+}
+.modal-content {
+    margin: auto;
+	padding: 20px;
+    width: 80%;
+}
+.close {
+    color: grey;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+input[type=submit] {
+    cursor:pointer;
+	width:100%;
+	border:none;
+	background:grey;
+	color:#FFF;
+	margin:0 0 5px;
+	padding:10px;
+	font-size:15px;
+	font-family: Quicksand;
+	letter-spacing: 2px;
+	text-shadow: none;
+	box-shadow: none;
+}
+
+input[type=submit]:hover {
+    background:black;
+	-webkit-transition:background 0.3s ease-in-out;
+	-moz-transition:background 0.3s ease-in-out;
+	transition:background-color 0.3s ease-in-out;
+}
+
+input[type=text], select {
+    width: 100%; 
+    padding: 12px;  
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; 
+    margin-top: 6px; 
+    margin-bottom: 16px; 
+    resize: vertical;
+}
+
+.FormContainer {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+	padding-bottom: 60px;
+    max-width:650px;
+    margin:0 auto;
+    position:relative;
+	font-family: Quicksand;
+}
+.FormContainer label, span {
+	color: #000000;
+}
+.FormContainer h1{
+	text-align: center;
+}
+
+  </style>
    <body>
   <div id="header-wrapper">
-  <h1>Welcome to Items List Page!</h1>
-      <p>Click <a href="/welcome">here</a> to go back to the Home page.</p>
+  <h1>Items List Page!</h1>
+   <p>Click <a href="/welcome">here</a> to go back to the Home page.</p>
   </div>
-  
            <table>
 <tr>
 	<th colspan="4">List of Items</th>
 	<th>
-		<form action="/add">
 		<div class="btn-group">
-    	<input type="submit" value="Add" />
+		<button id="addButton">Add Item</button>
     	</div>
-		</form>
 	</th>
 <tr>
     <th>Item Id</th>
@@ -43,6 +123,40 @@
 </tr>
 {% endfor %}
 </table>
-
+<div id="addModal" class="modal">
+ <div class="modal-content">
+ <div class="FormContainer">
+ <span class="close">&times;</span>
+  <h1>Add an Item!</h1>
+  <form action="/add" method="POST">
+  	<label for="idItems">ID Item</label>
+    <input type="text" id="idItems" name="idItems" placeholder="Item ID...">
+    <label for="Name">Name</label>
+    <input type="text" id="Name" name="Name" placeholder="Name...">
+    <label for="Quantity">Quantity</label>
+    <input type="text" id="Quantity" name="Quantity" placeholder="Quantity...">
+	<label for="Barcode">Barcode</label>
+    <input type="text" id="Barcode" name="Barcode" placeholder="Barcode...">
+    <input type="submit" value="Submit">
+  </form>
+  </div>
+ </div>
+</div>
+<script>
+var modal = document.getElementById('addModal');
+var btn = document.getElementById("addButton");
+var span = document.getElementsByClassName("close")[0];
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+span.onclick = function() {
+    modal.style.display = "none";
+}
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
 </body>
 </html>

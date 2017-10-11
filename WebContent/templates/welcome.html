@@ -50,7 +50,9 @@
             <div class="btn-group" style="width:100%">
   			<button style="width:33.3%">Start Date</button>
   			<button style="width:33.3%">End Date</button>
-  			<button style="width:33.3%">Calendar View</button>
+			<form method="get" action="/calendar">
+				<button style="width:33.3%" type="submit">Calendar View</button>
+			</form>
 				</div>
             </div>
            <table>
@@ -67,12 +69,13 @@
 <tr>
 	<td>{{ Shows.idShows }}</td>
 	<td>{{ Shows.show }}</td>
-	<td>{{ Shows.production }}</td>
 	<td>{{ Shows.start_date }}</td>
 	<td>{{ Shows.end_date }}</td>
+	<td>{{ Shows.production }}</td>
 </tr>
 {% endfor %}
 </table>
+<br>
           </div>
         </div>
       </div>
