@@ -17,7 +17,8 @@ def home():
 
 @app.route('/welcome')
 def welcome():
-    return render_template('welcome.html')  # render a template
+	showList = c.Shows.query.all()
+	return render_template('welcome.html', showList=showList)  # render a template
 
 # route for handling the login page logic
 @app.route('/login', methods=['GET', 'POST'])

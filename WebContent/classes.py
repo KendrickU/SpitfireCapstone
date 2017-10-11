@@ -32,6 +32,24 @@ class items(db.Model):
     def __repr__(self):
         return '<Item %r>' % self.Name 
 
+class Shows(db.Model):
+	__tablename__ = "Shows"
+	idShows = db.Column('idShows', db.Integer, primary_key=True)
+	show = db.Column('show', db.String(100))
+	production = db.Column('production', db.String(45))
+	start_date = db.Column('start date', db.String(45))
+	end_date = db.Column('end date', db.String(45))
+	
+	def __init__(self, idShows, show, production, start_date, end_date):
+		self.idShows = idShows
+		self.show = show
+		self.production = production
+		self.start_date = start_date
+		self.end_date = end_date
+	
+	def __repr__(self):
+		return '<Show> %r' % self.show
+	
 #item = items(123, "123", 213, "12")
 #db.session.add(item)
 #db.session.commit()

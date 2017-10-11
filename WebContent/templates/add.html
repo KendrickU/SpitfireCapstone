@@ -3,49 +3,61 @@
   <head>
     <title>Add an Item</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!-- <link href="static/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">-->
-	<link href="static/ad.css" rel="stylesheet" media="screen">
+	 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Quicksand" />
 	<style>
 input[type=text], select {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
+    width: 100%; 
+    padding: 12px;  
     border: 1px solid #ccc;
     border-radius: 4px;
-    box-sizing: border-box;
+    box-sizing: border-box; 
+    margin-top: 6px; 
+    margin-bottom: 16px; 
+    resize: vertical;
 }
 
 input[type=submit] {
-    width: 100%;
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+    cursor:pointer;
+	width:100%;
+	border:none;
+	background:grey;
+	color:#FFF;
+	margin:0 0 5px;
+	padding:10px;
+	font-size:15px;
+	font-family: Quicksand;
+	letter-spacing: 2px;
 }
 
 input[type=submit]:hover {
-    background-color: #45a049;
+    background:black;
+	-webkit-transition:background 0.3s ease-in-out;
+	-moz-transition:background 0.3s ease-in-out;
+	transition:background-color 0.3s ease-in-out;
 }
 
 .addFormContainer {
     border-radius: 5px;
     background-color: #f2f2f2;
     padding: 20px;
-    margin: 20px;
+    max-width:650px;
+    margin:0 auto;
+    position:relative;
+	font-family: Quicksand;
+}
+.addFormContainer label, span {
+	color: #000000;
+}
+.addFormContainer h1, p{
+	text-align: center;
 }
 </style>
   </head>
    <body>
-  <div id="header-wrapper">
-  <h1>Add an Item Page!</h1>
-      <p>Click <a href="/welcome">here</a> to go back to the Home page.</p>
-      <p>Click <a href="/database">here</a> to go back to the item list page.</p>
-  </div>
   <div class="addFormContainer">
+  <h1>Add an Item!</h1>
+      <p>Click <a href="/welcome">here</a> to go back to the Home page.</p>
+      <p>Click <a href="/database">here</a> to go back to the Item list page.</p>
   <form action="/add" method="POST">
   	<label for="idItems">ID Item</label>
     <input type="text" id="idItems" name="idItems" placeholder="Item ID...">

@@ -63,9 +63,15 @@
     <th>End Date</th>
     <th>Production</th>
 </tr>
+{% for Shows in showList %}
 <tr>
-	<td colspan="6">No Shows Found</td>
+	<td>{{ Shows.idShows }}</td>
+	<td>{{ Shows.show }}</td>
+	<td>{{ Shows.production }}</td>
+	<td>{{ Shows.start_date }}</td>
+	<td>{{ Shows.end_date }}</td>
 </tr>
+{% endfor %}
 </table>
           </div>
         </div>
