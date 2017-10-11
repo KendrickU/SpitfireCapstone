@@ -38,17 +38,35 @@ def database():
     itemList = c.items.query.all()
     return render_template('database.html', itemList=itemList)  # render a template
 
-@app.route('/add')
+@app.route('/add', methods=['GET', 'POST'])
 def add():
-    return render_template('add.html')  # render a template
+	if request.method == 'GET':
+		return render_template('add.html')
+	else:
+		item = c.items(request.form['idItems'], request.form['Name'], request.form['Quantity'], request.form['Barcode'])
+		c.db.session.add(item)
+		c.db.session.commit()
+		return redirect('/database')
 
-@app.route('/update')
+@app.route('/database/update/<int:idItems>', methods=['GET', 'POST'])
 def update(idItems):
-    return render_template('update.html')  # render a template
+	updateItem = c.items.query.filter_by(idItems=idItems).first()
+	if request.method == 'GET':
+		return render_template('update.html', updateItem=updateItem)
+	else:
+		updateItem.idItems = request.form['updatedidItems']
+		updateItem.Name = request.form['updatedName']
+		updateItem.Quantity = request.form['updatedQuantity']
+		updateItem.Barcode = request.form['updatedBarcode']
+		c.db.session.commit()
+		return redirect('/database')
 
-@app.route('/delete')
+@app.route('/database/delete/<int:idItems>', methods=['GET', 'POST'])
 def delete(idItems):
-    return render_template('delete.html')  # render a template
+	deleteItem = c.items.query.get_or_404(idItems)
+	c.db.session.delete(deleteItem)
+	c.db.session.commit()
+	return redirect('/database')
 
 # start the server with the 'run()' method
 if __name__ == '__main__':
