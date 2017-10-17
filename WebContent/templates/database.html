@@ -11,7 +11,7 @@
     display: none; 
     position: fixed; 
     z-index: 1; 
-    padding-top: 80px; 
+    padding-top: 25px; 
     left: 0;
     top: 0;
     width: 100%; 
@@ -90,11 +90,7 @@ input[type=text], select {
 
   </style>
    <body>
-  <div id="header-wrapper">
-  <h1>Items List Page!</h1>
-   <p>Click <a href="/welcome">here</a> to go back to the Home page.</p>
-  </div>
-           <table>
+    <table>
 <tr>
 	<th colspan="4">List of Items</th>
 	<th>
@@ -151,11 +147,6 @@ btn.onclick = function() {
 }
 span.onclick = function() {
     modal.style.display = "none";
-}
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
 }
 </script>
 </body>
