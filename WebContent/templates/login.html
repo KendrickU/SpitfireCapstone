@@ -1,16 +1,16 @@
 <html>
   <head>
-    <title>Flask Intro - login page</title>
+    <title>Login page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="static/bootstrap/css/bootstrap.css" rel="stylesheet"
 	type="text/css" />
-<script src="static/bootstrap/js/bootstrap.js"></script>
+	<script src="static/bootstrap/js/bootstrap.js"></script>
   </head>
   <body style="background-color:#2b2b33">
     <div id="login">
     <div class="modal-dialog">
     <div class="loginmodal-container">
-      <h1>Please login</h1>
+      <h1>Please Login</h1>
       <br>
       <form action="" method="post">
         <input type="text" placeholder="UserID" name="username" value="{{
@@ -20,7 +20,7 @@
         <input class="btn btn-default login loginmodal-submit" type="submit" value="Login">
       </form>
       {% if error %}
-        <p class="error"><strong>Error:</strong> {{ error }}
+        <center><p class="error"><strong>Error:</strong> {{ error }}</center>
       {% endif %}
       </div>
       </div>

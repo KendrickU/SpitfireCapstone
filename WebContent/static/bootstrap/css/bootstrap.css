@@ -313,7 +313,7 @@ a, a:link, a:visited {
 
 @import url(https://fonts.googleapis.com/css?family=Lato:700italic,400,400italic,700);
 
-.btn-group button, input[type=submit] {
+.btn-group button {
     background-color: #eaeef1; 
     padding: 10px 24px; 
     cursor: pointer; 
@@ -336,7 +336,7 @@ a, a:link, a:visited {
 }
 
 /* Add a background color on hover */
-.btn-group button:hover, input[type=submit]:hover {
+.btn-group button:hover {
     background-color: #d0d3d6;
 }
 
