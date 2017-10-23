@@ -108,9 +108,8 @@
 
 #header-wrapper     {
                      position: relative;
-                     background-color: #f2f2f2;
-                     height: 70px;
-                     margin: 15px 15px;
+                     height: 35px;
+                     margin: 0px 0px 15px 0px;
                     }
 
 .col                {
@@ -143,6 +142,12 @@
                      background-color: #f2f2f2;
                      height: 40px;
                     }
+.right{
+	padding-right: 0px !important;
+}
+.left {
+	padding-left: 0px !important;
+}
 
 /* Tablet devices */
 
@@ -223,7 +228,8 @@ tr:first-child th:last-child {
   border-radius: 0 5px 0 0; 
 }
 
-.accordianBody{
+/*LEFT ACCORDIAN*/
+.leftAccordianBody{
   background: #f7f7f7;
   width: 460px;
   max-width: 100%;
@@ -232,13 +238,13 @@ tr:first-child th:last-child {
   font-size: 13px;
   
 }
-.block{
+.leftBlock{
   background: linear-gradient(#111, #333);
   color: #fff;
   padding-top: 5px;
   box-shadow: 0 1px 2px #ccc;
 }
-.block input[type='radio']:checked ~ .info{
+.leftBlock input[type='radio']:checked ~ .info{
   height: 300px;
   transition: .2s ease-in;
   overflow-y: auto;
@@ -253,7 +259,7 @@ label{
   max-width: 100%;
   cursor: pointer;
 }
-.accordianBody span{
+.leftAccordianBody span{
   font-family: 'Arial';
   font-weight: bold;
   display: block;
@@ -315,6 +321,35 @@ a, a:link, a:visited {
   }
 }
 
+/*RIGHT ACCORDIAN*/
+.rightAccordianBody{
+  background: #f7f7f7;
+  width: 460px;
+  max-width: 100%;
+  margin: 0 auto;
+  font-family: "Verdana";
+  font-size: 13px;
+  
+}
+.rightBlock{
+  background: linear-gradient(#111, #333);
+  color: #fff;
+  padding-top: 5px;
+  box-shadow: 0 1px 2px #ccc;
+}
+.rightBlock input[type='radio']:checked ~ .info{
+  height: 300px;
+  transition: .2s ease-in;
+  overflow-y: auto;
+}
+.rightAccordianBody span{
+  font-family: 'Arial';
+  font-weight: bold;
+  display: block;
+  padding: 10px 12px 12px 15px;
+  margin: 0;
+  cursor: pointer;
+}
 @import url(https://fonts.googleapis.com/css?family=Lato:700italic,400,400italic,700);
 
 .btn-group button {
@@ -520,4 +555,93 @@ a, a:link, a:visited {
 
 .info li input:checked + ol > li:first-child{
 	margin:0 0 0.125em;
+}
+/*NAV BAR CSS*/
+.top-nav{
+  width:100%;
+  border:1px solid #222;
+  background-color:#111;
+  background-image: linear-gradient(#444,#111);
+  border-radius:0px 0px 6px 6px;
+  box-shadow:0 1px 1px #777;
+  padding:0;
+  list-style: none;
+}
+.top-nav:before, .top-nav:after{
+  content:" ";
+  display: table;
+}
+.top-nav:after{
+  clear: both;
+}
+.top-nav li{
+  float:left;
+  border-left:1px solid #222;
+  box-shadow: 1px 0 0 #444;
+  position: relative;
+}
+.top-nav li a {
+  float:left;
+  padding: 12px 30px;
+  color:#999;
+  font:bold 12px;
+  text-decoration: none;
+  text-shadow:0 1px 0 #000;
+}
+.top-nav li a:hover{
+  color:#fafafa;
+}
+.top-nav li ul{
+  visibility: hidden;
+  position: absolute;
+  list-style: none;
+  top:38px;
+  left: 0;
+  z-index: 1;
+  padding: 0;
+  background-color: #444;
+  background-image:linear-gradient(#444,#111);
+  box-shadow: 0 -1 0 rgba(255,255,255,.3);
+  border-radius: 3px;
+  opacity: 0;
+  margin:20px  0 0 0;
+  _margin:0;
+  transition: all .2s ease-in-out;
+  padding-bottom: 3px;
+}
+
+.top-nav li:hover > ul{
+  opacity: 1;
+  visibility: visible;
+  margin:0;
+
+}
+.top-nav ul li{
+  float:none;
+  display: block;
+  border:0;
+  box-shadow: 0 1px #111, 0 2px 0 #666;
+}
+.top-nav ul a {
+  padding:10px;
+  width:130px;
+  display: block;
+  float: none;
+  _height:10px;
+}
+.top-nav ul li:first-child > a{
+  border-radius: 3px 3px 0 0;
+}
+.top-nav ul li:last-child >a {
+  border-radius: 0 0 3px 3px;
+}
+.top-nav ul li:first-child > a:before{
+  content: "";
+  position: absolute;
+  left:40px;
+  top:-6px;
+  border-left:6px solid transparent;
+  border-right:6px solid transparent;
+  border-bottom:6px solid #444;
+
 }

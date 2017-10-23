@@ -15,8 +15,20 @@
   </head>
    <body class="container-fluid">
   <div id="header-wrapper">
-  <h1>Welcome to Spitfire!</h1>
-      <p>Click <a href="/login">here</a> to go login.</p>
+	    <ul class="top-nav">
+  <li><a href="#">HOME</a></li>
+  <li><a href="#">CONTACTS</a>
+	<ul>
+	    <li><a href="#">FRONT END</a></li>
+      	<li><a href="#">MOBILE</a></li>        
+      	<li><a href="#">BACK END</a></li>
+    </ul>
+  </li>
+  <li><a href="#">LEARN</a></li>
+  <li><a href="#">MOBILE</a></li>        
+  <li><a href="#">BACK END</a></li>
+  <li style="float:right"><a href="/login">LOGOUT</a></li>
+</ul>
   </div>
   <div class="row">
     <div class="col col-3 left">
@@ -24,23 +36,23 @@
 	  <div id="first">
 		<vue-tabs>
 		<v-tab title="BROWSE">
-	<div class="accordianBody">
-        <div class="block">
-  			<input type="radio" name="city" id="option1" checked />   
+	<div class="leftAccordianBody">
+        <div class="leftBlock">
+  			<input type="radio" name="left" id="option1" />   
   			<label for="option1"><span>Contacts</span></label>
   				<div class="info">
     				<p>Contacts Info</p>
   				</div>
 		</div>
-		<div class="block">
-  				<input type="radio" name="city" id="option2"/>
+		<div class="leftBlock">
+  				<input type="radio" name="left" id="option2"/>
   				<label for="option2"><span>Facilities</span></label>
   					<div class="info">
     					<p>Facilities Info</p>
   					</div>
 		</div>
-		<div class="block">
-  			<input type="radio" name="city" id="option3" />
+		<div class="leftBlock">
+  			<input type="radio" name="left" id="option3" checked />
   			<label for="option3"><span>Inventory</span></label>
   				<div class="info">
 					<ol class="tree">
@@ -63,8 +75,8 @@
 					</ol>
 				</div>
 		</div>
-		<div class="block">
-  			<input type="radio" name="city" id="option4" />
+		<div class="leftBlock">
+  			<input type="radio" name="left" id="option4" />
   			<label for="option4"><span>Services</span></label>
   				<div class="info">
     				<ol class="tree">
@@ -131,7 +143,7 @@
         <div class="col col-12">
           <div class="panel">
 	<div id="mainTabs">
-	<button @click="addTab">Add show tab</button>
+	<!--<button @click="addTab">Add show tab</button>-->
 		<vue-tabs>
 			<v-tab v-for="tab in tabs" :key="tab">
 			<div slot="title">{% raw %}{{tab}}{% endraw %} &nbsp;<span @click.stop="removeTab(tab)" class="ti-close tab-close"></span></div>
@@ -148,15 +160,13 @@
 						<th>Name</th>
 						<th>Start Date</th>
 						<th>End Date</th>
-						<th>Production</th>
 					</tr>
 						{% for Shows in showList %}
 					<tr>
 						<td>{{ Shows.idShows }}</td>
-						<td>{{ Shows.show }}</td>
+						<td><a href="#" @click="addGearTab" style="color:#000">{{ Shows.show }}</a></td>
 						<td>{{ Shows.start_date }}</td>
 						<td>{{ Shows.end_date }}</td>
-						<td>{{ Shows.production }}</td>
 					</tr>
 						{% endfor %}
 					</table>
@@ -167,8 +177,8 @@
 				<div v-if="tab === 'Calendar View'">
 					<object style="width:100%; height:625px;" type="text/html" data="/calendar"></object>
 				</div>
-				<div v-if="tab === 'To Do List'">
-					Make a todo List here
+				<div v-if="tab === 'Daily Tasks'">
+					Make a Daily Tasks here
 				</div>
 			</v-tab>
 		</vue-tabs>
@@ -183,15 +193,36 @@
         <div class="panel-label">
 		<h1>Quicklinks</h1>        
         </div>
-        <div class="quicklinks">
-        <ul>
-        	<a href="/database"><li>Items List Page</li></a>
-        	<a href="/contacts"><li>Contacts</li></a>
-        	<a href="/schedules"><li>Schedules</li></a>
-        	<a href="/reports"><li>Reports</li></a>
-        	<a href="/forms"><li>Forms</li></a>
-        </ul>
-        </div>
+        	<div class="rightAccordianBody">
+        <div class="rightBlock">
+  			<input type="radio" name="right" id="option5" checked />   
+  			<label for="option5"><span>OPTION 5</span></label>
+  				<div class="info">
+    				<p>Option 5 Info</p>
+  				</div>
+		</div>
+		<div class="rightBlock">
+  				<input type="radio" name="right" id="option6"/>
+  				<label for="option6"><span>OPTION 6</span></label>
+  					<div class="info">
+    					<p>Option 6 Info</p>
+  					</div>
+		</div>
+		<div class="rightBlock">
+  			<input type="radio" name="right" id="option7" />
+  			<label for="option7"><span>OPTION 7</span></label>
+  				<div class="info">
+				<p>Option 7 Info</p>
+				</div>
+		</div>
+		<div class="rightBlock">
+  			<input type="radio" name="right" id="option8" />
+  			<label for="option8"><span>OPTION 8</span></label>
+  				<div class="info">
+    				<p>Option 8 Info</p>
+  				</div>
+		</div>
+	</div>
       </div>
     </div>
   </div>

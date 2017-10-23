@@ -6,7 +6,7 @@ Vue.use(VueTabs);
 new Vue({
   el:"#mainTabs",
   data:{
-    tabs: ['Show List', 'Item List', 'Calendar View', 'To Do List'], 
+    tabs: ['Show List', 'Item List', 'Calendar View', 'Daily Tasks'], 
   },
   methods: {
     removeTab(x){
@@ -16,8 +16,8 @@ new Vue({
           }
         }
     },
-    addTab(){
-      this.tabs.push('Show List')
+    addGearTab(){
+      this.tabs.push('Gear List')
     }
   }
 })
