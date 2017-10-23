@@ -2,81 +2,22 @@ new Vue({
   el:"#first",
 })
 
+Vue.use(VueTabs);
 new Vue({
-  el:"#second",
-})
-
-/*var data = {
-  name: 'My Tree',
-  children: [
-    { name: 'hello' },
-    { name: 'wat' },
-    {
-      name: 'child folder',
-      children: [
-        {
-          name: 'child folder',
-          children: [
-            { name: 'hello' },
-            { name: 'wat' }
-          ]
-        },
-        { name: 'hello' },
-        { name: 'wat' },
-        {
-          name: 'child folder',
-          children: [
-            { name: 'hello' },
-            { name: 'wat' }
-          ]
-        }
-      ]
-    }
-  ]
-}
-
-// define the item component
-Vue.component('item', {
-  template: '#item-template',
-  props: {
-    model: Object
-  },
-  data: function () {
-    return {
-      open: false
-    }
-  },
-  computed: {
-    isFolder: function () {
-      return this.model.children &&
-        this.model.children.length
-    }
+  el:"#mainTabs",
+  data:{
+    tabs: ['Show List', 'Item List', 'Calendar View', 'To Do List'], 
   },
   methods: {
-    toggle: function () {
-      if (this.isFolder) {
-        this.open = !this.open
-      }
+    removeTab(x){
+      for (let i = 0; i < this.tabs.length; i++) {
+          if (this.tabs[i] === x) {
+            this.tabs.splice(i, 1);
+          }
+        }
     },
-    changeType: function () {
-      if (!this.isFolder) {
-        Vue.set(this.model, 'children', [])
-        this.addChild()
-        this.open = true
-      }
-    },
-    addChild: function () {
-      this.model.children.push({
-        name: 'new stuff'
-      })
+    addTab(){
+      this.tabs.push('Show List')
     }
   }
 })
-
-// boot up the demo
-var demo = new Vue({
-  el: '#demo',
-  data: {
-    treeData: data
-  }
-})*/

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="static/bootstrap/css/bootstrap.css" rel="stylesheet"
 	type="text/css" />
+	<link href="static/bootstrap/css/themify-icons/themify-icons.css" rel="stylesheet">
 	<script src="static/bootstrap/js/bootstrap.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
@@ -23,7 +24,7 @@
 	  <div id="first">
 		<vue-tabs>
 		<v-tab title="BROWSE">
-			<div class="accordianBody">
+	<div class="accordianBody">
         <div class="block">
   			<input type="radio" name="city" id="option1" checked />   
   			<label for="option1"><span>Contacts</span></label>
@@ -42,20 +43,84 @@
   			<input type="radio" name="city" id="option3" />
   			<label for="option3"><span>Inventory</span></label>
   				<div class="info">
-    				<p>Inventory Info</p>  
-  				</div>
+					<ol class="tree">
+						<li>
+							<label for="lighting">Lighting</label>
+							<input type="checkbox" id="lighting" />
+							<ol>
+								<li>
+									<label for="cases">Cases</label>
+									<input type="checkbox" id="cases"/>
+									<ol>
+										<li class="file"><a href="">Rack case 3U</a></li>
+										<li class="file"><a href="">menu-1-1-2</a></li>
+										<li class="file"><a href="">menu-1-1-3</a></li>
+										<li class="file"><a href="">menu-1-1-4</a></li>
+									</ol> 
+								</li>
+							</ol>
+						</li> 
+					</ol>
+				</div>
 		</div>
 		<div class="block">
-  			<input type="radio" name="city" id="option3" />
-  			<label for="option3"><span>Services</span></label>
+  			<input type="radio" name="city" id="option4" />
+  			<label for="option4"><span>Services</span></label>
   				<div class="info">
-    				<p>Services Info</p>  
+    				<ol class="tree">
+						<li>
+							<label for="labor">Labor</label>
+							<input type="checkbox" id="labor" />
+							<ol>
+								<li class="file"><a href="">information</a></li>
+							</ol>
+						</li> 
+						<li>
+							<label for="services">Services</label>
+							<input type="checkbox" id="services" />
+							<ol>
+								<li class="file"><a href="">information</a></li>
+							</ol>
+						</li>
+						<li>
+							<label for="showExpenses">Show Expenses</label>
+							<input type="checkbox" id="showExpenses" />
+							<ol>
+								<li class="file"><a href="">information</a></li>
+							</ol>
+						</li>
+						<li>
+							<label for="travel">Travel</label>
+							<input type="checkbox" id="travel" />
+							<ol>
+								<li class="file"><a href="">information</a></li>
+							</ol>
+						</li>
+						<li>
+							<label for="notes">Notes</label>
+							<input type="checkbox" id="notes" />
+							<ol>
+								<li class="file"><a href="">information</a></li>
+							</ol>
+						</li>
+					</ol>
   				</div>
 		</div>
 	</div>
 		</v-tab>
 		<v-tab title="SEARCH">
-				Search content
+				<div class="dropdown">
+				<select name="one" class="dropdown-select">
+				<option value="1">Search Contacts</option>
+				<option value="2">Search Facilities</option>
+				<option value="3">Search Inventory</option>
+				<option value="3">Search Services</option>
+				<option value="3">Search Shows</option>
+				</select>
+				</div>
+				<form method="get" action="/search" id="searchbox5">
+					<input id="search52" name="q" type="text" size="40" placeholder="Search..." />
+				</form>
 			</v-tab>
 		</vue-tabs>
 		</div>
@@ -65,42 +130,46 @@
       <div class="row">
         <div class="col col-12">
           <div class="panel">
-	<div id="second">
+	<div id="mainTabs">
+	<button @click="addTab">Add show tab</button>
 		<vue-tabs>
-		<v-tab title="Show List">
-			<div class="btn-group" style="width:100%">
-  			<button style="width:50%">Start Date</button>
-  			<button style="width:50%">End Date</button>
+			<v-tab v-for="tab in tabs" :key="tab">
+			<div slot="title">{% raw %}{{tab}}{% endraw %} &nbsp;<span @click.stop="removeTab(tab)" class="ti-close tab-close"></span></div>
+				<div v-if="tab === 'Show List'">
+						<div class="btn-group" style="width:100%">
+						<button style="width:50%">Start Date</button>
+						<button style="width:50%">End Date</button>
+						</div>
+					<table>
+					<tr>
+						<th colspan="6">List of Shows</th>
+					<tr>
+						<th>Show Id</th>
+						<th>Name</th>
+						<th>Start Date</th>
+						<th>End Date</th>
+						<th>Production</th>
+					</tr>
+						{% for Shows in showList %}
+					<tr>
+						<td>{{ Shows.idShows }}</td>
+						<td>{{ Shows.show }}</td>
+						<td>{{ Shows.start_date }}</td>
+						<td>{{ Shows.end_date }}</td>
+						<td>{{ Shows.production }}</td>
+					</tr>
+						{% endfor %}
+					</table>
 				</div>
-           <table>
-			<tr>
-				<th colspan="6">List of Shows</th>
-			<tr>
-				<th>Show Id</th>
-				<th>Name</th>
-				<th>Start Date</th>
-				<th>End Date</th>
-				<th>Production</th>
-			</tr>
-				{% for Shows in showList %}
-			<tr>
-				<td>{{ Shows.idShows }}</td>
-				<td>{{ Shows.show }}</td>
-				<td>{{ Shows.start_date }}</td>
-				<td>{{ Shows.end_date }}</td>
-				<td>{{ Shows.production }}</td>
-			</tr>
-				{% endfor %}
-		</table>
-			</v-tab>
-			<v-tab title="Item List">
-			<object style="width:100%; height:525px;" type="text/html" data="/database"></object>
-			</v-tab>
-			<v-tab title="Calendar View">
-				 <object style="width:100%; height:625px;" type="text/html" data="/calendar"></object>
-			</v-tab>
-			<v-tab title="To Do List">
-				Make a todo List here
+				<div v-if="tab === 'Item List'">
+					<object style="width:100%; height:525px;" type="text/html" data="/database"></object>
+				</div>
+				<div v-if="tab === 'Calendar View'">
+					<object style="width:100%; height:625px;" type="text/html" data="/calendar"></object>
+				</div>
+				<div v-if="tab === 'To Do List'">
+					Make a todo List here
+				</div>
 			</v-tab>
 		</vue-tabs>
 		</div>
