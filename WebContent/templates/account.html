@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Flask Intro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="static/bootstrap/css/bootstrap.css" rel="stylesheet"
+	type="text/css" />
+	<link href="static/bootstrap/css/themify-icons/themify-icons.css" rel="stylesheet">
+	<script src="static/bootstrap/js/bootstrap.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
+	<script src="https://unpkg.com/vue"></script>
+	<link rel="stylesheet" href="https://unpkg.com/vue-nav-tabs/themes/vue-tabs.css">
+		<script src="https://unpkg.com/vue-nav-tabs/dist/vue-tabs.js"></script>
+  </head>
+  <style>
+  .modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    padding-top: 5px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+}
+.modal-content {
+    margin: auto;
+	padding: 20px;
+    width: 80%;
+}
+.close {
+    color: grey;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+input[type=submit] {
+    cursor:pointer;
+	width:100%;
+	border:none;
+	background:grey;
+	color:#FFF;
+	margin:0 0 5px;
+	padding:10px;
+	font-size:15px;
+	font-family: Quicksand;
+	letter-spacing: 2px;
+	text-shadow: none;
+	box-shadow: none;
+}
+
+input[type=submit]:hover {
+    background:black;
+	-webkit-transition:background 0.3s ease-in-out;
+	-moz-transition:background 0.3s ease-in-out;
+	transition:background-color 0.3s ease-in-out;
+}
+
+input[type=text], select {
+    width: 100%; 
+    padding: 12px;  
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; 
+    margin-top: 6px; 
+    margin-bottom: 16px; 
+    resize: vertical;
+}
+
+.FormContainer {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+	padding-bottom: 60px;
+    max-width:650px;
+    margin:0 auto;
+    position:relative;
+	font-family: Quicksand;
+}
+.FormContainer label{
+	color: #000000;
+}
+
+.FormContainer span {
+	color: #000000;
+}
+
+.FormContainer h1{
+	text-align: center;
+}
+
+  </style>
+   <body class="container-fluid">
+  <div id="header-wrapper">
+	    <ul class="top-nav">
+  <li><a href="/welcome">HOME</a></li>
+  <li><a href="#">CONTACTS</a>
+	<ul>
+	    <li><a href="#">FRONT END</a></li>
+      	<li><a href="#">MOBILE</a></li>        
+      	<li><a href="#">BACK END</a></li>
+    </ul>
+  </li>
+  <li><a href="/account">ACCOUNT VIEW</a></li>      
+  <li><a href="#">INVENTORY MANAGEMENT</a></li>
+  <li style="float:right"><a href="/login">LOGOUT</a></li>
+</ul>
+  </div>
+  <div class="row">
+    <div class="col col-3 left">
+      <div class="panel panel-left">
+	  <div class="leftAccordianBody">
+        <div class="leftBlock">
+  			<input type="radio" name="left" id="option1" />   
+  			<label for="option1"><span>Main</span></label>
+  				<div class="info">
+    				<p>Contacts Info</p>
+  				</div>
+		</div>
+		<div class="leftBlock">
+  				<input type="radio" name="left" id="option2"/>
+  				<label for="option2"><span>Facilities</span></label>
+  					<div class="info">
+    					<p>Facilities Info</p>
+  					</div>
+		</div>
+		<div class="leftBlock">
+  			<input type="radio" name="left" id="option3" checked />
+  			<label for="option3"><span>Inventory</span></label>
+  				<div class="info">
+				</div>
+		</div>
+		<div class="leftBlock">
+  			<input type="radio" name="left" id="option4" />
+  			<label for="option4"><span>Services</span></label>
+  				<div class="info">
+  				</div>
+		</div>
+	</div>
+	  </div>
+	  </div>
+	  </div>
+      <div class="row">
+        <div class="thisTable">
+          <div class="panel">
+		  <div class="showRow">
+		  <form method="get" action="/searchShows" id="searchbox5">
+					<input id="searchShow" name="w" type="text" size="40" placeholder="Search..." />
+				</form>
+				<div class="btn-group rightShow">
+							<button id="addButton">Create New Job</button>
+							</div>
+							</div>
+					<table>
+					<tr>
+						<th colspan="10">List of Shows</th>
+					<tr>
+						<th>Show Id</th>
+						<th>Name</th>
+						<th>Start Date</th>
+						<th>End Date</th>
+						<th>Client</th>
+						<th>Job Type</th>
+						<th>Status</th>
+						<th>Handler</th>
+						<th>Sales Person</th>
+						<th>Created By</th>
+					</tr>
+						{% for Shows in showList %}
+					<tr>
+						<td>{{ Shows.idShows }}</td>
+						<td>{{ Shows.show }}</td>
+						<td>{{ Shows.start_date }}</td>
+						<td>{{ Shows.end_date }}</td>
+						<td>{{ Shows.client }}</td>
+						<td>{{ Shows.job_type }}</td>
+						<td>{{ Shows.status }}</td>
+						<td>{{ Shows.handler }}</td>
+						<td>{{ Shows.salesperson }}</td>
+						<td>{{ Shows.created_by }}</td>
+					</tr>
+						{% endfor %}
+					</table>
+				</div>
+			</div>	
+		</div>
+	</div>
+	<div id="addModal" class="modal">
+ <div class="modal-content">
+ <div class="FormContainer">
+ <span class="close">&times;</span>
+  <h1>Add a Show!</h1>
+  <form action="/addShow" method="POST">
+  	<label for="idShows">ID Show</label>
+    <input type="text" id="idShow" name="idShow" placeholder="Show ID...">
+    <label for="show">Show name</label>
+    <input type="text" id="show" name="show" placeholder="Name...">
+    <label for="start_date">Start Date</label>
+    <input type="text" id="start_date" name="start_date" placeholder="Start Date...">
+	<label for="end_date">End Date</label>
+    <input type="text" id="end_date" name="end_date" placeholder="End Date...">
+	<label for="client">Client</label>
+    <input type="text" id="client" name="client" placeholder="Client...">
+	<label for="job_type">Job Type</label>
+    <input type="text" id="job_type" name="job_type" placeholder="Job Type...">
+	<label for="status">Status</label>
+    <input type="text" id="status" name="status" placeholder="Status...">
+	<label for="handler">Handler</label>
+    <input type="text" id="handler" name="handler" placeholder="Handler...">
+	<label for="salesperson">Sales Person</label>
+    <input type="text" id="salesperson" name="salesperson" placeholder="Sales Person...">
+	<label for="created_by">Created By</label>
+    <input type="text" id="created_by" name="created_by" placeholder="Created By...">
+    <input type="submit" value="Submit">
+  </form>
+  </div>
+ </div>
+</div>
+<script>
+var modal = document.getElementById('addModal');
+var btn = document.getElementById("addButton");
+var span = document.getElementsByClassName("close")[0];
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+span.onclick = function() {
+    modal.style.display = "none";
+}
+</script>
+</body>
+</html>
+
