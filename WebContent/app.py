@@ -1,4 +1,5 @@
 # import the Flask class from the flask module
+# Create a new table for a new show
 from flask import Flask, render_template, redirect, url_for, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import classes as c
@@ -39,6 +40,7 @@ def login():
 def database():
     itemList = c.items.query.all()
     return render_template('database.html', itemList=itemList)  # render a template
+	
 
 @app.route('/add', methods=['GET', 'POST'])
 def add():
@@ -79,6 +81,15 @@ def search():
 	q = request.args.get('q', '')
 	information = c.contacts.query.filter_by(contactName=q)
 	return redirect('/welcome')
+	
+@app.route('/account')
+def account():
+	showList = c.Shows.query.all()
+	return render_template('account.html', showList=showList)
+
+#@app.route('/addShow')
+#def addShow():
+	
 
 # start the server with the 'run()' method
 if __name__ == '__main__':
