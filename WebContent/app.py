@@ -30,7 +30,7 @@ def login():
 	username = request.form['username']
 	password = request.form['password']
 	registered_user = c.users.query.filter_by(User=username).first()
-	if registered_user.Password != password:
+	if registered_user == None or registered_user.Password != password:
 		error = 'Invalid Credentials. Please try again.'
 		return render_template('login.html', error=error)
 	return redirect(url_for('welcome'))
