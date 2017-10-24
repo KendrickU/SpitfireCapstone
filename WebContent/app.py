@@ -14,7 +14,7 @@ app.secret_key = "super secret key"
 # use decorators to link the function to a url
 @app.route('/')
 def home():
-    return redirect(url_for('login'))  # return a string
+	return redirect(url_for('login'))  # return a string
 
 @app.route('/welcome')
 def welcome():
@@ -24,16 +24,16 @@ def welcome():
 # route for handling the login page logic
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    error = None
-    if request.method == 'GET':
-        return render_template('login.html')
-    username = request.form['username']
-    password = request.form['password']
-    registered_user = c.users.query.filter_by(User=username,Password=password).first()
-    if  registered_user is None:
-        error = 'Invalid Credentials. Please try again.'
-        return render_template('login.html', error=error)
-    return redirect(url_for('welcome'))
+	error = None
+	if request.method == 'GET':
+		return render_template('login.html')
+	username = request.form['username']
+	password = request.form['password']
+	registered_user = c.users.query.filter_by(User=username).first()
+	if registered_user.Password != password:
+		error = 'Invalid Credentials. Please try again.'
+		return render_template('login.html', error=error)
+	return redirect(url_for('welcome'))
 
 @app.route('/database')
 def database():
@@ -52,7 +52,7 @@ def add():
 
 @app.route('/database/update/<int:idItems>', methods=['GET', 'POST'])
 def update(idItems):
-	updateItem = c.items.query.filter_by(idItems=idItems).first()
+	updateItem = c.items.query.get_or_404(idItems)
 	if request.method == 'GET':
 		return render_template('update.html', updateItem=updateItem)
 	else:
@@ -72,8 +72,14 @@ def delete(idItems):
 
 @app.route('/calendar')
 def calendar():
-    return render_template("calendar.html")
+	return render_template("calendar.html")
+
+@app.route('/search', methods=['GET', 'POST'])
+def search():
+	q = request.args.get('q', '')
+	information = c.contacts.query.filter_by(contactName=q)
+	return redirect('/welcome')
 
 # start the server with the 'run()' method
 if __name__ == '__main__':
-    app.run(debug=True)
+	app.run(debug=True)

@@ -3,44 +3,44 @@ from flask_sqlalchemy import SQLAlchemy
 from app import db
 
 class users(db.Model):
-    __tablename__ = "users"
-    idUsers = db.Column('idUsers', db.Integer, primary_key=True)
-    User = db.Column('User', db.String(45))
-    Password = db.Column('Password', db.String(45))
+	__tablename__ = "users"
+	idUsers = db.Column('idUsers', db.Integer, primary_key=True)
+	User = db.Column('User', db.String(45))
+	Password = db.Column('Password', db.String(45))
 	Department = db.Column('Department', db.String(45))
-	Email = db.Column('Email', db.string(45))
+	Email = db.Column('Email', db.String(45))
 
-    def __init__(self, idUsers, User, Password, Department, Email):
-        self.idUsers = idUsers
-        self.User = User
-        self.Password = Password
+	def __init__(self, idUsers, User, Password, Department, Email):
+		self.idUsers = idUsers
+		self.User = User
+		self.Password = Password
 		self.Department = Department
 		self.Email = Email
 
-    def __repr__(self):
-        return '<User %r>' % self.User
+	def __repr__(self):
+		return '<User %r>' % self.User
     
 class items(db.Model):
-    __tablename__ = "items"
-    idItems = db.Column('idItems', db.Integer, primary_key=True)
-    Name = db.Column('Name', db.String(45))
-    Quantity = db.Column('Quantity', db.Integer)
+	__tablename__ = "items"
+	idItems = db.Column('idItems', db.Integer, primary_key=True)
+	Name = db.Column('Name', db.String(45))
+	Quantity = db.Column('Quantity', db.Integer)
 	MasterCategory = db.Column('MasterCategory', db.String(45))
 	Sub_Category = db.Column('Sub-Category', db.String(45))
-	Pictures = db.Column('Pictures', db.Blob)
-    Barcode = db.Column('Barcode', db.String(45))
+	Pictures = db.Column('Pictures', db.BLOB)
+	Barcode = db.Column('Barcode', db.String(45))
     
-    def __init__(self, idItems, Name, Quantity, MasterCategory, Sub_Category, Pictures, Barcode):
-        self.idItems = idItems
-        self.Name = Name
-        self.Quantity = Quantity
+	def __init__(self, idItems, Name, Quantity, MasterCategory, Sub_Category, Pictures, Barcode):
+		self.idItems = idItems
+		self.Name = Name
+		self.Quantity = Quantity
 		self.MasterCategory = MasterCategory
 		self.Sub_Category = Sub_Category
 		self.Pictures = Pictures
-        self.Barcode = Barcode
-        
-    def __repr__(self):
-        return '<Item %r>' % self.Name 
+		self.Barcode = Barcode
+		
+	def __repr__(self):
+		return '<Item %r>' % self.Name 
 
 class Shows(db.Model):
 	__tablename__ = "Shows"
@@ -61,7 +61,7 @@ class Shows(db.Model):
 	created_by = db.Column('created by', db.String(45))
 	production = db.Column('production', db.String(45))
 	
-	def __init__(self, idShows, show, production, start_date, end_date, load_in, show_start, load-out, return_date, venue, client, job_type, status, handler, salesperson, created_by, production):
+	def __init__(self, idShows, show, production, start_date, end_date, load_in, show_start, load_out, return_date, venue, client, job_type, status, handler, salesperson, created_by):
 		self.idShows = idShows
 		self.show = show
 		self.start_date = start_date
@@ -82,6 +82,7 @@ class Shows(db.Model):
 		return '<Show> %r' % self.show
 	
 class contacts(db.Model):
+	__tablename__ = "contacts"
 	contactName = db.Column('contactName', db.String(55), primary_key=True)
 	contactAddress = db.Column('contactAddress', db.String(55))
 	contactCity = db.Column('contactCity', db.String(45))
@@ -103,7 +104,8 @@ class contacts(db.Model):
 		return '<contactName> %r' % self.contactName
 	
 class jobGear(db.Model):
-	idItems = db.Column('idItems', db.Integer)
+	__tablename__ = "jobGear"
+	idItems = db.Column('idItems', db.Integer, primary_key=True)
 	Name = db.Column('Name', db.String(45))
 	Quantity = db.Column('Quantity', db.Integer)
 	Barcode = db.Column('Barcode', db.String(45))
@@ -120,7 +122,8 @@ class jobGear(db.Model):
 		return '<jobGear> %r' % self.Name
 	
 class types(db.Model):
-	Type = db.Column('Type', db.String(45))
+	__tablename__ = "types"
+	Type = db.Column('Type', db.String(45), primary_key=True)
 	
 	def __init__(self, Type):
 		self.Type = Type
@@ -129,14 +132,15 @@ class types(db.Model):
 		return '<types> %r' % self.Type
 	
 class venues(db.Model):
-	venueName = db.column('venueName', db.String(55))
-	Address = db.column('Address', db.String(255))
-	City = db.column('City', db.String(255))
-	Zip = db.column('Zip', db.String(255))
-	Phone = db.column('Phone', db.String(14))
-	contactName = db.column('contactName', db.String(55))
-	layout = db.column('layout', db.String(255))
-	URL = db.column('URL', db.String(55))
+	__tablename__ = "venues"
+	venueName = db.Column('venueName', db.String(55), primary_key=True)
+	Address = db.Column('Address', db.String(255))
+	City = db.Column('City', db.String(255))
+	Zip = db.Column('Zip', db.String(255))
+	Phone = db.Column('Phone', db.String(14))
+	contactName = db.Column('contactName', db.String(55))
+	layout = db.Column('layout', db.String(255))
+	URL = db.Column('URL', db.String(55))
 	
 	def __init__(self, venueName, Address, City, Zip, Phone, contactName, layout, URL):
 		self.venueName = venueName
