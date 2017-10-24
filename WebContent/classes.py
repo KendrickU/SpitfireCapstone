@@ -7,11 +7,15 @@ class users(db.Model):
     idUsers = db.Column('idUsers', db.Integer, primary_key=True)
     User = db.Column('User', db.String(45))
     Password = db.Column('Password', db.String(45))
+	Department = db.Column('Department', db.String(45))
+	Email = db.Column('Email', db.string(45))
 
-    def __init__(self, idUsers, User, Password):
+    def __init__(self, idUsers, User, Password, Department, Email):
         self.idUsers = idUsers
         self.User = User
         self.Password = Password
+		self.Department = Department
+		self.Email = Email
 
     def __repr__(self):
         return '<User %r>' % self.User
@@ -21,12 +25,18 @@ class items(db.Model):
     idItems = db.Column('idItems', db.Integer, primary_key=True)
     Name = db.Column('Name', db.String(45))
     Quantity = db.Column('Quantity', db.Integer)
+	MasterCategory = db.Column('MasterCategory', db.String(45))
+	Sub_Category = db.Column('Sub-Category', db.String(45))
+	Pictures = db.Column('Pictures', db.Blob)
     Barcode = db.Column('Barcode', db.String(45))
     
-    def __init__(self, idItems, Name, Quantity, Barcode):
+    def __init__(self, idItems, Name, Quantity, MasterCategory, Sub_Category, Pictures, Barcode):
         self.idItems = idItems
         self.Name = Name
         self.Quantity = Quantity
+		self.MasterCategory = MasterCategory
+		self.Sub_Category = Sub_Category
+		self.Pictures = Pictures
         self.Barcode = Barcode
         
     def __repr__(self):
@@ -35,20 +45,112 @@ class items(db.Model):
 class Shows(db.Model):
 	__tablename__ = "Shows"
 	idShows = db.Column('idShows', db.Integer, primary_key=True)
-	show = db.Column('show', db.String(100))
+	show = db.Column('show', db.String(45))
+	start_date = db.Column('start date', db.DateTime)
+	end_date = db.Column('end date', db.DateTime)
+	load_in = db.Column('load-in', db.DateTime)
+	show_start = db.Column('show start', db.DateTime)
+	load_out = db.Column('load-out', db.DateTime)
+	return_date = db.Column('return', db.DateTime)
+	venue = db.Column('venue', db.String(45))
+	client = db.Column('client', db.String(45))
+	job_type = db.Column('job type', db.String(45))
+	status = db.Column('status', db.String(45))
+	handler = db.Column('handler', db.String(45))
+	salesperson = db.Column('salesperson', db.String(45))
+	created_by = db.Column('created by', db.String(45))
 	production = db.Column('production', db.String(45))
-	start_date = db.Column('start date', db.String(45))
-	end_date = db.Column('end date', db.String(45))
 	
-	def __init__(self, idShows, show, production, start_date, end_date):
+	def __init__(self, idShows, show, production, start_date, end_date, load_in, show_start, load-out, return_date, venue, client, job_type, status, handler, salesperson, created_by, production):
 		self.idShows = idShows
 		self.show = show
-		self.production = production
 		self.start_date = start_date
 		self.end_date = end_date
+		self.load_in = load_in
+		self.load_out = load_out
+		self.return_date = return_date
+		self.venue = venue
+		self.client = client
+		self.job_type = job_type
+		self.status = status
+		self.handler = handler
+		self.salesperson = salesperson
+		self.created_by = created_by
+		self.production = production
 	
 	def __repr__(self):
 		return '<Show> %r' % self.show
+	
+class contacts(db.Model):
+	contactName = db.Column('contactName', db.String(55), primary_key=True)
+	contactAddress = db.Column('contactAddress', db.String(55))
+	contactCity = db.Column('contactCity', db.String(45))
+	contactZip = db.Column('contactZip', db.Integer)
+	Phone = db.Column('Phone', db.String(14))
+	Email = db.Column('Email', db.String(255))
+	isEmployee = db.Column('isEmployee', db.String(1))
+	
+	def __init__(self, contactName, contactAddress, contactCity, contactZip, Phone, Email, isEmployee):
+		self.contactName = contactName
+		self.contactAddress = contactAddress
+		self.contactCity = contactCity
+		self.contactZip = contactZip
+		self.Phone = Phone
+		self.Email = Email
+		self.isEmployee = isEmployee
+		
+	def __repr__(self):
+		return '<contactName> %r' % self.contactName
+	
+class jobGear(db.Model):
+	idItems = db.Column('idItems', db.Integer)
+	Name = db.Column('Name', db.String(45))
+	Quantity = db.Column('Quantity', db.Integer)
+	Barcode = db.Column('Barcode', db.String(45))
+	show = db.Column('show', db.String(45))
+	
+	def __init__(self, idItems, Name, Quantity, Barcode, show):
+		self.idItems = idItems
+		self.Name = Name
+		self.Quantity = Quantity
+		self.Barcode = Barcode
+		self.show = show
+		
+	def __repr__(self):
+		return '<jobGear> %r' % self.Name
+	
+class types(db.Model):
+	Type = db.Column('Type', db.String(45))
+	
+	def __init__(self, Type):
+		self.Type = Type
+	
+	def __repr__(self):
+		return '<types> %r' % self.Type
+	
+class venues(db.Model):
+	venueName = db.column('venueName', db.String(55))
+	Address = db.column('Address', db.String(255))
+	City = db.column('City', db.String(255))
+	Zip = db.column('Zip', db.String(255))
+	Phone = db.column('Phone', db.String(14))
+	contactName = db.column('contactName', db.String(55))
+	layout = db.column('layout', db.String(255))
+	URL = db.column('URL', db.String(55))
+	
+	def __init__(self, venueName, Address, City, Zip, Phone, contactName, layout, URL):
+		self.venueName = venueName
+		self.Address = Address
+		self.City = City
+		self.Zip = Zip
+		self.Phone = Phone
+		self.contactName = contactName
+		self.layout = layout
+		self.URL = URL
+		
+	def __repr__(self):
+		return '<venues> %r' % self.venueName
+	
 	
 #item = items(123, "123", 213, "12")
 #db.session.add(item)
