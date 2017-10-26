@@ -25,8 +25,8 @@ class items(db.Model):
 	idItems = db.Column('idItems', db.Integer, primary_key=True)
 	Name = db.Column('Name', db.String(45))
 	Quantity = db.Column('Quantity', db.Integer)
-	MasterCategory = db.Column('Master Category', db.String(45))
-	Sub_Category = db.Column('Sub-Category', db.String(45))
+	MasterCategory = db.Column('Master_Category', db.String(45))
+	Sub_Category = db.Column('Sub_Category', db.String(45))
 	Pictures = db.Column('Pictures', db.BLOB)
 	Barcode = db.Column('Barcode', db.String(45))
     

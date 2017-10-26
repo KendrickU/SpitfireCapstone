@@ -68,7 +68,7 @@ def add():
 	if request.method == 'GET':
 		return render_template('add.html')
 	else:
-		item = c.items(request.form['idItems'], request.form['Name'], request.form['Quantity'], request.form['Barcode'])
+		item = c.items(request.form['idItems'], request.form['Name'], request.form['Quantity'], request.form['Master_Category'], request.form['Sub_Category'], request.form['Pictures'], request.form['Barcode'])
 		c.db.session.add(item)
 		c.db.session.commit()
 		return redirect('/database')
@@ -85,6 +85,9 @@ def update(idItems):
 		updateItem.idItems = request.form['updatedidItems']
 		updateItem.Name = request.form['updatedName']
 		updateItem.Quantity = request.form['updatedQuantity']
+		updateItem.MasterCategory = request.form['updatedMaster_Category']
+		updateItem.Sub_Category = request.form['updatedSub_Category']
+		updateItem.Pictures = request.form['updatedPictures']
 		updateItem.Barcode = request.form['updatedBarcode']
 		c.db.session.commit()
 		return redirect('/database')
