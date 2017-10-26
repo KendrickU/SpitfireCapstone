@@ -4,7 +4,10 @@ from flask import Flask, render_template, redirect, url_for, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import classes as c
 import json
-
+"""@package docstring
+Documentation for this module.
+More details.
+"""
 # create the application object
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
@@ -12,19 +15,30 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://Spitfire:12Reddoor34@tms-capsto
 db = SQLAlchemy(app)
 app.secret_key = "super secret key"
 
+
 # use decorators to link the function to a url
 @app.route('/')
 def home():
+	"""Redircts to the login page.
+	"""
 	return redirect(url_for('login'))  # return a string
 
 @app.route('/welcome')
 def welcome():
+	"""This will the main page for users
+	that work. They will be able to check status on inventory
+	and assign them to shows.
+	"""
 	showList = c.Shows.query.all()
 	return render_template('welcome.html', showList=showList)  # render a template
 
 # route for handling the login page logic
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+	"""The login page
+	users will provide a username and password if correct
+	will direct them to the welcome/main page.
+	"""
 	error = None
 	if request.method == 'GET':
 		return render_template('login.html')
@@ -38,12 +52,19 @@ def login():
 
 @app.route('/database')
 def database():
-    itemList = c.items.query.all()
-    return render_template('database.html', itemList=itemList)  # render a template
+	"""Gives access to the inventory
+	with the ability to add, edit, and delete
+	inventory only select users will have that privlege.
+	"""
+	itemList = c.items.query.all()
+	return render_template('database.html', itemList=itemList)  # render a template
 	
 
 @app.route('/add', methods=['GET', 'POST'])
 def add():
+	"""This function will be used to add new items into inventory
+	This ability will only be given to select personal.
+	"""
 	if request.method == 'GET':
 		return render_template('add.html')
 	else:
@@ -54,6 +75,9 @@ def add():
 
 @app.route('/database/update/<int:idItems>', methods=['GET', 'POST'])
 def update(idItems):
+	"""Lets the user edit items already in inventory.
+	Only select users will be able to modify inventory.
+	"""
 	updateItem = c.items.query.get_or_404(idItems)
 	if request.method == 'GET':
 		return render_template('update.html', updateItem=updateItem)
@@ -67,6 +91,9 @@ def update(idItems):
 
 @app.route('/database/delete/<int:idItems>', methods=['GET', 'POST'])
 def delete(idItems):
+	"""This function give the user the
+	ability to delete items from inventory.
+	"""
 	deleteItem = c.items.query.get_or_404(idItems)
 	c.db.session.delete(deleteItem)
 	c.db.session.commit()
@@ -74,16 +101,27 @@ def delete(idItems):
 
 @app.route('/calendar')
 def calendar():
+	"""Rednders a calender.
+	The calender will make it easier to visualize
+	gear and their locations to aviod confilicts.
+	"""
 	return render_template("calendar.html")
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
+	"""This function lets the user search
+	through the database.
+	"""
 	q = request.args.get('q', '')
 	information = c.contacts.query.filter_by(contactName=q)
 	return redirect('/welcome')
 	
 @app.route('/account')
 def account():
+	"""The function is used to render the page used
+	on the account rep side.
+	This includes the ability to create, edit, and delete shows.
+	"""
 	showList = c.Shows.query.all()
 	return render_template('account.html', showList=showList)
 
