@@ -1,0 +1,160 @@
+\hypertarget{namespace_web_content_1_1app}{}\section{Web\+Content.\+app Namespace Reference}
+\label{namespace_web_content_1_1app}\index{Web\+Content.\+app@{Web\+Content.\+app}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespace_web_content_1_1app_ab0090e2c92ec892cf11fed49d580737a}{home} ()
+\item 
+def \hyperlink{namespace_web_content_1_1app_ac220a4f6d552ae239a9fe5a933eb4c0d}{welcome} ()
+\item 
+def \hyperlink{namespace_web_content_1_1app_a1e55cf68c2c2c883c82749a8725e068c}{login} ()
+\item 
+def \hyperlink{namespace_web_content_1_1app_aeb0d3df489a674be05033bd0ba98e7a6}{database} ()
+\item 
+def \hyperlink{namespace_web_content_1_1app_a01e890f5f74756a5e0db012e87a3bb32}{add} ()
+\item 
+def \hyperlink{namespace_web_content_1_1app_a2f6071690c83608f94abb72589ab7527}{update} (id\+Items)
+\item 
+def \hyperlink{namespace_web_content_1_1app_a280b9c530dfd4125df19a186218bb132}{delete} (id\+Items)
+\item 
+def \hyperlink{namespace_web_content_1_1app_a368b9d1da5b4c987484797ecce9aabc9}{calendar} ()
+\item 
+def \hyperlink{namespace_web_content_1_1app_a6d7ee2ff030bada6042b07189d92a01c}{search} ()
+\item 
+def \hyperlink{namespace_web_content_1_1app_afe68584aa29f9b47108d88d14650c05f}{account} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespace_web_content_1_1app_a52716e6e08bae668f90c903a1f4e2f10}{app} = Flask(\+\_\+\+\_\+name\+\_\+\+\_\+)
+\item 
+\hyperlink{namespace_web_content_1_1app_a317646b91bdcf24c176d3bfc065083f3}{db} = S\+Q\+L\+Alchemy(\hyperlink{namespace_web_content_1_1app_a52716e6e08bae668f90c903a1f4e2f10}{app})
+\item 
+\hyperlink{namespace_web_content_1_1app_a6092358451315e755637b56d42326052}{secret\+\_\+key}
+\item 
+\hyperlink{namespace_web_content_1_1app_ac91170bea34c6458f4262824618a18a2}{debug}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{namespace_web_content_1_1app_afe68584aa29f9b47108d88d14650c05f}\label{namespace_web_content_1_1app_afe68584aa29f9b47108d88d14650c05f}} 
+\index{Web\+Content\+::app@{Web\+Content\+::app}!account@{account}}
+\index{account@{account}!Web\+Content\+::app@{Web\+Content\+::app}}
+\subsubsection{\texorpdfstring{account()}{account()}}
+{\footnotesize\ttfamily def Web\+Content.\+app.\+account (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}The function is used to render the page used
+on the account rep side.
+This includes the ability to create, edit, and delete shows.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespace_web_content_1_1app_a01e890f5f74756a5e0db012e87a3bb32}\label{namespace_web_content_1_1app_a01e890f5f74756a5e0db012e87a3bb32}} 
+\index{Web\+Content\+::app@{Web\+Content\+::app}!add@{add}}
+\index{add@{add}!Web\+Content\+::app@{Web\+Content\+::app}}
+\subsubsection{\texorpdfstring{add()}{add()}}
+{\footnotesize\ttfamily def Web\+Content.\+app.\+add (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}This function will be used to add new items into inventory
+This ability will only be given to select personal.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespace_web_content_1_1app_a368b9d1da5b4c987484797ecce9aabc9}\label{namespace_web_content_1_1app_a368b9d1da5b4c987484797ecce9aabc9}} 
+\index{Web\+Content\+::app@{Web\+Content\+::app}!calendar@{calendar}}
+\index{calendar@{calendar}!Web\+Content\+::app@{Web\+Content\+::app}}
+\subsubsection{\texorpdfstring{calendar()}{calendar()}}
+{\footnotesize\ttfamily def Web\+Content.\+app.\+calendar (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Rednders a calender.
+The calender will make it easier to visualize
+gear and their locations to aviod confilicts.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespace_web_content_1_1app_aeb0d3df489a674be05033bd0ba98e7a6}\label{namespace_web_content_1_1app_aeb0d3df489a674be05033bd0ba98e7a6}} 
+\index{Web\+Content\+::app@{Web\+Content\+::app}!database@{database}}
+\index{database@{database}!Web\+Content\+::app@{Web\+Content\+::app}}
+\subsubsection{\texorpdfstring{database()}{database()}}
+{\footnotesize\ttfamily def Web\+Content.\+app.\+database (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Gives access to the inventory
+with the ability to add, edit, and delete
+inventory only select users will have that privlege.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespace_web_content_1_1app_a280b9c530dfd4125df19a186218bb132}\label{namespace_web_content_1_1app_a280b9c530dfd4125df19a186218bb132}} 
+\index{Web\+Content\+::app@{Web\+Content\+::app}!delete@{delete}}
+\index{delete@{delete}!Web\+Content\+::app@{Web\+Content\+::app}}
+\subsubsection{\texorpdfstring{delete()}{delete()}}
+{\footnotesize\ttfamily def Web\+Content.\+app.\+delete (\begin{DoxyParamCaption}\item[{}]{id\+Items }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}This function give the user the
+ability to delete items from inventory.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespace_web_content_1_1app_ab0090e2c92ec892cf11fed49d580737a}\label{namespace_web_content_1_1app_ab0090e2c92ec892cf11fed49d580737a}} 
+\index{Web\+Content\+::app@{Web\+Content\+::app}!home@{home}}
+\index{home@{home}!Web\+Content\+::app@{Web\+Content\+::app}}
+\subsubsection{\texorpdfstring{home()}{home()}}
+{\footnotesize\ttfamily def Web\+Content.\+app.\+home (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Redircts to the login page.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespace_web_content_1_1app_a1e55cf68c2c2c883c82749a8725e068c}\label{namespace_web_content_1_1app_a1e55cf68c2c2c883c82749a8725e068c}} 
+\index{Web\+Content\+::app@{Web\+Content\+::app}!login@{login}}
+\index{login@{login}!Web\+Content\+::app@{Web\+Content\+::app}}
+\subsubsection{\texorpdfstring{login()}{login()}}
+{\footnotesize\ttfamily def Web\+Content.\+app.\+login (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}The login page
+users will provide a username and password if correct
+will direct them to the welcome/main page.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespace_web_content_1_1app_a6d7ee2ff030bada6042b07189d92a01c}\label{namespace_web_content_1_1app_a6d7ee2ff030bada6042b07189d92a01c}} 
+\index{Web\+Content\+::app@{Web\+Content\+::app}!search@{search}}
+\index{search@{search}!Web\+Content\+::app@{Web\+Content\+::app}}
+\subsubsection{\texorpdfstring{search()}{search()}}
+{\footnotesize\ttfamily def Web\+Content.\+app.\+search (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}This function lets the user search
+through the database.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespace_web_content_1_1app_a2f6071690c83608f94abb72589ab7527}\label{namespace_web_content_1_1app_a2f6071690c83608f94abb72589ab7527}} 
+\index{Web\+Content\+::app@{Web\+Content\+::app}!update@{update}}
+\index{update@{update}!Web\+Content\+::app@{Web\+Content\+::app}}
+\subsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily def Web\+Content.\+app.\+update (\begin{DoxyParamCaption}\item[{}]{id\+Items }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Lets the user edit items already in inventory.
+Only select users will be able to modify inventory.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespace_web_content_1_1app_ac220a4f6d552ae239a9fe5a933eb4c0d}\label{namespace_web_content_1_1app_ac220a4f6d552ae239a9fe5a933eb4c0d}} 
+\index{Web\+Content\+::app@{Web\+Content\+::app}!welcome@{welcome}}
+\index{welcome@{welcome}!Web\+Content\+::app@{Web\+Content\+::app}}
+\subsubsection{\texorpdfstring{welcome()}{welcome()}}
+{\footnotesize\ttfamily def Web\+Content.\+app.\+welcome (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}This will the main page for users
+that work. They will be able to check status on inventory
+and assign them to shows.
+\end{DoxyVerb}
+ 
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{namespace_web_content_1_1app_a52716e6e08bae668f90c903a1f4e2f10}\label{namespace_web_content_1_1app_a52716e6e08bae668f90c903a1f4e2f10}} 
+\index{Web\+Content\+::app@{Web\+Content\+::app}!app@{app}}
+\index{app@{app}!Web\+Content\+::app@{Web\+Content\+::app}}
+\subsubsection{\texorpdfstring{app}{app}}
+{\footnotesize\ttfamily Web\+Content.\+app.\+app = Flask(\+\_\+\+\_\+name\+\_\+\+\_\+)}
+
+\mbox{\Hypertarget{namespace_web_content_1_1app_a317646b91bdcf24c176d3bfc065083f3}\label{namespace_web_content_1_1app_a317646b91bdcf24c176d3bfc065083f3}} 
+\index{Web\+Content\+::app@{Web\+Content\+::app}!db@{db}}
+\index{db@{db}!Web\+Content\+::app@{Web\+Content\+::app}}
+\subsubsection{\texorpdfstring{db}{db}}
+{\footnotesize\ttfamily Web\+Content.\+app.\+db = S\+Q\+L\+Alchemy(\hyperlink{namespace_web_content_1_1app_a52716e6e08bae668f90c903a1f4e2f10}{app})}
+
+\mbox{\Hypertarget{namespace_web_content_1_1app_ac91170bea34c6458f4262824618a18a2}\label{namespace_web_content_1_1app_ac91170bea34c6458f4262824618a18a2}} 
+\index{Web\+Content\+::app@{Web\+Content\+::app}!debug@{debug}}
+\index{debug@{debug}!Web\+Content\+::app@{Web\+Content\+::app}}
+\subsubsection{\texorpdfstring{debug}{debug}}
+{\footnotesize\ttfamily Web\+Content.\+app.\+debug}
+
+\mbox{\Hypertarget{namespace_web_content_1_1app_a6092358451315e755637b56d42326052}\label{namespace_web_content_1_1app_a6092358451315e755637b56d42326052}} 
+\index{Web\+Content\+::app@{Web\+Content\+::app}!secret\+\_\+key@{secret\+\_\+key}}
+\index{secret\+\_\+key@{secret\+\_\+key}!Web\+Content\+::app@{Web\+Content\+::app}}
+\subsubsection{\texorpdfstring{secret\+\_\+key}{secret\_key}}
+{\footnotesize\ttfamily Web\+Content.\+app.\+secret\+\_\+key}
+
