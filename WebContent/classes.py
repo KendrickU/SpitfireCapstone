@@ -5,17 +5,17 @@ from app import db
 class users(db.Model):
 	__tablename__ = "users"
 	idUsers = db.Column('idUsers', db.Integer, primary_key=True)
-	User = db.Column('User', db.String(45))
-	Password = db.Column('Password', db.String(45))
-	Department = db.Column('Department', db.String(45))
-	Email = db.Column('Email', db.String(45))
+	username = db.Column('username', db.String(45))
+	password = db.Column('password', db.String(45))
+	department = db.Column('department', db.String(45))
+	email = db.Column('email', db.String(45))
 
-	def __init__(self, idUsers, User, Password, Department, Email):
+	def __init__(self, idUsers, username, password, department, email):
 		self.idUsers = idUsers
-		self.User = User
-		self.Password = Password
-		self.Department = Department
-		self.Email = Email
+		self.username = username
+		self.password = password
+		self.department = department
+		self.email = email
 
 	def __repr__(self):
 		return '<User %r>' % self.User
@@ -25,8 +25,8 @@ class items(db.Model):
 	idItems = db.Column('idItems', db.Integer, primary_key=True)
 	Name = db.Column('Name', db.String(45))
 	Quantity = db.Column('Quantity', db.Integer)
-	MasterCategory = db.Column('Master Category', db.String(45))
-	Sub_Category = db.Column('Sub-Category', db.String(45))
+	MasterCategory = db.Column('Master_Category', db.String(45))
+	Sub_Category = db.Column('Sub_Category', db.String(45))
 	Pictures = db.Column('Pictures', db.BLOB)
 	Barcode = db.Column('Barcode', db.String(45))
     
@@ -45,28 +45,28 @@ class items(db.Model):
 class Shows(db.Model):
 	__tablename__ = "Shows"
 	idShows = db.Column('idShows', db.Integer, primary_key=True)
-	show = db.Column('show', db.String(45))
-	start_date = db.Column('start date', db.DateTime)
-	end_date = db.Column('end date', db.DateTime)
+	show = db.Column('show', db.String(45), primary_key=True)
+	start_date = db.Column('start', db.DateTime)
+	end_date = db.Column('end', db.DateTime)
 	load_in = db.Column('load-in', db.DateTime)
-	show_start = db.Column('show start', db.DateTime)
+	show_start = db.Column('show_start', db.DateTime)
 	load_out = db.Column('load-out', db.DateTime)
-	return_date = db.Column('return', db.DateTime)
+	return_date = db.Column('return', db.DateTime, primary_key=True)
 	venue = db.Column('venue', db.String(45))
 	client = db.Column('client', db.String(45))
-	job_type = db.Column('job type', db.String(45))
-	status = db.Column('status', db.String(45))
-	handler = db.Column('handler', db.String(45))
-	salesperson = db.Column('salesperson', db.String(45))
-	created_by = db.Column('created by', db.String(45))
-	production = db.Column('production', db.String(45))
+	job_type = db.Column('job_type', db.String(45), primary_key=True)
+	status = db.Column('status', db.String(45), primary_key=True)
+	handler = db.Column('handler', db.String(45), primary_key=True)
+	salesperson = db.Column('salesperson', db.String(45), primary_key=True)
+	created_by = db.Column('created_by', db.String(45))
 	
-	def __init__(self, idShows, show, production, start_date, end_date, load_in, show_start, load_out, return_date, venue, client, job_type, status, handler, salesperson, created_by):
+	def __init__(self, idShows, show, start_date, end_date, load_in, show_start, load_out, return_date, venue, client, job_type, status, handler, salesperson, created_by):
 		self.idShows = idShows
 		self.show = show
 		self.start_date = start_date
 		self.end_date = end_date
 		self.load_in = load_in
+		self.show_start = show_start
 		self.load_out = load_out
 		self.return_date = return_date
 		self.venue = venue
@@ -76,10 +76,9 @@ class Shows(db.Model):
 		self.handler = handler
 		self.salesperson = salesperson
 		self.created_by = created_by
-		self.production = production
 	
 	def __repr__(self):
-		return '<Show> %r' % self.show
+		return '<Shows> %r' % self.Shows
 	
 class contacts(db.Model):
 	__tablename__ = "contacts"
