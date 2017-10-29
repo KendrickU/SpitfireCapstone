@@ -29,7 +29,7 @@ def welcome():
 	that work. They will be able to check status on inventory
 	and assign them to shows.
 	"""
-	showList = c.Shows.query.all()
+	showList = c.Shows.query.with_entities(c.Shows.idShows, c.Shows.show, c.Shows.start_date, c.Shows.end_date)
 	return render_template('welcome.html', showList=showList)  # render a template
 
 # route for handling the login page logic
@@ -44,8 +44,8 @@ def login():
 		return render_template('login.html')
 	username = request.form['username']
 	password = request.form['password']
-	registered_user = c.users.query.filter_by(User=username).first()
-	if registered_user == None or registered_user.Password != password:
+	registered_user = c.users.query.filter_by(username=username).first()
+	if registered_user == None or registered_user.password != password:
 		error = 'Invalid Credentials. Please try again.'
 		return render_template('login.html', error=error)
 	return redirect(url_for('welcome'))
@@ -125,13 +125,21 @@ def account():
 	on the account rep side.
 	This includes the ability to create, edit, and delete shows.
 	"""
-	showList = c.Shows.query.all()
+	showList = c.Shows.query.with_entities(c.Shows.idShows, c.Shows.show, c.Shows.start_date,
+										   c.Shows.end_date,c.Shows.client, c.Shows.job_type,
+										   c.Shows.status, c.Shows.handler,c.Shows.salesperson,
+										   c.Shows.created_by)
 	return render_template('account.html', showList=showList)
 
-#@app.route('/addShow')
-#def addShow():
-	
+
+# @app.route('/addShow')
+# def addShow():
+
 
 # start the server with the 'run()' method
 if __name__ == '__main__':
 	app.run(debug=True)
+
+
+#@app.route('/addShow')
+#def addShow():
