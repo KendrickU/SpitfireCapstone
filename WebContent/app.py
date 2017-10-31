@@ -56,7 +56,7 @@ def database():
 	with the ability to add, edit, and delete
 	inventory only select users will have that privlege.
 	"""
-	itemList = c.items.query.all()
+	itemList = c.items.query.with_entities(c.items.idItems, c.items.name, c.items.quantity, c.items.code)
 	return render_template('database.html', itemList=itemList)  # render a template
 	
 

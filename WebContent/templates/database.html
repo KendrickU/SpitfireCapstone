@@ -109,9 +109,9 @@ input[type=text], select {
 {% for items in itemList %}
 <tr>
 	<td>{{ items.idItems }}</td>
-	<td>{{ items.Name }}</td>
-	<td>{{ items.Quantity }}</td>
-	<td>{{ items.Barcode }}</td>
+	<td>{{ items.name }}</td>
+	<td>{{ items.quantity }}</td>
+	<td>{{ items.code }}</td>
 	<td>
 		<a href="{{ url_for('delete', idItems=items.idItems) }}">Delete</a>
 		&nbsp;||&nbsp;
