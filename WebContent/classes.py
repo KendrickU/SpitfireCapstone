@@ -29,7 +29,7 @@ class items(db.Model):
     quantity = db.Column('quantity', db.Integer)
     mastercategory = db.Column('master_category', db.String(45))
     subcategory = db.Column('sub_category', db.String(45))
-    pictures = db.Column('pictures', db.BLOB)
+    pictures = db.Column('pictures', db.String(45))
     code = db.Column('code', db.String(45))
 
     def __init__(self, idItems, name, quantity, mastercategory, subcategory, pictures, code):
