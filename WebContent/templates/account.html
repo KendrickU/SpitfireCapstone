@@ -107,9 +107,10 @@ input[type=text], select {
   <li><a href="/welcome">HOME</a></li>
   <li><a href="#">CONTACTS</a>
 	<ul>
-	    <li><a href="#">FRONT END</a></li>
-      	<li><a href="#">MOBILE</a></li>        
-      	<li><a href="#">BACK END</a></li>
+	    <li><a href="#">Kendrick Urbaniak</a></li>
+      	<li><a href="#">Antonio Guillen</a></li>        
+      	<li><a href="#">Amanda Conlin</a></li>
+		<li><a href="#">Mark Bradshaw</a></li>
     </ul>
   </li>
   <li><a href="/account">ACCOUNT VIEW</a></li>      
@@ -118,51 +119,22 @@ input[type=text], select {
 </ul>
   </div>
   <div class="row">
-    <div class="col col-3 left">
-      <div class="panel panel-left">
-	  <div class="leftAccordianBody">
-        <div class="leftBlock">
-  			<input type="radio" name="left" id="option1" />   
-  			<label for="option1"><span>Main</span></label>
-  				<div class="info">
-    				<p>Contacts Info</p>
-  				</div>
-		</div>
-		<div class="leftBlock">
-  				<input type="radio" name="left" id="option2"/>
-  				<label for="option2"><span>Facilities</span></label>
-  					<div class="info">
-    					<p>Facilities Info</p>
-  					</div>
-		</div>
-		<div class="leftBlock">
-  			<input type="radio" name="left" id="option3" checked />
-  			<label for="option3"><span>Inventory</span></label>
-  				<div class="info">
-				</div>
-		</div>
-		<div class="leftBlock">
-  			<input type="radio" name="left" id="option4" />
-  			<label for="option4"><span>Services</span></label>
-  				<div class="info">
-  				</div>
-		</div>
-	</div>
-	  </div>
-	  </div>
-	  </div>
-      <div class="row">
-        <div class="thisTable">
-          <div class="panel">
-		  <div class="showRow">
-		  <form method="get" action="/searchShows" id="searchbox5">
+    <div class="col left">
+      <div class="panel-left">
+	  <div id="showTabs">
+		<vue-tabs direction="vertical">
+		<v-tab v-for="tab in tabs" :key="tab">
+		<div slot="title">{% raw %}{{tab}}{% endraw %} &nbsp;<span @click.stop="removeTab(tab)" class="ti-close tab-close"></span></div>
+	  <div class="fullPage">
+	  <form method="get" action="/searchShows" id="searchbox5">
 					<input id="searchShow" name="w" type="text" size="40" placeholder="Search..." />
 				</form>
 				<div class="btn-group rightShow">
 							<button id="addButton">Create New Job</button>
 							</div>
-							</div>
-					<table>
+	</div>
+	  <div v-if="tab === 'Main View'" class="row" style="width:1200px !important">
+					<table style="width:100% !important">
 					<tr>
 						<th colspan="10">List of Shows</th>
 					<tr>
@@ -180,7 +152,7 @@ input[type=text], select {
 						{% for Shows in showList %}
 					<tr>
 						<td>{{ Shows.idShows }}</td>
-						<td>{{ Shows.show }}</td>
+						<td><a href="#" @click="addShowTab" style="color:#000">{{ Shows.show }}</a></td>
 						<td>{{ Shows.start_date }}</td>
 						<td>{{ Shows.end_date }}</td>
 						<td>{{ Shows.client }}</td>
@@ -192,9 +164,12 @@ input[type=text], select {
 					</tr>
 						{% endfor %}
 					</table>
-				</div>
-			</div>	
 		</div>
+	  </v-tab>
+		</vue-tabs>
+		</div>
+	  </div>
+	 </div>
 	</div>
 	<div id="addModal" class="modal">
  <div class="modal-content">
@@ -238,6 +213,6 @@ span.onclick = function() {
     modal.style.display = "none";
 }
 </script>
+<script type="text/javascript" src="static/js/javascript.js"></script>
 </body>
 </html>
-

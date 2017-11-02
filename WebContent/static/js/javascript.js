@@ -21,3 +21,22 @@ new Vue({
     }
   }
 })
+
+new Vue({
+  el:"#showTabs",
+  data:{
+    tabs: ['Main View']
+  },
+  methods: {
+    removeTab(x){
+      for (let i = 0; i < this.tabs.length; i++) {
+          if (this.tabs[i] === x) {
+            this.tabs.splice(i, 1);
+          }
+        }
+    }, 
+	addShowTab(M){
+		this.tabs.push('Gear List');
+	}
+  }
+})
