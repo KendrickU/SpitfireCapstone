@@ -93,14 +93,13 @@ input[type=text], select {
    <body>
     <table>
 <tr>
-	<th colspan="4">List of Items</th>
+	<th colspan="3">List of Items</th>
 	<th>
 		<div class="btn-group">
 		<button id="addButton">Add Item</button>
     	</div>
 	</th>
 <tr>
-    <th>Item Id</th>
     <th>Name</th>
     <th>Quantity</th>
     <th>Barcode</th>
@@ -108,7 +107,6 @@ input[type=text], select {
 </tr>
 {% for items in itemList %}
 <tr>
-	<td>{{ items.idItems }}</td>
 	<td>{{ items.name }}</td>
 	<td>{{ items.quantity }}</td>
 	<td>{{ items.code }}</td>
@@ -126,20 +124,29 @@ input[type=text], select {
  <span class="close">&times;</span>
   <h1>Add an Item!</h1>
   <form action="/add" method="POST">
-  <label for="idItems">idItems</label>
+	<label for="idItems">idItems</label>
     <input type="text" id="idItems" name="idItems" placeholder="idItems...">
     <label for="name">Name</label>
-    <input type="text" id="name" name="name" placeholder="Name...">
+    <input type="text" id="name" name="name" placeholder="Name..." required oninvalid="this.setCustomValidity('Enter Name Here')" oninput="setCustomValidity('')" />
     <label for="quantity">Quantity</label>
-    <input type="text" id="quantity" name="quantity" placeholder="Quantity...">
+    <input type="text" id="quantity" name="quantity" placeholder="Quantity..." required oninvalid="this.setCustomValidity('Enter Quantity Here')" oninput="setCustomValidity('')">
 	<label for="mastercategory">Master Category</label>
-    <input type="text" id="mastercategory" name="mastercategory" placeholder="Master Category...">
+	<select id="mastercategory" name="mastercategory" required oninvalid="this.setCustomValidity('Pick Master Category')" oninput="setCustomValidity('')">
+		<option value="Yes">Yes</option>
+		<option value="No">No</option>
+	</select>
 	<label for="subcategory">Sub Category</label>
-    <input type="text" id="subcategory" name="subcategory" placeholder="Sub Category...">
+	<select id="subcategory" name="subcategory">
+		<option value="Yes">Yes</option>
+		<option value="No">No</option>
+	</select>
 	<label for="pictures">Pictures</label>
     <input type="text" id="pictures" name="pictures" placeholder="Pictures...">
-	<label for="code">Code</label>
-    <input type="text" id="code" name="code" placeholder="Code...">
+	<label for="code">Is This Item Barcoded?</label>
+	<select id="code" name="code">
+		<option value="Yes">Yes</option>
+		<option value="No">No</option>
+	</select>
     <input type="submit" value="Submit">
   </form>
   </div>

@@ -51,9 +51,7 @@ class Shows(db.Model):
     show = db.Column('show', db.String(45))
     start_date = db.Column('start', db.DateTime)
     end_date = db.Column('end', db.DateTime)
-    load_in = db.Column('load-in', db.DateTime)
     show_start = db.Column('show_start', db.DateTime)
-    load_out = db.Column('load-out', db.DateTime)
     return_date = db.Column('return', db.DateTime)
     venue = db.Column('venue', db.String(45))
     client = db.Column('client', db.String(45))
@@ -63,14 +61,12 @@ class Shows(db.Model):
     salesperson = db.Column('salesperson', db.String(45))
     created_by = db.Column('created_by', db.String(45))
 
-    def __init__(self, idShows, show, start_date, end_date, load_in, show_start, load_out, return_date, venue, client,
+    def __init__(self, idShows, show, start_date, end_date, show_start, return_date, venue, client,
                  job_type, status, handler, salesperson, created_by):
         self.idShows = idShows
         self.show = show
         self.start_date = start_date
         self.end_date = end_date
-        self.load_in = load_in
-        self.load_out = load_out
         self.return_date = return_date
         self.venue = venue
         self.client = client

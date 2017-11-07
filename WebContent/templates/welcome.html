@@ -26,7 +26,7 @@
     </ul>
   </li>
   <li><a href="/account">ACCOUNT VIEW</a></li>      
-  <li><a href="#">BACK END</a></li>
+    <li><a href="#">INVENTORY MANAGEMENT</a></li>
   <li style="float:right"><a href="/login">LOGOUT</a></li>
 </ul>
   </div>
@@ -146,12 +146,8 @@
 	<!--<button @click="addTab">Add show tab</button>-->
 		<vue-tabs>
 			<v-tab v-for="tab in tabs" :key="tab">
-			<div slot="title">{% raw %}{{tab}}{% endraw %} &nbsp;<span @click.stop="removeTab(tab)" class="ti-close tab-close"></span></div>
+			<div slot="title">{% raw %}{{tab}}{% endraw %} &nbsp;<span v-if="tab !== 'Show List'" @click.stop="removeTab(tab)" class="ti-close tab-close"></span></div>
 				<div v-if="tab === 'Show List'">
-						<div class="btn-group" style="width:100%">
-						<button style="width:50%">Start Date</button>
-						<button style="width:50%">End Date</button>
-						</div>
 					<table>
 					<tr>
 						<th colspan="6">List of Shows</th>
@@ -190,37 +186,27 @@
 
     <div class="col col-3 right">
       <div class="panel panel-right">
-        <div class="panel-label">
-		<h1>Quicklinks</h1>        
-        </div>
         	<div class="rightAccordianBody">
         <div class="rightBlock">
   			<input type="radio" name="right" id="option5" checked />   
-  			<label for="option5"><span>OPTION 5</span></label>
+  			<label for="option5"><span>Gear List</span></label>
   				<div class="info">
-    				<p>Option 5 Info</p>
+    				<p>Gear List Info</p>
   				</div>
 		</div>
 		<div class="rightBlock">
   				<input type="radio" name="right" id="option6"/>
-  				<label for="option6"><span>OPTION 6</span></label>
+  				<label for="option6"><span>Daily To Do</span></label>
   					<div class="info">
-    					<p>Option 6 Info</p>
+    					<p>Daily To Do Info</p>
   					</div>
 		</div>
 		<div class="rightBlock">
   			<input type="radio" name="right" id="option7" />
-  			<label for="option7"><span>OPTION 7</span></label>
+  			<label for="option7"><span>Gantt View</span></label>
   				<div class="info">
-				<p>Option 7 Info</p>
+				<p>Gantt View Info</p>
 				</div>
-		</div>
-		<div class="rightBlock">
-  			<input type="radio" name="right" id="option8" />
-  			<label for="option8"><span>OPTION 8</span></label>
-  				<div class="info">
-    				<p>Option 8 Info</p>
-  				</div>
 		</div>
 	</div>
       </div>

@@ -124,16 +124,16 @@ input[type=text], select {
 	  <div id="showTabs">
 		<vue-tabs direction="vertical">
 		<v-tab v-for="tab in tabs" :key="tab">
-		<div slot="title">{% raw %}{{tab}}{% endraw %} &nbsp;<span @click.stop="removeTab(tab)" class="ti-close tab-close"></span></div>
+		<div slot="title">{% raw %}{{tab}}{% endraw %} &nbsp;<span v-if="tab !== 'Main View'" @click.stop="removeTab(tab)" class="ti-close tab-close"></span></div>
 	  <div class="fullPage">
-	  <form method="get" action="/searchShows" id="searchbox5">
-					<input id="searchShow" name="w" type="text" size="40" placeholder="Search..." />
+	  <form method="get" action="/search" id="searchbox5">
+					<input id="searchShow" name="q" type="text" size="40" placeholder="Search..." />
 				</form>
-				<div class="btn-group rightShow">
+				<div class="btn-group">
 							<button id="addButton">Create New Job</button>
 							</div>
 	</div>
-	  <div v-if="tab === 'Main View'" class="row" style="width:1200px !important">
+	  <div v-if="tab === 'Main View'" class="row" style="width:1200px !important"> 
 					<table style="width:100% !important">
 					<tr>
 						<th colspan="10">List of Shows</th>
@@ -178,13 +178,19 @@ input[type=text], select {
   <h1>Add a Show!</h1>
   <form action="/addShow" method="POST">
   	<label for="idShows">ID Show</label>
-    <input type="text" id="idShow" name="idShow" placeholder="Show ID...">
+    <input type="text" id="idShows" name="idShows" placeholder="Show ID...">
     <label for="show">Show name</label>
     <input type="text" id="show" name="show" placeholder="Name...">
-    <label for="start_date">Start Date</label>
-    <input type="text" id="start_date" name="start_date" placeholder="Start Date...">
-	<label for="end_date">End Date</label>
-    <input type="text" id="end_date" name="end_date" placeholder="End Date...">
+    <label for="start">Start Date</label>
+    <input type="text" id="start" name="start" placeholder="Start Date...">
+	<label for="end">End Date</label>
+    <input type="text" id="end" name="end" placeholder="End Date...">
+	<label for="show_start">Show Start</label>
+    <input type="text" id="show_start" name="show_start" placeholder="Show Start...">
+	<label for="return">Return</label>
+    <input type="text" id="return" name="return" placeholder="Return...">
+	<label for="venue">Venue</label>
+    <input type="text" id="venue" name="venue" placeholder="Venue...">
 	<label for="client">Client</label>
     <input type="text" id="client" name="client" placeholder="Client...">
 	<label for="job_type">Job Type</label>
@@ -202,6 +208,7 @@ input[type=text], select {
   </div>
  </div>
 </div>
+<script type="text/javascript" src="static/js/javascript.js"></script>
 <script>
 var modal = document.getElementById('addModal');
 var btn = document.getElementById("addButton");
@@ -213,6 +220,5 @@ span.onclick = function() {
     modal.style.display = "none";
 }
 </script>
-<script type="text/javascript" src="static/js/javascript.js"></script>
 </body>
 </html>

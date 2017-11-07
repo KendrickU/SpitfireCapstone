@@ -65,13 +65,10 @@ def add():
 	"""This function will be used to add new items into inventory
 	This ability will only be given to select personal.
 	"""
-	if request.method == 'GET':
-		return render_template('add.html')
-	else:
-		item = c.items(request.form['idItems'], request.form['name'], request.form['quantity'], request.form['mastercategory'], request.form['subcategory'], request.form['pictures'], request.form['code'])
-		c.db.session.add(item)
-		c.db.session.commit()
-		return redirect('/database')
+	item = c.items(request.form['idItems'], request.form['name'], request.form['quantity'], request.form['mastercategory'], request.form['subcategory'], request.form['pictures'], request.form['code'])
+	c.db.session.add(item)
+	c.db.session.commit()
+	return redirect('/database')
 
 @app.route('/database/update/<int:idItems>', methods=['GET', 'POST'])
 def update(idItems):
@@ -132,13 +129,13 @@ def account():
 	return render_template('account.html', showList=showList)
 
 
-@app.route('/addShow')
+@app.route('/addShow', methods=['GET', 'POST'])
 def addShow():
 	if request.method == 'POST':
-		shows = Shows.(request.form['idShows'],request.form['show'],request.form['start'],request.form['end'],request.form['show_start'],request.form['return'],request.form['venue'],request.form['client'],request.form['job_type'],request.form['status'],request.form['handler'],request.form['salesperson'],request.form['created_by'])
-		c.db.add(shows)
-		c.db.commit()
-		return redirect(/welcome)
+		shows = c.Shows(request.form['idShows'],request.form['show'],request.form['start'],request.form['end'],request.form['show_start'],request.form['return'],request.form['venue'],request.form['client'],request.form['job_type'],request.form['status'],request.form['handler'],request.form['salesperson'],request.form['created_by'])
+		c.db.session.add(shows)
+		c.db.session.commit()
+		return redirect('/account')
 
 
 # start the server with the 'run()' method
