@@ -132,14 +132,15 @@ def account():
 	return render_template('account.html', showList=showList)
 
 
-# @app.route('/addShow')
-# def addShow():
+@app.route('/addShow')
+def addShow():
+	if request.method == 'POST':
+		shows = Shows.(request.form['idShows'],request.form['show'],request.form['start'],request.form['end'],request.form['show_start'],request.form['return'],request.form['venue'],request.form['client'],request.form['job_type'],request.form['status'],request.form['handler'],request.form['salesperson'],request.form['created_by'])
+		c.db.add(shows)
+		c.db.commit()
+		return redirect(/welcome)
 
 
 # start the server with the 'run()' method
 if __name__ == '__main__':
 	app.run(debug=True)
-
-
-#@app.route('/addShow')
-#def addShow():
