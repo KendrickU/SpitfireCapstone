@@ -42,3 +42,15 @@ new Vue({
     }
   }
 })
+
+new Vue({
+  el:"#dropdown",
+  data: {
+    master_category: '',
+    sub_category: '',
+    list: {
+      'Lighting': [ { sub_category:'5' }, { sub_category:'10' } ],
+      'Truss': [{ sub_category:'8'}]
+    }
+  }
+})

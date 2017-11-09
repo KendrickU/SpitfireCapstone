@@ -80,12 +80,12 @@ def update(idItems):
 		return render_template('update.html', updateItem=updateItem)
 	else:
 		updateItem.idItems = request.form['updatedidItems']
-		updateItem.Name = request.form['updatedName']
-		updateItem.Quantity = request.form['updatedQuantity']
-		updateItem.MasterCategory = request.form['updatedMaster_Category']
-		updateItem.Sub_Category = request.form['updatedSub_Category']
-		updateItem.Pictures = request.form['updatedPictures']
-		updateItem.Barcode = request.form['updatedBarcode']
+		updateItem.name = request.form['updatedName']
+		updateItem.quantity = request.form['updatedQuantity']
+		updateItem.mastercategory= request.form['updatedMaster_Category']
+		updateItem.subcategory = request.form['updatedSub_Category']
+		updateItem.pictures = request.form['updatedPictures']
+		updateItem.code = request.form['updatedBarcode']
 		c.db.session.commit()
 		return redirect('/database')
 
@@ -105,7 +105,11 @@ def calendar():
 	The calender will make it easier to visualize
 	gear and their locations to aviod confilicts.
 	"""
-	return render_template("calendar.html")
+	showList = c.Shows.query.with_entities(c.Shows.idShows, c.Shows.show, c.Shows.start_date,
+										   c.Shows.end_date,c.Shows.client, c.Shows.job_type,
+										   c.Shows.status, c.Shows.handler,c.Shows.salesperson,
+										   c.Shows.created_by)
+	return render_template('calendar.html', showList=showList)
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():

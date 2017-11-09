@@ -6,6 +6,10 @@
 	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Quicksand" />
 	<link href="static/bootstrap/css/bootstrap.css" rel="stylesheet"
 	type="text/css" />
+	<script src="static/bootstrap/js/bootstrap.js"></script>
+	<script src="https://unpkg.com/vue"></script>
+	<link rel="stylesheet" href="https://unpkg.com/vue-nav-tabs/themes/vue-tabs.css">
+		<script src="https://unpkg.com/vue-nav-tabs/dist/vue-tabs.js"></script>
   </head>
   <style>
   .modal {
@@ -130,16 +134,16 @@ input[type=text], select {
     <input type="text" id="name" name="name" placeholder="Name..." required oninvalid="this.setCustomValidity('Enter Name Here')" oninput="setCustomValidity('')" />
     <label for="quantity">Quantity</label>
     <input type="text" id="quantity" name="quantity" placeholder="Quantity..." required oninvalid="this.setCustomValidity('Enter Quantity Here')" oninput="setCustomValidity('')">
+	<div id="dropdown">
 	<label for="mastercategory">Master Category</label>
-	<select id="mastercategory" name="mastercategory" required oninvalid="this.setCustomValidity('Pick Master Category')" oninput="setCustomValidity('')">
-		<option value="Yes">Yes</option>
-		<option value="No">No</option>
-	</select>
+	<select id="mastercategory" name="mastercategory" v-model="master_category">
+    <option v-for="(item, index) in list">{% raw %}{{ index }}{% endraw %}</option>
+  </select>
 	<label for="subcategory">Sub Category</label>
-	<select id="subcategory" name="subcategory">
-		<option value="Yes">Yes</option>
-		<option value="No">No</option>
-	</select>
+	<select id="subcategory" name="subcategory" v-model="sub_category">
+    <option v-for="option in list[master_category]">{% raw %}{{option.sub_category}}{% endraw %}</option>
+  </select>
+</div>
 	<label for="pictures">Pictures</label>
     <input type="text" id="pictures" name="pictures" placeholder="Pictures...">
 	<label for="code">Is This Item Barcoded?</label>
@@ -152,6 +156,7 @@ input[type=text], select {
   </div>
  </div>
 </div>
+<script type="text/javascript" src="static/js/javascript.js"></script>
 <script>
 var modal = document.getElementById('addModal');
 var btn = document.getElementById("addButton");

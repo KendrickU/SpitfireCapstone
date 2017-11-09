@@ -7,8 +7,6 @@
 	type="text/css" />
 	<link href="static/bootstrap/css/themify-icons/themify-icons.css" rel="stylesheet">
 	<script src="static/bootstrap/js/bootstrap.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
 	<script src="https://unpkg.com/vue"></script>
 	<link rel="stylesheet" href="https://unpkg.com/vue-nav-tabs/themes/vue-tabs.css">
 		<script src="https://unpkg.com/vue-nav-tabs/dist/vue-tabs.js"></script>
@@ -143,7 +141,6 @@
         <div class="col col-12">
           <div class="panel">
 	<div id="mainTabs">
-	<!--<button @click="addTab">Add show tab</button>-->
 		<vue-tabs>
 			<v-tab v-for="tab in tabs" :key="tab">
 			<div slot="title">{% raw %}{{tab}}{% endraw %} &nbsp;<span v-if="tab !== 'Show List'" @click.stop="removeTab(tab)" class="ti-close tab-close"></span></div>

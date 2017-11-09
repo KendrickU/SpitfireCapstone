@@ -51,13 +51,14 @@ input[type=submit] {
 	border:none;
 	background:grey;
 	color:#FFF;
-	margin:0 0 5px;
+	margin-bottom: 5px;
 	padding:10px;
 	font-size:15px;
 	font-family: Quicksand;
 	letter-spacing: 2px;
 	text-shadow: none;
 	box-shadow: none;
+	margin-top: 10px;
 }
 
 input[type=submit]:hover {
@@ -69,12 +70,10 @@ input[type=submit]:hover {
 
 input[type=text], select {
     width: 100%; 
-    padding: 12px;  
+	padding: 12px;  
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box; 
-    margin-top: 6px; 
-    margin-bottom: 16px; 
     resize: vertical;
 }
 
@@ -82,8 +81,8 @@ input[type=text], select {
     border-radius: 5px;
     background-color: #f2f2f2;
     padding: 20px;
-	padding-bottom: 60px;
-    max-width:650px;
+	padding-bottom: 20px;
+    max-width:1000px;
     margin:0 auto;
     position:relative;
 	font-family: Quicksand;
@@ -98,6 +97,26 @@ input[type=text], select {
 
 .FormContainer h1{
 	text-align: center;
+}
+
+.halfLeft {
+	width: 50%;
+	float: left;
+	padding-right: 12px;  
+	padding-left: 12px;  
+	padding-bottom: 5px;  
+	box-sizing: border-box; 
+	resize: vertical;
+}
+
+.halfRight {
+	width: 50%;
+	float: right;
+	padding-right: 12px;  
+	padding-left: 12px;  
+	padding-bottom: 5px;  
+	box-sizing: border-box; 	
+	resize: vertical;
 }
 
   </style>
@@ -128,7 +147,7 @@ input[type=text], select {
 	  <div v-if="tab === 'Main View'" class="row" style="width:1200px !important"> 
 					<div class="fullPage">
 	  <form method="get" action="/search" id="searchbox5">
-					<input id="searchShow" name="q" type="text" size="40" placeholder="Search..." />
+					<input id="searchShow" name="q" type="text" size="40" placeholder="Search Shows..." />
 				</form>
 				<div class="btn-group">
 							<button id="addButton">Create New Job</button>
@@ -152,7 +171,10 @@ input[type=text], select {
 						{% for Shows in showList %}
 					<tr>
 						<td>{{ Shows.idShows }}</td>
-						<td><button v-on:click="addShowTab('{{ Shows.show }}')">{{ Shows.show }}</button></td>
+						<td><div class="show-names">
+							<button v-on:click="addShowTab('{{ Shows.show }}')">{{ Shows.show }}</button>
+							</div>
+						</td>
 						<td>{{ Shows.start_date }}</td>
 						<td>{{ Shows.end_date }}</td>
 						<td>{{ Shows.client }}</td>
@@ -167,6 +189,7 @@ input[type=text], select {
 		</div>
 		<div v-if="tab !== 'Main View'">
 					<object style="width:1200px !important" type="text/html" data="/gearList"></object>
+					</div>
 		</div>
 	  </v-tab>
 		</vue-tabs>
@@ -180,30 +203,54 @@ input[type=text], select {
  <span class="close">&times;</span>
   <h1>Add a Show!</h1>
   <form action="/addShow" method="POST">
+	<div class="halfLeft">
   	<label for="idShows">ID Show</label>
     <input type="text" id="idShows" name="idShows" placeholder="Show ID...">
+	</div>
+	<div class="halfRight">
     <label for="show">Show name</label>
     <input type="text" id="show" name="show" placeholder="Name...">
+	</div>
+	<div class="halfLeft">
     <label for="start">Start Date</label>
     <input type="text" id="start" name="start" placeholder="Start Date...">
+	</div>
+	<div class="halfRight">
 	<label for="end">End Date</label>
     <input type="text" id="end" name="end" placeholder="End Date...">
+	</div>
+	<div class="halfLeft">
 	<label for="show_start">Show Start</label>
     <input type="text" id="show_start" name="show_start" placeholder="Show Start...">
+	</div>
+	<div class="halfRight">
 	<label for="return">Return</label>
     <input type="text" id="return" name="return" placeholder="Return...">
+	</div>
+	<div class="halfLeft">
 	<label for="venue">Venue</label>
     <input type="text" id="venue" name="venue" placeholder="Venue...">
+	</div>
+	<div class="halfRight">
 	<label for="client">Client</label>
     <input type="text" id="client" name="client" placeholder="Client...">
+	</div>
+	<div class="halfLeft">
 	<label for="job_type">Job Type</label>
     <input type="text" id="job_type" name="job_type" placeholder="Job Type...">
+	</div>
+	<div class="halfRight">
 	<label for="status">Status</label>
     <input type="text" id="status" name="status" placeholder="Status...">
+	</div>
+	<div class="halfLeft">
 	<label for="handler">Handler</label>
     <input type="text" id="handler" name="handler" placeholder="Handler...">
+	</div>
+	<div class="halfRight">
 	<label for="salesperson">Sales Person</label>
     <input type="text" id="salesperson" name="salesperson" placeholder="Sales Person...">
+	</div>
 	<label for="created_by">Created By</label>
     <input type="text" id="created_by" name="created_by" placeholder="Created By...">
     <input type="submit" value="Submit">
