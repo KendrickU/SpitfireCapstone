@@ -25,7 +25,8 @@ new Vue({
 new Vue({
   el:"#showTabs",
   data:{
-    tabs: ['Main View']
+    tabs: ['Main View'], 
+	title: ''
   },
   methods: {
     removeTab(x){
@@ -35,8 +36,9 @@ new Vue({
           }
         }
     }, 
-	addShowTab(M){
-		this.tabs.push('Gear List');
-	}
+	addShowTab: function (message) {
+	  this.title = message;
+      this.tabs.push(message);
+    }
   }
 })

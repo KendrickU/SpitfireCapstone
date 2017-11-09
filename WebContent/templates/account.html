@@ -125,7 +125,8 @@ input[type=text], select {
 		<vue-tabs direction="vertical">
 		<v-tab v-for="tab in tabs" :key="tab">
 		<div slot="title">{% raw %}{{tab}}{% endraw %} &nbsp;<span v-if="tab !== 'Main View'" @click.stop="removeTab(tab)" class="ti-close tab-close"></span></div>
-	  <div class="fullPage">
+	  <div v-if="tab === 'Main View'" class="row" style="width:1200px !important"> 
+					<div class="fullPage">
 	  <form method="get" action="/search" id="searchbox5">
 					<input id="searchShow" name="q" type="text" size="40" placeholder="Search..." />
 				</form>
@@ -133,7 +134,6 @@ input[type=text], select {
 							<button id="addButton">Create New Job</button>
 							</div>
 	</div>
-	  <div v-if="tab === 'Main View'" class="row" style="width:1200px !important"> 
 					<table style="width:100% !important">
 					<tr>
 						<th colspan="10">List of Shows</th>
@@ -152,7 +152,7 @@ input[type=text], select {
 						{% for Shows in showList %}
 					<tr>
 						<td>{{ Shows.idShows }}</td>
-						<td><a href="#" @click="addShowTab" style="color:#000">{{ Shows.show }}</a></td>
+						<td><button v-on:click="addShowTab('{{ Shows.show }}')">{{ Shows.show }}</button></td>
 						<td>{{ Shows.start_date }}</td>
 						<td>{{ Shows.end_date }}</td>
 						<td>{{ Shows.client }}</td>
@@ -164,6 +164,9 @@ input[type=text], select {
 					</tr>
 						{% endfor %}
 					</table>
+		</div>
+		<div v-if="tab !== 'Main View'">
+					<object style="width:1200px !important" type="text/html" data="/gearList"></object>
 		</div>
 	  </v-tab>
 		</vue-tabs>

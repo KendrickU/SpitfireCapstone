@@ -137,6 +137,9 @@ def addShow():
 		c.db.session.commit()
 		return redirect('/account')
 
+@app.route('/gearList')
+def gearList():
+	return render_template("gearList.html")
 
 # start the server with the 'run()' method
 if __name__ == '__main__':

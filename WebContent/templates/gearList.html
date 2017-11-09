@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Flask Intro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="static/bootstrap/css/bootstrap.css" rel="stylesheet"
+	type="text/css" />
+	<link href="static/bootstrap/css/themify-icons/themify-icons.css" rel="stylesheet">
+	<script src="static/bootstrap/js/bootstrap.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
+	<script src="https://unpkg.com/vue"></script>
+	<link rel="stylesheet" href="https://unpkg.com/vue-nav-tabs/themes/vue-tabs.css">
+		<script src="https://unpkg.com/vue-nav-tabs/dist/vue-tabs.js"></script>
+  </head>
+   <body class="container-fluid">
+   <div id="showTabs">
+   <label>{% raw %}{{title}}{% endraw %}</label>
+   <table style="width:100% !important">
+					<tr>
+						<th colspan="10">List of Gear</th>
+					<tr>
+						<th>Id Items</th>
+						<th>Name</th>
+						<th>Quantity</th>
+						<th>Code</th>
+						<th>Show</th>
+					</tr>
+						{% for Gears in gearList %}
+					<tr>
+						<td>{{ Gears.idItems }}</td>
+						<td>{{ Gears.Name }}</td>
+						<td>{{ Gears.Quantity }}</td>
+						<td>{{ Gears.Barcode }}</td>
+						<td>{{ Gears.show }}</td>
+					</tr>
+						{% endfor %}
+					</table>
+	</div>
+<script type="text/javascript" src="static/js/javascript.js"></script>
+</body>
+</html>
