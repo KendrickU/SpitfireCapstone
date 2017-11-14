@@ -49,8 +49,8 @@ new Vue({
     master_category: '',
     sub_category: '',
     list: {
-            'Lighting': [{sub_category: 'Adapters'}, {sub_category: 'Bolts/Pins/Tools'}, {sub_category: 'Cases'}, {sub_category: 'Data Cable'}
-                {sub_category: 'Desks-Moving Lights'}, {sub_category: 'Dimmers'}, {sub_category: 'Distros'}, {sub_category: 'F1 Moving Lights'}
+            'Lighting': [{sub_category: 'Adapters'}, {sub_category: 'Bolts/Pins/Tools'}, {sub_category: 'Cases'}, {sub_category: 'Data Cable'},
+                {sub_category: 'Desks-Moving Lights'}, {sub_category: 'Dimmers'}, {sub_category: 'Distros'}, {sub_category: 'F1 Moving Lights'},
                 {sub_category: 'F2 Led Lights'}, {sub_category: 'F3 Static Lights'}, {sub_category: 'F4 Strobe Lights'},
                 {sub_category: 'F5 Spotlights'}, {sub_category: 'Lamps'}, {sub_category: 'Fans'}, {sub_category: 'Feeder'},
                 {sub_category: 'Foggers'}, {sub_category: 'Hardware'}, {sub_category: 'Hazers'}, {sub_category: 'Intercom/Radio'},
@@ -59,7 +59,7 @@ new Vue({
             'Truss': [{sub_category: 'Truss 12"'}, {sub_category: 'Truss 16"'}, {sub_category: 'Truss 20.5"'}, {sub_category: 'Truss Floor Bases'},
                 {sub_category: 'Truss GT'}, {sub_category: 'Truss Pre-Rig 30"'}, {sub_category: ' Truss Tri-Truss'}],
             'Rigging & Motors': [{sub_category: 'Fall Arrest'}, {sub_category: 'Motors'}, {sub_category: 'Motor Cable'},
-                {sub_category: 'Motor Controls'}, {sub_category: 'Rigging'}]
+                {sub_category: 'Motor Controls'}, {sub_category: 'Rigging'}],
     }
   }
 })
