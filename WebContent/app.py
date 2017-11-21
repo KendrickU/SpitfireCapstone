@@ -141,10 +141,15 @@ def addShow():
 		c.db.session.commit()
 		return redirect('/account')
 
-@app.route('/gearList')
-def gearList():
-	return render_template("gearList.html")
-
+@app.route('/account/show/<int:idShows>', methods=['GET', 'POST'])
+def show(idShows):
+	updateShow = c.Shows.query.get_or_404(idShows)
+	if request.method == 'GET':
+		itemList = c.items.query.with_entities(c.items.idItems, c.items.name, c.items.quantity, c.items.code)
+		return render_template('gearList.html', updateShow=updateShow, itemList=itemList)
+	else:
+		c.db.session.commit()
+		
 # start the server with the 'run()' method
 if __name__ == '__main__':
 	app.run(debug=True)

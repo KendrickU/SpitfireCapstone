@@ -135,11 +135,11 @@ input[type=text], select {
     <input type="text" id="quantity" name="quantity" placeholder="Quantity..." required oninvalid="this.setCustomValidity('Enter Quantity Here')" oninput="setCustomValidity('')">
 	<div id="dropdown">
 	<label for="mastercategory">Master Category</label>
-	<select id="mastercategory" name="mastercategory" v-model="master_category">
+	<select id="mastercategory" name="mastercategory" v-model="master_category" required>
     <option v-for="(item, index) in list">{% raw %}{{ index }}{% endraw %}</option>
   </select>
 	<label for="subcategory">Sub Category</label>
-	<select id="subcategory" name="subcategory" v-model="sub_category">
+	<select id="subcategory" name="subcategory" v-model="sub_category" required>
     <option v-for="option in list[master_category]">{% raw %}{{option.sub_category}}{% endraw %}</option>
   </select>
 </div>
