@@ -136,11 +136,11 @@
 		</div>
       </div>
     </div>
+	<div id="mainTabs">
     <div class="col col-6">
       <div class="row">
         <div class="col col-12">
           <div class="panel">
-	<div id="mainTabs">
 		<vue-tabs>
 			<v-tab v-for="tab in tabs" :key="tab">
 			<div slot="title">{% raw %}{{tab}}{% endraw %} &nbsp;<span v-if="tab !== 'Show List'" @click.stop="removeTab(tab)" class="ti-close tab-close"></span></div>
@@ -165,21 +165,28 @@
 					</table>
 				</div>
 				<div v-if="tab === 'Item List'">
-					<object style="width:100%; height:525px;" type="text/html" data="/database"></object>
+					<object style="width:100%; height:100vh;" type="text/html" data="/database"></object>
 				</div>
 				<div v-if="tab === 'Calendar View'">
-					<object style="width:100%; height:625px;" type="text/html" data="/calendar"></object>
+					<object style="width:100%; height:100vh;" type="text/html" data="/calendar"></object>
 				</div>
 				<div v-if="tab === 'Daily Tasks'">
-					Make a Daily Tasks here
+					<object style="width:100%; height:100vh;" type="text/html" data="/dailyTask"></object>
 				</div>
+				<div v-if="tab === 'Gantt View'">
+					<object style="width:100%; height:100vh;" type="text/html" data="/ganttView"></object>
+				</div>
+				{% for Shows in showList %}
+				<div v-if="tab === '{{ Shows.show }}'">
+					<object style="width:100% !important; height:100vh !important" type="text/html" data="account/show/{{ Shows.idShows }}"></object>
+				</div>
+				{% endfor %}
 			</v-tab>
 		</vue-tabs>
 		</div>
         </div>
       </div>
     </div>
-	</div>
 
     <div class="col col-3 right">
       <div class="panel panel-right">
@@ -188,26 +195,43 @@
   			<input type="radio" name="right" id="option5" checked />   
   			<label for="option5"><span>Gear List</span></label>
   				<div class="info">
-    				<p>Gear List Info</p>
+    				<p>Select the Show You Would Like to View the Gear List For:</p>
+					<table>
+					<tr>
+						<th>List of Shows</th>
+					<tr>					
+						<th>Name</th>
+					</tr>
+						{% for Shows in showList %}
+					<tr>
+						<td><div class="show-names">
+							<button v-on:click="addShowTab('{{ Shows.show }}')">{{ Shows.show }}</button>
+						</div></td>
+					</tr>
+						{% endfor %}
+					</table>
   				</div>
 		</div>
 		<div class="rightBlock">
   				<input type="radio" name="right" id="option6"/>
   				<label for="option6"><span>Daily To Do</span></label>
   					<div class="info">
-    					<p>Daily To Do Info</p>
+					<a href="#" style="left:65px;position: relative;" class="DailyLink" @click="addDailyTab">Open Daily Task View</a>
+    					<object style="width:100%; height:100%;" type="text/html" data="/dailyTaskPanel"></object>
   					</div>
 		</div>
 		<div class="rightBlock">
   			<input type="radio" name="right" id="option7" />
-  			<label for="option7"><span>Gantt View</span></label>
+  			<label for="option7"><span>Schedules</span></label>
   				<div class="info">
-				<p>Gantt View Info</p>
+				<a href="#"  class="DailyLink" @click="addGanttTab">Open Gantt View</a>
+				<a href="#"  class="DailyLink" @click="addCalendarTab">Open Calendar View</a>
 				</div>
 		</div>
 	</div>
       </div>
     </div>
+  </div>
   </div>
   <script type="text/javascript" src="static/js/javascript.js"></script>
 </body>

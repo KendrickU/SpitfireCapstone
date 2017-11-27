@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  </head>
+  <body>
+     <div id="chart_div"></div>
+	    <script>
+	google.charts.load('current', {'packages':['gantt']});
+    google.charts.setOnLoadCallback(drawChart);
+	function getYear(text){
+		var d = new Date(text);
+		var n = d.getFullYear()
+		return n;
+	}
+	function getMonth(text){
+		var d = new Date(text);
+		var n = d.getMonth()
+		return n;
+	}
+	function getDay(text){
+		var d = new Date(text);
+		var n = d.getDate();
+		return n;
+	}
+	
+    function drawChart() {
+
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Task ID');
+      data.addColumn('string', 'Task Name');
+      data.addColumn('date', 'Start Date');
+      data.addColumn('date', 'End Date');
+      data.addColumn('number', 'Duration');
+      data.addColumn('number', 'Percent Complete');
+      data.addColumn('string', 'Dependencies');
+	{% for Shows in showList %}
+      data.addRows([
+		['{{ Shows.show }}', '{{ Shows.show }}', 
+		new Date(getYear('{{ Shows.start_date }}'), getMonth('{{ Shows.start_date }}'), getDay('{{ Shows.start_date }}')), 
+		new Date(getYear('{{ Shows.end_date }}'), getMonth('{{ Shows.end_date }}'), getDay('{{ Shows.end_date }}')), 
+		null, 100, null],
+      ]);
+	{% endfor %}
+      var options = {
+        height: 400,
+        gantt: {
+          trackHeight: 30
+        }
+      };
+
+      var chart = new google.visualization.Gantt(document.getElementById('chart_div'));
+
+      chart.draw(data, options);
+    }
+		</script>
+  </body>
+</html>

@@ -150,6 +150,20 @@ def show(idShows):
 	else:
 		c.db.session.commit()
 		
+@app.route('/dailyTask')
+def dailyTask():
+	return render_template('dailyTask.html')
+	
+@app.route('/dailyTaskPanel')
+def dailyTaskPanel():
+	return render_template('dailyTaskPanel.html')
+	
+@app.route('/ganttView')
+def ganttView():
+	showList = c.Shows.query.with_entities(c.Shows.idShows, c.Shows.show, c.Shows.start_date, c.Shows.end_date)
+	return render_template('ganttView.html', showList=showList)
+
+	
 # start the server with the 'run()' method
 if __name__ == '__main__':
 	app.run(debug=True)
