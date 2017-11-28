@@ -157,9 +157,10 @@ class venues(db.Model):
     def __repr__(self):
         return '<venues> %r' % self.venueName
 
-class allocation(db.Model):
-    __tablename__ = "allocation"
+class allocation_table(db.Model):
+    __tablename__ = "allocation_table"
     idallocation_table = db.Column("idallocation_table", db.Integer, primary_key=True)
+    name = db.Column("name", db.String(45))
     items_id = db.Column("items_id", db.Integer)
     user = db.Column("user", db.String(45))
     id_Shows = db.Column("id_Shows", db.Integer)
@@ -169,8 +170,9 @@ class allocation(db.Model):
     Barcoded = db.Column("Barcoded", db.String(45))
     quantity_available = db.Column("quantity_available", db.Integer)
 
-    def __init__(self, idallocation_table, items_id, user, id_Shows, quantity, start_date, end_date, Barcoded, quantity_available):
+    def __init__(self, idallocation_table, name, items_id, user, id_Shows, quantity, start_date, end_date, Barcoded, quantity_available):
         self.idallocation_table = idallocation_table
+        self.name = name
         self.items_id = items_id
         self.user = user
         self.id_Shows = id_Shows
@@ -181,7 +183,7 @@ class allocation(db.Model):
         self.quantity_available = quantity_available
 
     def __repr(self):
-        return '<allocation> %r' % self.idallocation_table
+        return '<allocation> %r' % self.name
 
         # item = items(123, "123", 213, "12")
         # db.session.add(item)
