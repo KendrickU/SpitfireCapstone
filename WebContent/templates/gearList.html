@@ -14,17 +14,17 @@
 		<script src="https://unpkg.com/vue-nav-tabs/dist/vue-tabs.js"></script>
   <style>
   .modal {
-    display: none; 
-    position: fixed; 
-    z-index: 1; 
-    padding-top: 5px; 
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 5px;
     left: 0;
     top: 0;
-    width: 100%; 
-    height: 100%; 
-    overflow: auto; 
-    background-color: rgb(0,0,0); 
-    background-color: rgba(0,0,0,0.4); 
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
 }
 .modal-content {
     margin: auto;
@@ -68,11 +68,11 @@ input[type=submit]:hover {
 }
 
 input[type=text], select {
-    width: 100%; 
-    padding: 12px;  
+    width: 100%;
+    padding: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    box-sizing: border-box; 
+    box-sizing: border-box;
     resize: vertical;
 }
 
@@ -107,7 +107,7 @@ input[type=text], select {
     visibility: hidden;
     width: 80vh;
 	left: 0px;
-	background-color: #e2e0e0; 
+	background-color: #e2e0e0;
     color: #000;
     text-align: center;
     padding: 20px;
@@ -126,19 +126,19 @@ input[type=text], select {
 .halfLeft {
 	width: 50%;
 	float: left !important;
-	padding-right: 12px;  
-	padding-left: 12px;  
-	padding-bottom: 5px;  
-	box-sizing: border-box; 
+	padding-right: 12px;
+	padding-left: 12px;
+	padding-bottom: 5px;
+	box-sizing: border-box;
 	resize: vertical;
 }
 .halfRight {
 	width: 50%;
 	float: right !important;
-	padding-right: 12px;  
-	padding-left: 12px;  
-	padding-bottom: 5px;  
-	box-sizing: border-box; 	
+	padding-right: 12px;
+	padding-left: 12px;
+	padding-bottom: 5px;
+	box-sizing: border-box;
 	resize: vertical;
 }
 
@@ -157,16 +157,16 @@ input[type=text], select {
 						<th>Id Items</th>
 						<th>Name</th>
 						<th>Quantity</th>
-						<th>Code</th>
-						<th>Show</th>
+            <th>Quantity Available</th>
+						<th>Barcode</th>
 					</tr>
 						{% for Gears in gearList %}
 					<tr>
-						<td>{{ Gears.idItems }}</td>
-						<td>{{ Gears.Name }}</td>
-						<td>{{ Gears.Quantity }}</td>
-						<td>{{ Gears.Barcode }}</td>
-						<td>{{ Gears.show }}</td>
+						<td>{{ Gears.items_id }}</td>
+						<td>{{ Gears.name }}</td>
+						<td>{{ Gears.quantity }}</td>
+            <td>{{ Gears.quantity_available }}</td>
+						<td>{{ Gears.Barcoded }}</td>
 					</tr>
 						{% endfor %}
 					</table>

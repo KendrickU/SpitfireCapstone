@@ -42,13 +42,15 @@ def login():
 	error = None
 	if request.method == 'GET':
 		return render_template('login.html')
-	username = request.form['username']
-	password = request.form['password']
-	registered_user = c.users.query.filter_by(username=username).first()
-	if registered_user == None or registered_user.password != password:
-		error = 'Invalid Credentials. Please try again.'
-		return render_template('login.html', error=error)
-	return redirect(url_for('welcome'))
+	if request.method == 'POST':
+		username = request.form['username']
+		password = request.form['password']
+		registered_user = c.users.query.filter_by(username=username).first()
+		if registered_user == None or registered_user.password != password:
+			error = 'Invalid Credentials. Please try again.'
+			return render_template('login.html', error=error)
+		return redirect(url_for('welcome'))
+	return render_template('login.html')
 
 @app.route('/database')
 def database():
@@ -60,15 +62,16 @@ def database():
 	return render_template('database.html', itemList=itemList)  # render a template
 
 
-@app.route('/add', methods=['GET', 'POST'])
+@app.route('/add', methods=['POST'])
 def add():
 	"""This function will be used to add new items into inventory
 	This ability will only be given to select personal.
 	"""
-	item = c.items(request.form['idItems'], request.form['name'], request.form['quantity'], request.form['mastercategory'], request.form['subcategory'], request.form['pictures'], request.form['code'])
-	c.db.session.add(item)
-	c.db.session.commit()
-	return redirect('/database')
+	if reqeust.method == 'POST':
+		item = c.items(request.form['idItems'], request.form['name'], request.form['quantity'], request.form['mastercategory'], request.form['subcategory'], request.form['pictures'], request.form['code'])
+		c.db.session.add(item)
+		c.db.session.commit()
+		return redirect('/database')
 
 @app.route('/database/update/<int:idItems>', methods=['GET', 'POST'])
 def update(idItems):
@@ -101,7 +104,7 @@ def delete(idItems):
 
 @app.route('/calendar')
 def calendar():
-	"""Rednders a calender.
+	"""Renders a calender.
 	The calender will make it easier to visualize
 	gear and their locations to aviod confilicts.
 	"""
@@ -111,7 +114,7 @@ def calendar():
 										   c.Shows.created_by)
 	return render_template('calendar.html', showList=showList)
 
-@app.route('/search', methods=['GET', 'POST'])
+@app.route('/search')
 def search():
 	"""This function lets the user search
 	through the database.
@@ -133,7 +136,7 @@ def account():
 	return render_template('account.html', showList=showList)
 
 
-@app.route('/addShow', methods=['GET', 'POST'])
+@app.route('/addShow', methods=['POST'])
 def addShow():
 	if request.method == 'POST':
 		shows = c.Shows(request.form['idShows'],request.form['show'],request.form['start'],request.form['end'],request.form['show_start'],request.form['return'],request.form['venue'],request.form['client'],request.form['job_type'],request.form['status'],request.form['handler'],request.form['salesperson'],request.form['created_by'])
@@ -141,7 +144,7 @@ def addShow():
 		c.db.session.commit()
 		return redirect('/account')
 
-@app.route('/gearList', methods=['GET', 'POST'])
+@app.route('/gearList', methods=['POST'])
 def gearList():
 	return render_template("gearList.html")
 
@@ -150,19 +153,27 @@ def show(idShows):
 	updateShow = c.Shows.query.get_or_404(idShows)
 	if request.method == 'GET':
 		itemList = c.items.query.with_entities(c.items.idItems, c.items.name, c.items.quantity, c.items.code)
-		gearList = c.allocation_table.query.filter_by(idallocation_table=idShows).with_entities(c.allocation_table.name, c.allocation_table.quantity) #complete this
+		gearList = c.allocation_table.query.filter_by(idallocation_table=idShows).with_entities(c.allocation_table.items_id, c.allocation_table.name, c.allocation_table.quantity, c.allocation_table.quantity_available, c.allocation_table.Barcoded)
 		return render_template('gearList.html', updateShow=updateShow, itemList=itemList, gearList=gearList)
 	if request.method == 'POST':
 		#we need to do some recoding here.
 		Gear = c.allocation_table(request.form['idallocation_table'], request.form['name'], request.form['items_id'], request.form['user'], request.form['id_Shows'], request.form['quantity'], request.form['start_date'], request.form['end_date'], request.form['Barcoded'], request.form['quantity_available'])
 		c.db.session.add(Gear)
 		c.db.session.commit()
-	else:
-		c.db.session.commit()
+		itemList = c.items.query.with_entities(c.items.idItems, c.items.name, c.items.quantity, c.items.code)
+		gearList = c.allocation_table.query.filter_by(idallocation_table=idShows).with_entities(c.allocation_table.name, c.allocation_table.quantity) #complete this
+		return render_template('gearList.html', updateShow=updateShow, itemList=itemList, gearList=gearList)
 
 @app.route('/dailyTask')
 def dailyTask():
-	return render_template('dailyTask.html')
+    if request.method == 'POST':
+        task = c.daily_task(request.form['iddaily_task'], request.form['task'], request.form['place'], request.form['note'], request.form['time'], request.form['date'])
+        c.db.session.add(task)
+        c.db.session.commit()
+    else:
+        c.db.session.commit()
+
+    return render_template('dailyTask.html')
 
 @app.route('/dailyTaskPanel')
 def dailyTaskPanel():
