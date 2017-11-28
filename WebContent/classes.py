@@ -207,6 +207,26 @@ class daily_task(db.Model):
     def __repr__(self):
         return '<daily_task> %r' % self.task
 
+class daily_task(db.Model):
+    __tablename__="daily_task"
+    iddaily_task = db.Column("iddaily_task", db.String(50), primary_key=True)
+    task = db.Column("task", db.String(50))
+    place = db.Column("place", db.String(50))
+    note = db.Column("note", db.String(50))
+    time = db.Column("time", db.String(10))
+    date = db.Column("date", db.String(15))
+
+    def __init__(self, iddaily_task, task, place, note, time, date):
+        self.iddaily_task = iddaily_task
+        self.task = task
+        self.place = place
+        self.note = note
+        self.time = time
+        self.date = date
+
+    def __repr__(self):
+        return '<daily_task> %r' % self.task
+
         # item = items(123, "123", 213, "12")
         # db.session.add(item)
         # db.session.commit()
