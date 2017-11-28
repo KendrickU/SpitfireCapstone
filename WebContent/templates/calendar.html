@@ -8,6 +8,17 @@
 <script src="{{ url_for('static', filename='lib/jquery.min.js') }}"></script>
 <script src="{{ url_for('static', filename='fullcalendar.min.js') }}"></script>
 <script>
+	function myFunction(text) {
+    var d = new Date(text);
+    var n = d.toISOString();
+    return n;
+}
+function myEndFunction(text) {
+    var d = new Date(text);
+    var n = d.toISOString();
+    return n;
+}
+
 	$(document).ready(function() {
 
 		$('#calendar').fullCalendar({
@@ -16,27 +27,22 @@
 				center: 'title',
 				right: 'month,agendaWeek,agendaDay'
 			},
-			defaultDate: '2017-11-12',
+			defaultDate: '2017-11-26',
 			editable: true,
 			eventLimit: true, 
 			events: [
-        {
-            title  : 'event1',
-            start  : '2017-11-10'
-        },
 		{% for Shows in showList %}
         {
             title  : '{{ Shows.show }}',
-            start  : {{ Shows.start_date }},
-            end    : {{ Shows.end_date }},
+            start  : myFunction('{{ Shows.start_date }}'),
+            end    : myEndFunction('{{ Shows.end_date }}'),
 			allDay : false // will make the time show
         },
-        {% endfor %}
+		{% endfor %}
     ]
 		});
 
 	});
-
 </script>
 <style>
 

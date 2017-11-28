@@ -141,10 +141,35 @@ def addShow():
 		c.db.session.commit()
 		return redirect('/account')
 
+<<<<<<< HEAD
 @app.route('/gearList', methods=['GET', 'POST'])
 def gearList():
 	return render_template("gearList.html")
+=======
+@app.route('/account/show/<int:idShows>', methods=['GET', 'POST'])
+def show(idShows):
+	updateShow = c.Shows.query.get_or_404(idShows)
+	if request.method == 'GET':
+		itemList = c.items.query.with_entities(c.items.idItems, c.items.name, c.items.quantity, c.items.code)
+		return render_template('gearList.html', updateShow=updateShow, itemList=itemList)
+	else:
+		c.db.session.commit()
+		
+@app.route('/dailyTask')
+def dailyTask():
+	return render_template('dailyTask.html')
+	
+@app.route('/dailyTaskPanel')
+def dailyTaskPanel():
+	return render_template('dailyTaskPanel.html')
+	
+@app.route('/ganttView')
+def ganttView():
+	showList = c.Shows.query.with_entities(c.Shows.idShows, c.Shows.show, c.Shows.start_date, c.Shows.end_date)
+	return render_template('ganttView.html', showList=showList)
+>>>>>>> b2303f479205faa226d22db926efd89e5e233fdb
 
+	
 # start the server with the 'run()' method
 if __name__ == '__main__':
 	app.run(debug=True)

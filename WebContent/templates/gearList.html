@@ -3,7 +3,7 @@
   <head>
     <title>Flask Intro</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="static/bootstrap/css/bootstrap.css" rel="stylesheet"
+	<link href="../../static/bootstrap/css/bootstrap.css" rel="stylesheet"
 	type="text/css" />
 	<link href="static/bootstrap/css/themify-icons/themify-icons.css" rel="stylesheet">
 	<script src="static/bootstrap/js/bootstrap.js"></script>
@@ -12,16 +12,147 @@
 	<script src="https://unpkg.com/vue"></script>
 	<link rel="stylesheet" href="https://unpkg.com/vue-nav-tabs/themes/vue-tabs.css">
 		<script src="https://unpkg.com/vue-nav-tabs/dist/vue-tabs.js"></script>
+  <style>
+  .modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    padding-top: 5px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+}
+.modal-content {
+    margin: auto;
+	padding: 20px;
+    width: 100%;
+}
+.close {
+    color: grey;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+input[type=submit] {
+    cursor:pointer;
+	width:100%;
+	border:none;
+	background:grey;
+	color:#FFF;
+	margin:0 0 5px;
+	padding:10px;
+	font-size:15px;
+	font-family: Quicksand;
+	letter-spacing: 2px;
+	text-shadow: none;
+	box-shadow: none;
+	margin-top: 10px;
+}
+
+input[type=submit]:hover {
+    background:black;
+	-webkit-transition:background 0.3s ease-in-out;
+	-moz-transition:background 0.3s ease-in-out;
+	transition:background-color 0.3s ease-in-out;
+}
+
+input[type=text], select {
+    width: 100%; 
+    padding: 12px;  
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; 
+    resize: vertical;
+}
+
+.FormContainer {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+	padding-bottom: 20px;
+    height: 93vh;
+    margin:0;
+    position:relative;
+	font-family: Quicksand;
+}
+.FormContainer label, span {
+	color: #000000;
+}
+.FormContainer h1{
+	text-align: center;
+}
+.popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+.popup .popuptext {
+    visibility: hidden;
+    width: 80vh;
+	left: 0px;
+	background-color: #e2e0e0; 
+    color: #000;
+    text-align: center;
+    padding: 20px;
+    position: absolute;
+    z-index: 1;
+	font-family: Quicksand;
+	font-size:24px;
+	border-radius: 6px;
+}
+
+.popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn .5s;
+    animation: fadeIn 1s;
+}
+.halfLeft {
+	width: 50%;
+	float: left !important;
+	padding-right: 12px;  
+	padding-left: 12px;  
+	padding-bottom: 5px;  
+	box-sizing: border-box; 
+	resize: vertical;
+}
+.halfRight {
+	width: 50%;
+	float: right !important;
+	padding-right: 12px;  
+	padding-left: 12px;  
+	padding-bottom: 5px;  
+	box-sizing: border-box; 	
+	resize: vertical;
+}
+
+  </style>
   </head>
    <body class="container-fluid">
    <div id="showTabs">
-   <label>{% raw %}{{title}}{% endraw %}</label>
    <div class="btn-group">
-		<button id="addGear">Add Gear To Show</button>
+		<button id="addGear">Add Gear To {{updateShow.show}}</button>
     	</div>
+	<form action="/account/show/{{updateShow.idShows}}" method="POST">
    <table style="width:100% !important">
 					<tr>
-						<th colspan="10">List of Gear</th>
+						<th colspan="10">List of Gear for {{updateShow.show}}</th>
 					<tr>
 						<th>Id Items</th>
 						<th>Name</th>
@@ -40,6 +171,97 @@
 						{% endfor %}
 					</table>
 	</div>
+	<div id="addModal" class="modal">
+ <div class="modal-content">
+ <div class="FormContainer">
+ <span class="close">&times;</span>
+  <h1>Add Gear to {{updateShow.show}}</h1>
+  <div class="row">
+    <div class="col col-3 left">
+      <div class="panel panel-left">
+   <form method="get" action="/searchGear" id="searchboxGear">
+		<input style="width:100% !important" id="searchShow" name="gear" type="text" size="40" placeholder="Search Gear to Add..." />
+	</form>
+	</div>
+	</div>
+	 <div class="col col-6">
+      <div class="row">
+        <div class="col col-12">
+          <div class="panel">
+  <table>
+<tr>
+	<th colspan="3">List of Items Available</th>
+<tr>
+    <th>Add</th>
+	<th>Name</th>
+    <th>Quantity</th>
+</tr>
+{% for items in itemList %}
+<tr>
+	<td>
+	<div class="popup">
+	 <div class="btn-group">
+	<button onclick="myFunction()">+</button>
+  <span class="popuptext" id="myPopup">How many of {{items.name}} would You Like to Add?
+  <input type="text" id="quantity" name="quantity">
+  <div class="halfLeft">
+  <button style="float: none; !important" type="submit">Submit</button>
+  </div>
+  <div class="halfRight" >
+  <button style="float: none; !important" onclick="myFunction()">Cancel</button>
+  </div>
+  </div>
+  </span>
+	</div>
+	</td>
+	<td>{{ items.name }}</td>
+	<td>{{ items.quantity }}</td>
+</tr>
+{% endfor %}
+</table>
+</div>
+</div>
+</div>
+</div>
+ <div class="col col-3 right">
+      <div class="panel panel-right">
+ <table>
+<tr>
+	<th colspan="3">List of Items</th>
+<tr>
+    <th>Name</th>
+    <th>Quantity</th>
+</tr>
+{% for gears in gearList %}
+<tr>
+	<td>{{ gears.name }}</td>
+	<td>{{ gears.quantity }}</td>
+</tr>
+{% endfor %}
+</table>
+</div>
+</div>
+</div>
+  </form>
+  </div>
+ </div>
+ </div>
 <script type="text/javascript" src="static/js/javascript.js"></script>
+<script>
+var modal = document.getElementById('addModal');
+var btn = document.getElementById("addGear");
+var span = document.getElementsByClassName("close")[0];
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+span.onclick = function() {
+    modal.style.display = "none";
+}
+function myFunction() {
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
+}
+
+</script>
 </body>
 </html>

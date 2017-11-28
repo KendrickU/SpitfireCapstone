@@ -173,7 +173,7 @@ input[type=text], select {
 						<td>{{ Shows.idShows }}</td>
 						<td><div class="show-names">
 							<button v-on:click="addShowTab('{{ Shows.show }}')">{{ Shows.show }}</button>
-							</div>
+						</div>
 						</td>
 						<td>{{ Shows.start_date }}</td>
 						<td>{{ Shows.end_date }}</td>
@@ -187,9 +187,11 @@ input[type=text], select {
 						{% endfor %}
 					</table>
 		</div>
-		<div v-if="tab !== 'Main View'">
-					<object style="width:1200px !important" type="text/html" data="/gearList"></object>
-					</div>
+		{% for Shows in showList %}
+		<div v-if="tab === '{{ Shows.show }}'">
+			<object style="width:1200px !important; height:100vh !important" type="text/html" data="account/show/{{ Shows.idShows }}"></object>
+		</div>
+		{% endfor %}
 		</div>
 	  </v-tab>
 		</vue-tabs>

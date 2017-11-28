@@ -18,6 +18,19 @@ new Vue({
     },
     addGearTab(){
       this.tabs.push('Gear List')
+    }, 
+	addDailyTab(){
+		this.tabs.push('Daily Tasks')
+	}, 
+	addGanttTab(){
+		this.tabs.push('Gantt View')
+	}, 
+	addCalendarTab(){
+		this.tabs.push('Calendar View')
+	}, 
+	addShowTab: function (message) {
+	  this.title = message;
+      this.tabs.push(message);
     }
   }
 })
