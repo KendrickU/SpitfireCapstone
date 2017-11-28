@@ -162,7 +162,14 @@ def show(idShows):
 
 @app.route('/dailyTask')
 def dailyTask():
-	return render_template('dailyTask.html')
+    if request.method == 'POST':
+        task = c.daily_task(request.form['iddaily_task'], request.form['task'], request.form['place'], request.form['note'], request.form['time'], request.form['date'])
+        c.db.session.add(task)
+        c.db.session.commit()
+    else:
+        c.db.session.commit()
+
+    return render_template('dailyTask.html')
 
 @app.route('/dailyTaskPanel')
 def dailyTaskPanel():
