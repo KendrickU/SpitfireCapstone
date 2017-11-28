@@ -58,7 +58,7 @@ def database():
 	"""
 	itemList = c.items.query.with_entities(c.items.idItems, c.items.name, c.items.quantity, c.items.code)
 	return render_template('database.html', itemList=itemList)  # render a template
-	
+
 
 @app.route('/add', methods=['GET', 'POST'])
 def add():
@@ -119,7 +119,7 @@ def search():
 	q = request.args.get('q', '')
 	information = c.contacts.query.filter_by(contactName=q)
 	return redirect('/welcome')
-	
+
 @app.route('/account')
 def account():
 	"""The function is used to render the page used
@@ -141,7 +141,7 @@ def addShow():
 		c.db.session.commit()
 		return redirect('/account')
 
-@app.route('/gearList')
+@app.route('/gearList', methods=['GET', 'POST'])
 def gearList():
 	return render_template("gearList.html")
 
