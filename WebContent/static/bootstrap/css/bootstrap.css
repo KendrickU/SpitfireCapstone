@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Quicksand');
 @import 'themify-icons/themify-icons';
-
+*{
+	font-family: 'Quicksand', sans-serif;
+}
 /* LOGIN PAGE CSS */
 .welcome{
 	color: white;
@@ -202,7 +204,7 @@
 
 table { 
   color: #333;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: 'Quicksand', sans-serif;
   width: 100%;
   border-collapse: collapse; border-spacing: 0; 
 }
@@ -211,7 +213,7 @@ td, th {  border: 0 none; height: 30px; }
 			
 th {
 	background: linear-gradient(#333 0%,#444 100%);
-	color: #FFF; font-weight: bold;
+	color: #FFF; 
 	height: 40px;
 }
 		
@@ -235,7 +237,7 @@ tr:first-child th:last-child {
   width: 460px;
   max-width: 100%;
   margin: 0 auto;
-  font-family: "Verdana";
+  font-family: 'Quicksand', sans-serif;
   font-size: 13px;
   
 }
@@ -261,8 +263,7 @@ label{
   cursor: pointer;
 }
 .leftAccordianBody span{
-  font-family: 'Arial';
-  font-weight: bold;
+  font-family: 'Quicksand', sans-serif;
   display: block;
   padding: 10px 12px 12px 15px;
   margin: 0;
@@ -329,7 +330,7 @@ a, a:link, a:visited {
   width: 460px;
   max-width: 100%;
   margin: 0 auto;
-  font-family: "Verdana";
+  font-family: 'Quicksand', sans-serif;
   font-size: 13px;
   
 }
@@ -345,8 +346,7 @@ a, a:link, a:visited {
   overflow-y: hidden;
 }
 .rightAccordianBody span{
-  font-family: 'Arial';
-  font-weight: bold;
+  font-family: 'Quicksand', sans-serif;
   display: block;
   padding: 10px 12px 12px 15px;
   margin: 0;
@@ -401,7 +401,7 @@ a, a:link, a:visited {
 	width:100%;
 	background: white;
 	border: 1px solid #888888;
-	font-family: sans-serif;
+	font-family: 'Quicksand', sans-serif;
 	text-decoration: none;
 }
 .quicklinks a {
@@ -695,6 +695,6 @@ a, a:link, a:visited {
     border: none;
     cursor:pointer;
     overflow: hidden;
-	font-family: Helvetica, Arial, sans-serif;
+	font-family: 'Quicksand', sans-serif;
 	font-size: 16px;
 }

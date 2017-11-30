@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Flask Intro</title>
+    <title>Welcome</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="static/bootstrap/css/bootstrap.css" rel="stylesheet"
 	type="text/css" />
@@ -157,7 +157,7 @@
 						{% for Shows in showList %}
 					<tr>
 						<td>{{ Shows.idShows }}</td>
-						<td><a href="#" @click="addGearTab" style="color:#000">{{ Shows.show }}</a></td>
+						<td><a href="#" @click="addShowTab('{{ Shows.show }}')" style="color:#000">{{ Shows.show }}</a></td>
 						<td>{{ Shows.start_date }}</td>
 						<td>{{ Shows.end_date }}</td>
 					</tr>
@@ -194,8 +194,8 @@
         <div class="rightBlock">
   			<input type="radio" name="right" id="option5" checked />   
   			<label for="option5"><span>Gear List</span></label>
-  				<div class="info">
-    				<p>Select the Show You Would Like to View the Gear List For:</p>
+  				<div class="info" style="padding: 0px !important;">
+    				<p style="text-align:center;font-size: 14px;">Select the Show You Would Like to View the Gear List For:</p>
 					<table>
 					<tr>
 						<th>List of Shows</th>
@@ -222,10 +222,10 @@
 		</div>
 		<div class="rightBlock">
   			<input type="radio" name="right" id="option7" />
-  			<label for="option7"><span>Schedules</span></label>
+  			<label for="option7"><span>Scheduling</span></label>
   				<div class="info">
-				<a href="#"  class="DailyLink" @click="addGanttTab">Open Gantt View</a>
-				<a href="#"  class="DailyLink" @click="addCalendarTab">Open Calendar View</a>
+				<a href="#" class="DailyLink" @click="addGanttTab">Open Gantt View</a>
+				<a href="#" class="DailyLink" @click="addCalendarTab">Open Calendar View</a>
 				</div>
 		</div>
 	</div>

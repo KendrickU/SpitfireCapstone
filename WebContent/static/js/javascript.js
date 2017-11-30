@@ -31,7 +31,7 @@ new Vue({
 	addShowTab: function (message) {
 	  this.title = message;
       this.tabs.push(message);
-    }
+    }, 
   }
 })
 
