@@ -81,7 +81,7 @@ input[type=text], select {
     background-color: #f2f2f2;
     padding: 20px;
 	padding-bottom: 20px;
-    height: 93vh;
+    height: 110vh;
     margin:0;
     position:relative;
 	font-family: Quicksand;
@@ -202,16 +202,21 @@ input[type=text], select {
 	<div class="popup">
 	 <div class="btn-group">
 	<button onclick="myFunction()">+</button>
+	<form action="/addGear" method="POST">
   <span class="popuptext" id="myPopup">How many of {{items.name}} would You Like to Add?
-  <input type="text" id="quantity" name="quantity">
+  <input type="text" id="quantity" name="quantity" value="{{items.quantity}}" required oninvalid="this.setCustomValidity('Enter Quantity Here')" oninput="setCustomValidity('')">
+  <!--HIDE THESE-->
+  <input type="text" id="idItems" name="idItems" value="{{items.idItems}}">
+ <input type="text" id="idShows" name="idShows" value="{{updateShow.idShows}}">
   <div class="halfLeft">
-  <button style="float: none; !important" type="submit">Submit</button>
+  <input style="float: none; !important" type="submit" value="Submit">
   </div>
   <div class="halfRight" >
   <button style="float: none; !important" onclick="myFunction()">Cancel</button>
   </div>
   </div>
   </span>
+  </form>
 	</div>
 	</td>
 	<td>{{ items.name }}</td>
@@ -246,7 +251,7 @@ input[type=text], select {
   </div>
  </div>
  </div>
-<script type="text/javascript" src="static/js/javascript.js"></script>
+ <script type="text/javascript" src="../../static/js/javascript.js"></script>
 <script>
 var modal = document.getElementById('addModal');
 var btn = document.getElementById("addGear");
