@@ -15,16 +15,9 @@
   <div id="header-wrapper">
 	    <ul class="top-nav">
   <li><a href="/welcome">HOME</a></li>
-  <li><a href="#">CONTACTS</a>
-	<ul>
-	    <li><a href="#">Kendrick Urbaniak</a></li>
-      	<li><a href="#">Antonio Guillen</a></li>        
-      	<li><a href="#">Amanda Conlin</a></li>
-		<li><a href="#">Mark Bradshaw</a></li>
-    </ul>
-  </li>
+  <li><a href="/contacts">CONTACTS</a></li>
   <li><a href="/account">ACCOUNT VIEW</a></li>      
-    <li><a href="#">INVENTORY MANAGEMENT</a></li>
+    <li><a href="/database">INVENTORY MANAGEMENT</a></li>
   <li style="float:right"><a href="/login">LOGOUT</a></li>
 </ul>
   </div>
@@ -38,8 +31,19 @@
         <div class="leftBlock">
   			<input type="radio" name="left" id="option1" />   
   			<label for="option1"><span>Contacts</span></label>
-  				<div class="info">
-    				<p>Contacts Info</p>
+  				<div class="info" style="padding: 0px !important;">
+    				<table>
+					<tr>					
+						<th>Name</th>
+					</tr>
+						{% for contacts in contactList %}
+					<tr>
+						<td>
+							<a href="#" @click="addContactTab('{{ contacts.contactName }}')" style="color:#000">{{ contacts.contactName }}</a></td>
+						</td>
+					</tr>
+						{% endfor %}
+					</table>
   				</div>
 		</div>
 		<div class="leftBlock">
@@ -68,6 +72,157 @@
 										<li class="file"><a href="">menu-1-1-4</a></li>
 									</ol> 
 								</li>
+								<li>
+									<label for="boltsPinsTools">Bolts/Pins/Tools</label>
+									<input type="checkbox" id="boltsPinsTools"/>
+									<ol>
+									</ol> 
+								</li>
+								<li>
+									<label for="cases">Cases</label>
+									<input type="checkbox" id="cases"/>
+									<ol>
+									</ol> 
+								</li>
+								<li>
+									<label for="dataCable">Data Cable</label>
+									<input type="checkbox" id="dataCable"/>
+									<ol>
+									</ol> 
+								</li>
+								<li>
+									<label for="desksMovingLights">Desks-Moving Lights</label>
+									<input type="checkbox" id="desksMovingLights"/>
+									<ol>
+									</ol> 
+								</li>
+								<li>
+									<label for="dimmers">Dimmers</label>
+									<input type="checkbox" id="dimmers"/>
+									<ol>
+									</ol> 
+								</li>
+								<li>
+									<label for="distros">Distros</label>
+									<input type="checkbox" id="distros"/>
+									<ol>
+									</ol> 
+								</li>
+								<li>
+									<label for="f1MovingLights">F1 Moving Lights</label>
+									<input type="checkbox" id="f1MovingLights"/>
+									<ol>
+									</ol> 
+								</li>
+								<li>
+									<label for="f2LedLights">F2 Led Lights</label>
+									<input type="checkbox" id="f2LedLights"/>
+									<ol>
+									</ol> 
+								</li>
+								<li>
+									<label for="f3StaticLights">F3 Static Lights</label>
+									<input type="checkbox" id="f3StaticLights"/>
+									<ol>
+									</ol> 
+								</li>
+								<li>
+									<label for="f4StrobeLights">F4 Strobe Lights</label>
+									<input type="checkbox" id="f4StrobeLights"/>
+									<ol>
+									</ol> 
+								</li>
+								<li>
+									<label for="f5Spotlights">F5 Spotlights</label>
+									<input type="checkbox" id="f5Spotlights"/>
+									<ol>
+									</ol> 
+								</li>
+								<li>
+									<label for="lamps">Lamps</label>
+									<input type="checkbox" id="lamps"/>
+									<ol>
+									</ol> 
+								</li>
+								<li>
+									<label for="fans">Fans</label>
+									<input type="checkbox" id="fans"/>
+									<ol>
+									</ol> 
+								</li>
+								<li>
+									<label for="feeder">Feeder</label>
+									<input type="checkbox" id="feeder"/>
+									<ol>
+									</ol> 
+								</li>
+								<li>
+									<label for="foggers">Foggers</label>
+									<input type="checkbox" id="foggers"/>
+									<ol>
+									</ol> 
+								</li>
+								<li>
+									<label for="hardware">Hardware</label>
+									<input type="checkbox" id="hardware"/>
+									<ol>
+									</ol> 
+								</li>
+								<li>
+									<label for="hazers">Hazers</label>
+									<input type="checkbox" id="hazers"/>
+									<ol>
+									</ol> 
+								</li>
+								<li>
+									<label for="intercomRadio">Intercom/Radio</label>
+									<input type="checkbox" id="intercomRadio"/>
+									<ol>
+									</ol> 
+								</li>
+								<li>
+									<label for="lifts">Lifts</label>
+									<input type="checkbox" id="lifts"/>
+									<ol>
+									</ol> 
+								</li>
+								<li>
+									<label for="multicable">Multicable</label>
+									<input type="checkbox" id="multicable"/>
+									<ol>
+									</ol> 
+								</li>
+								<li>
+									<label for="pipe">Pipe</label>
+									<input type="checkbox" id="pipe"/>
+									<ol>
+									</ol> 
+								</li>
+								<li>
+									<label for="powerCable">Power Cable (A/C)</label>
+									<input type="checkbox" id="powerCable"/>
+									<ol>
+									</ol> 
+								</li>
+								<li>
+									<label for="snakes">Snakes</label>
+									<input type="checkbox" id="snakes"/>
+									<ol>
+									</ol> 
+								</li>
+								<li>
+									<label for="softgoods">Softgoods</label>
+									<input type="checkbox" id="softgoods"/>
+									<ol>
+									</ol> 
+								</li>
+								<li>
+									<label for="lifts">Lifts</label>
+									<input type="checkbox" id="lifts"/>
+									<ol>
+									</ol> 
+								</li>
+								
 							</ol>
 						</li> 
 						<li>
@@ -76,12 +231,80 @@
 							<ol>
 								<li>
 									<label for="truss_12">Truss 12</label>
-									<input type="checkbox" id="adapters"/>
+									<input type="checkbox" id="truss_12"/>
 									<ol>
-										<li class="file"><a href="">hi</a></li>
-										<li class="file"><a href="">menu-1-1-2</a></li>
-										<li class="file"><a href="">menu-1-1-3</a></li>
-										<li class="file"><a href="">menu-1-1-4</a></li>
+									</ol> 
+								</li>
+								<li>
+									<label for="truss_16">Truss 16</label>
+									<input type="checkbox" id="truss_16"/>
+									<ol>
+									</ol> 
+								</li>
+								<li>
+									<label for="truss_205">Truss 20.5</label>
+									<input type="checkbox" id="truss_205"/>
+									<ol>
+									</ol>
+								</li>
+								<li>
+									<label for="trussFloorBases">Truss Floor Bases</label>
+									<input type="checkbox" id="trussFloorBases"/>
+									<ol>
+									</ol>
+								</li>
+								<li>
+									<label for="trussGT">Truss GT</label>
+									<input type="checkbox" id="trussGT"/>
+									<ol>
+									</ol>
+								</li>
+								<li>
+									<label for="trussPreRig">Truss Pre-Rig 30</label>
+									<input type="checkbox" id="trussPreRig"/>
+									<ol>
+									</ol>
+								</li>
+								<li>
+									<label for="trussTriTruss">Truss Tri-Truss</label>
+									<input type="checkbox" id="trussTriTruss"/>
+									<ol>
+									</ol>
+								</li>
+							</ol>
+						</li> 
+						<li>
+							<label for="riggingAndMotors">Rigging & Motors</label>
+							<input type="checkbox" id="riggingAndMotors" />
+							<ol>
+								<li>
+									<label for="fallArrest">Fall Arrest</label>
+									<input type="checkbox" id="fallArrest"/> 
+									<ol>
+									</ol> 
+								</li>
+								<li>
+									<label for="motors">Motors</label>
+									<input type="checkbox" id="motors"/> 
+									<ol>
+									</ol> 
+								</li>
+								<li>
+									<label for="motorCable">Motor Cable</label>
+									<input type="checkbox" id="motorCable"/> 
+									<ol>
+									</ol> 
+								</li>
+								<li>
+									<label for="motorControls">Motor Controls</label>
+									<input type="checkbox" id="motorControls"/> 
+									<ol>
+									</ol> 
+								</li>
+								<li>
+									<label for="rigging">Rigging</label>
+									<input type="checkbox" id="rigging"/> 
+									<ol>
 									</ol> 
 								</li>
 							</ol>
@@ -89,11 +312,127 @@
 					</ol>
 				</div>
 		</div>
-		<div class="leftBlock">
-  			<input type="radio" name="left" id="option4" />
+	</div>
+		</v-tab>
+		<v-tab title="SEARCH">
+				<div class="dropdown">
+				<select name="one" class="dropdown-select">
+				<option value="1">Search Contacts</option>
+				<option value="2">Search Facilities</option>
+				<option value="3">Search Inventory</option>
+				<option value="3">Search Services</option>
+				<option value="3">Search Shows</option>
+				</select>
+				</div>
+				<form method="get" action="/search" id="searchbox5">
+					<input id="search52" name="q" type="text" size="40" placeholder="Search..." />
+				</form>
+			</v-tab>
+		</vue-tabs>
+		</div>
+      </div>
+    </div>
+	 <div id="mainTabs">
+    <div class="col col-6">
+      <div class="row">
+        <div class="col col-12">
+          <div class="panel">
+		<vue-tabs>
+			<v-tab v-for="tab in tabs" :key="tab">
+			<div slot="title">{% raw %}{{tab}}{% endraw %} &nbsp;<span v-if="tab !== 'Show List'" @click.stop="removeTab(tab)" class="ti-close tab-close"></span></div>
+				<div v-if="tab === 'Show List'">
+					<table>
+					<tr>
+						<th colspan="6">List of Shows</th>
+					<tr>
+						<th>Show Id</th>
+						<th>Name</th>
+						<th>Start Date</th>
+						<th>End Date</th>
+					</tr>
+						{% for Shows in showList %}
+					<tr>
+						<td>{{ Shows.idShows }}</td>
+						<td><a href="#" @click="addShowTab('{{ Shows.show }}')" style="color:#000">{{ Shows.show }}</a></td>
+						<td>{{ Shows.start_date }}</td>
+						<td>{{ Shows.end_date }}</td>
+					</tr>
+						{% endfor %}
+					</table>
+				</div>
+				<div v-if="tab === 'Item List'">
+					<object style="width:100%; height:100vh;" type="text/html" data="/itemList"></object>
+				</div>
+				<div v-if="tab === 'Calendar View'">
+					<object style="width:100%; height:100vh;" type="text/html" data="/calendar"></object>
+				</div>
+				<div v-if="tab === 'Daily Tasks'">
+					<object style="width:100%; height:100vh;" type="text/html" data="/dailyTask"></object>
+				</div>
+				<div v-if="tab === 'Gantt View'">
+					<object style="width:100%; height:100vh;" type="text/html" data="/ganttView"></object>
+				</div>
+				{% for Shows in showList %}
+				<div v-if="tab === '{{ Shows.show }}'">
+					<object style="width:100% !important; height:100vh !important" type="text/html" data="account/show/{{ Shows.idShows }}"></object>
+				</div>
+				{% endfor %}
+			</v-tab>
+		</vue-tabs>
+		</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col col-3 right">
+      <div class="panel panel-right">
+        	<div class="rightAccordianBody">
+        <div class="rightBlock">
+  			<input type="radio" name="right" id="option5" />   
+  			<label for="option5"><span>Gear List</span></label>
+  				<div class="info" style="padding: 0px !important;">
+    				<p style="text-align:center;font-size: 14px;">Select the Show You Would Like to View the Gear List For:</p>
+					<table>
+					<tr>
+						<th>List of Shows</th>
+					<tr>					
+						<th>Name</th>
+					</tr>
+						{% for Shows in showList %}
+					<tr>
+						<td><div class="show-names">
+							<button v-on:click="addShowTab('{{ Shows.show }}')">{{ Shows.show }}</button>
+						</div></td>
+					</tr>
+						{% endfor %}
+					</table>
+  				</div>
+		</div>
+		<div class="rightBlock">
+  				<input type="radio" name="right" id="option6" checked/>
+  				<label for="option6"><span>Daily To Do</span></label>
+  					<div class="info" style="padding: 0px !important;">
+					<a href="#" style="left:65px;position: relative;" class="DailyLink" @click="addDailyTab">Open Daily Task View</a>
+						<object style="width:100%; height:85%;" type="text/html" data="/dailyTaskPanel"></object>
+  					</div>
+		</div>
+		<div class="rightBlock">
+  			<input type="radio" name="right" id="option7" />
+  			<label for="option7"><span>Scheduling</span></label>
+  				<div class="info">
+				<a href="#" class="DailyLink" style="width: 100% !important;height: 40% !important;text-align: center;font-size: 26px !important;padding-top: 25px;margin-top:15px !important;" 
+				@click="addGanttTab">Open Gantt View</a>
+				<a href="#" class="DailyLink" style="width: 100% !important;height: 40% !important;text-align: center;font-size: 26px !important;padding-top: 25px; margin-top:15px !important;" 
+				@click="addCalendarTab">Open Calendar View</a>
+				</div>
+		</div>
+		<div class="rightBlock">
+  			<input type="radio" name="right" id="option4" />
   			<label for="option4"><span>Services</span></label>
   				<div class="info">
-    				<ol class="tree">
+				<a href="#" style="left:65px;position: relative;" class="DailyLink" @click="addItemTab">Open Item List View</a>
+    				<br></br>
+					<ol class="tree">
 						<li>
 							<label for="labor">Labor</label>
 							<input type="checkbox" id="labor" />
@@ -131,118 +470,6 @@
 						</li>
 					</ol>
   				</div>
-		</div>
-	</div>
-		</v-tab>
-		<v-tab title="SEARCH">
-				<div class="dropdown">
-				<select name="one" class="dropdown-select">
-				<option value="1">Search Contacts</option>
-				<option value="2">Search Facilities</option>
-				<option value="3">Search Inventory</option>
-				<option value="3">Search Services</option>
-				<option value="3">Search Shows</option>
-				</select>
-				</div>
-				<form method="get" action="/search" id="searchbox5">
-					<input id="search52" name="q" type="text" size="40" placeholder="Search..." />
-				</form>
-			</v-tab>
-		</vue-tabs>
-		</div>
-      </div>
-    </div>
-	<div id="mainTabs">
-    <div class="col col-6">
-      <div class="row">
-        <div class="col col-12">
-          <div class="panel">
-		<vue-tabs>
-			<v-tab v-for="tab in tabs" :key="tab">
-			<div slot="title">{% raw %}{{tab}}{% endraw %} &nbsp;<span v-if="tab !== 'Show List'" @click.stop="removeTab(tab)" class="ti-close tab-close"></span></div>
-				<div v-if="tab === 'Show List'">
-					<table>
-					<tr>
-						<th colspan="6">List of Shows</th>
-					<tr>
-						<th>Show Id</th>
-						<th>Name</th>
-						<th>Start Date</th>
-						<th>End Date</th>
-					</tr>
-						{% for Shows in showList %}
-					<tr>
-						<td>{{ Shows.idShows }}</td>
-						<td><a href="#" @click="addShowTab('{{ Shows.show }}')" style="color:#000">{{ Shows.show }}</a></td>
-						<td>{{ Shows.start_date }}</td>
-						<td>{{ Shows.end_date }}</td>
-					</tr>
-						{% endfor %}
-					</table>
-				</div>
-				<div v-if="tab === 'Item List'">
-					<object style="width:100%; height:100vh;" type="text/html" data="/database"></object>
-				</div>
-				<div v-if="tab === 'Calendar View'">
-					<object style="width:100%; height:100vh;" type="text/html" data="/calendar"></object>
-				</div>
-				<div v-if="tab === 'Daily Tasks'">
-					<object style="width:100%; height:100vh;" type="text/html" data="/dailyTask"></object>
-				</div>
-				<div v-if="tab === 'Gantt View'">
-					<object style="width:100%; height:100vh;" type="text/html" data="/ganttView"></object>
-				</div>
-				{% for Shows in showList %}
-				<div v-if="tab === '{{ Shows.show }}'">
-					<object style="width:100% !important; height:100vh !important" type="text/html" data="account/show/{{ Shows.idShows }}"></object>
-				</div>
-				{% endfor %}
-			</v-tab>
-		</vue-tabs>
-		</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col col-3 right">
-      <div class="panel panel-right">
-        	<div class="rightAccordianBody">
-        <div class="rightBlock">
-  			<input type="radio" name="right" id="option5" checked />   
-  			<label for="option5"><span>Gear List</span></label>
-  				<div class="info" style="padding: 0px !important;">
-    				<p style="text-align:center;font-size: 14px;">Select the Show You Would Like to View the Gear List For:</p>
-					<table>
-					<tr>
-						<th>List of Shows</th>
-					<tr>					
-						<th>Name</th>
-					</tr>
-						{% for Shows in showList %}
-					<tr>
-						<td><div class="show-names">
-							<button v-on:click="addShowTab('{{ Shows.show }}')">{{ Shows.show }}</button>
-						</div></td>
-					</tr>
-						{% endfor %}
-					</table>
-  				</div>
-		</div>
-		<div class="rightBlock">
-  				<input type="radio" name="right" id="option6"/>
-  				<label for="option6"><span>Daily To Do</span></label>
-  					<div class="info">
-					<a href="#" style="left:65px;position: relative;" class="DailyLink" @click="addDailyTab">Open Daily Task View</a>
-    					<object style="width:100%; height:100%;" type="text/html" data="/dailyTaskPanel"></object>
-  					</div>
-		</div>
-		<div class="rightBlock">
-  			<input type="radio" name="right" id="option7" />
-  			<label for="option7"><span>Scheduling</span></label>
-  				<div class="info">
-				<a href="#" class="DailyLink" @click="addGanttTab">Open Gantt View</a>
-				<a href="#" class="DailyLink" @click="addCalendarTab">Open Calendar View</a>
-				</div>
 		</div>
 	</div>
       </div>

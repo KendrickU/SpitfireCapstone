@@ -205,11 +205,13 @@ input[type=text], select {
 	<form action="/addGear" method="POST">
   <span class="popuptext" id="myPopup">How many of {{items.name}} would You Like to Add?
   <input type="text" id="quantity" name="quantity" value="{{items.quantity}}" required oninvalid="this.setCustomValidity('Enter Quantity Here')" oninput="setCustomValidity('')">
-  <!--HIDE THESE-->
-  <input type="text" id="idItems" name="idItems" value="{{items.idItems}}">
- <input type="text" id="idShows" name="idShows" value="{{updateShow.idShows}}">
+  <!--HIDE vvv THESE-->
+  <input type="hidden" id="idItems" name="idItems" value="{{items.idItems}}">
+ <input type="hidden" id="idShows" name="idShows" value="{{updateShow.idShows}}">
+ <input type="hidden" id="user" name="user" value="NULL">
+ <!--HIDE ^^^ THOSE-->
   <div class="halfLeft">
-  <input style="float: none; !important" type="submit" value="Submit">
+  <button style="float: none; !important" type="submit">Submit</button>
   </div>
   <div class="halfRight" >
   <button style="float: none; !important" onclick="myFunction()">Cancel</button>
@@ -251,7 +253,6 @@ input[type=text], select {
   </div>
  </div>
  </div>
- <script type="text/javascript" src="../../static/js/javascript.js"></script>
 <script>
 var modal = document.getElementById('addModal');
 var btn = document.getElementById("addGear");

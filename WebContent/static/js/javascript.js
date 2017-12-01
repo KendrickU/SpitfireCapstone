@@ -32,7 +32,17 @@ new Vue({
 	  this.title = message;
       this.tabs.push(message);
     }, 
+	addItemTab() {
+	  this.tabs.push('Item List')
+    }, 
   }
+})
+
+new Vue({
+	el:"#addGear", 
+	data:{
+		show: false
+	}
 })
 
 new Vue({
@@ -70,7 +80,7 @@ new Vue({
                 {sub_category: 'Lifts'}, {sub_category: 'Multicable'}, {sub_category: 'Pipe'}, {sub_category: 'Power Cable (A/C)'},
                 {sub_category: 'Snakes'}, {sub_category: 'Softgoods'}],
             'Truss': [{sub_category: 'Truss 12"'}, {sub_category: 'Truss 16"'}, {sub_category: 'Truss 20.5"'}, {sub_category: 'Truss Floor Bases'},
-                {sub_category: 'Truss GT'}, {sub_category: 'Truss Pre-Rig 30"'}, {sub_category: ' Truss Tri-Truss'}],
+                {sub_category: 'Truss GT'}, {sub_category: 'Truss Pre-Rig 30"'}, {sub_category: 'Truss Tri-Truss'}],
             'Rigging & Motors': [{sub_category: 'Fall Arrest'}, {sub_category: 'Motors'}, {sub_category: 'Motor Cable'},
                 {sub_category: 'Motor Controls'}, {sub_category: 'Rigging'}],
     }

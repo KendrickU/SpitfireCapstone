@@ -438,7 +438,7 @@ input:focus::placeholder{
     top: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.5);
+    background: rgb(32, 65, 149);
 }
 .head:before {
     position: absolute;
@@ -1970,14 +1970,10 @@ position: absolute;
                         <h3>Set Time</h3>
                         <input type='time'>
                     </div>
-                    
-                    
                     <div class='set-priority'>
                         <h3>Set date</h3>
                         <input id='datepicker' placeholder='dd/mm/yyyy' readonly>
                     </div>
-                    
-                   
                     </div>
                     <button id='submit' role="button"><i class="fa fa-check"></i>
                         <span class='ripple'></span>
@@ -1995,16 +1991,12 @@ position: absolute;
                     <span class="timing"></span>
                     </span>
                 </div>
-                <div class='task-info'>
-                    <span class='counter'>No Tasks Pending</span>
-                </div>
             </div>
             <div class="list-container">
                 <div class="pre-loading">
                     <div class='simulate-container'>
                     <div class="simulatepost">
                         <div class="circle"></div>
-                        
                         <div class="right-side">
                         <div class="top-line"></div>
                         <div class="center-line"></div>
@@ -2020,10 +2012,9 @@ position: absolute;
                     <i class="fa fa-signal"></i>
                     <h1>No tasks for today</h1>
                     <h3>Enjoy your <span class='wel-day'></span></h3>
-                        </div>
+                    </div>
                 </div>
                 <ul class="list">
-
                 </ul>
             </div>
       <div class="main-message">
@@ -2148,8 +2139,6 @@ position: absolute;
 
     });
 
-
-
     $('#tmp').on('click', function() {
         $('.notification').toggleClass('checked');
         $('.notification .left').toggleClass('animated-checked');
@@ -2191,14 +2180,10 @@ position: absolute;
         }
     });
 
-
     $('#open_todo').on('click', function() {
         $('.counter').removeClass('numric-animated');
         $('#overlay, #card-main').fadeIn();
     });
-
-
-
 
     var counter = 0;
     $('#submit').on('click', function() {
@@ -2219,7 +2204,6 @@ position: absolute;
             }
 
         });
-
 
         if (myDescription.length > showChar) {
 
@@ -2270,10 +2254,8 @@ $(this).find('.icon-arrow-down').toggleClass('rotated');
                         $(event.target).closest('li').remove();
 
                         var co = $('.list li').length;
-                        $('.counter').html(co + ' task(s) pending');
 
                         if (co == 0) {
-                            $('.counter').html('No Tasks Pending');
                             $('.pre-loading').fadeIn();
 
                         }
@@ -2304,7 +2286,6 @@ $(this).find('.icon-arrow-down').toggleClass('rotated');
 
 
         var co = $('.list li').length;
-        $('.counter').html(co + ' Task(s) Pending');
     });
     $('#overlay').mouseup(function(e) {
         var container = $("#card-main, .main-message");

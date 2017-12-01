@@ -30,7 +30,8 @@ def welcome():
 	and assign them to shows.
 	"""
 	showList = c.Shows.query.with_entities(c.Shows.idShows, c.Shows.show, c.Shows.start_date, c.Shows.end_date)
-	return render_template('welcome.html', showList=showList)  # render a template
+	contactList = c.contacts.query.with_entities(c.contacts.contactName, c.contacts.contactAddress, c.contacts.contactCity, c.contacts.contactZip, c.contacts.Phone, c.contacts.Email)
+	return render_template('welcome.html', showList=showList, contactList=contactList)  # render a template
 
 # route for handling the login page logic
 @app.route('/login', methods=['GET', 'POST'])
@@ -183,6 +184,48 @@ def dailyTaskPanel():
 def ganttView():
 	showList = c.Shows.query.with_entities(c.Shows.idShows, c.Shows.show, c.Shows.start_date, c.Shows.end_date)
 	return render_template('ganttView.html', showList=showList)
+
+@app.route('/contacts')
+def contacts():
+	contactList = c.contacts.query.with_entities(c.contacts.contactName, c.contacts.contactAddress, c.contacts.contactCity, c.contacts.contactZip, c.contacts.Phone, c.contacts.Email)
+	return render_template('contacts.html', contactList=contactList)
+
+@app.route('/addContact', methods=['POST'])
+def addContact():
+	if request.method == 'POST':
+		contacts = c.contacts(request.form['contactName'],request.form['contactAddress'],request.form['contactCity'],request.form['contactZip'],request.form['Phone'],request.form['Email'],request.form['isEmployee'])
+		c.db.session.add(contacts)
+		c.db.session.commit()
+		return redirect('/contacts')
+		
+@app.route('/contacts/deleteContact/<string:contactName>', methods=['GET', 'POST'])
+def deleteContact(contactName):
+	deleteContact = c.contacts.query.get_or_404(contactName)
+	c.db.session.delete(deleteContact)
+	c.db.session.commit()
+	return redirect('/contacts')
+	
+@app.route('/contacts/updateContact/<string:contactName>', methods=['GET', 'POST'])
+def updateContact(contactName):
+	updateContact = c.contacts.query.get_or_404(contactName)
+	if request.method == 'GET':
+		return render_template('updateContact.html', updateContact=updateContact)
+	else:
+		updateContact.contactName = request.form['updatedcontactName']
+		updateContact.contactAddress = request.form['updatedcontactAddress']
+		updateContact.contactCity = request.form['updatedcontactCity']
+		updateContact.contactZip= request.form['updatedcontactZip']
+		updateContact.Phone = request.form['updatedPhone']
+		updateContact.Email = request.form['updatedEmail']
+		updateContact.isEmployee = request.form['updatedisEmployee']
+		c.db.session.commit()
+		return redirect('/contacts')
+		
+@app.route('/itemList')
+def itemList():
+	itemList = c.items.query.with_entities(c.items.idItems, c.items.name, c.items.quantity, c.items.code)
+	return render_template('itemList.html', itemList=itemList)
+
 
 # start the server with the 'run()' method
 if __name__ == '__main__':

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Update Contact</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Quicksand" />
+	<script src="https://unpkg.com/vue"></script>
+	<link rel="stylesheet" href="https://unpkg.com/vue-nav-tabs/themes/vue-tabs.css">
+		<script src="https://unpkg.com/vue-nav-tabs/dist/vue-tabs.js"></script>
+	<style>
+input[type=text], select {
+    width: 100%; 
+    padding: 12px;  
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; 
+    margin-top: 6px; 
+    margin-bottom: 16px; 
+    resize: vertical;
+}
+
+input[type=submit] {
+    cursor:pointer;
+	width:100%;
+	border:none;
+	background:grey;
+	color:#FFF;
+	margin:0 0 5px;
+	padding:10px;
+	font-size:15px;
+	font-family: Quicksand;
+	letter-spacing: 2px;
+}
+
+input[type=submit]:hover {
+    background:black;
+	-webkit-transition:background 0.3s ease-in-out;
+	-moz-transition:background 0.3s ease-in-out;
+	transition:background-color 0.3s ease-in-out;
+}
+
+.updateFormContainer {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    max-width:650px;
+    margin:0 auto;
+    position:relative;
+	font-family: Quicksand;
+}
+.updateFormContainer label, span {
+	color: #000000;
+}
+.updateFormContainer h1, p{
+	text-align: center;
+}
+</style>
+  </head>
+   <body>
+  <div class="updateFormContainer">
+  <h1>Update Contact!</h1>
+      <p>Click <a href="/welcome">here</a> to go back to the Home page.</p>
+      <p>Click <a href="/database">here</a> to go back to the Item list page.</p>
+  <form action="/contacts/updateContact/{{updateContact.contactName}}" method="POST">
+  <label for="updatedcontactName">Name</label>
+    <input type="text" id="updatedcontactName" name="updatedcontactName" value="{{updateContact.contactName}}" required oninvalid="this.setCustomValidity('Enter Name Here')" oninput="setCustomValidity('')">
+    <label for="updatedcontactAddress"> Street Address</label>
+    <input type="text" id="updatedcontactAddress" name="updatedcontactAddress" value="{{updateContact.contactAddress}}" />
+    <label for="updatedcontactCity">City</label>
+    <input type="text" id="updatedcontactCity" name="updatedcontactCity" value="{{updateContact.contactCity}}" >
+	<label for="updatedcontactZip">Zipcode</label>
+    <input type="text" id="updatedcontactZip" name="updatedcontactZip" value="{{updateContact.contactZip}}">
+	<label for="updatedPhone">Phone</label>
+    <input type="text" id="updatedPhone" name="updatedPhone" value="{{updateContact.Phone}}">
+	<label for="updatedEmail">Email</label>
+    <input type="text" id="updatedEmail" name="updatedEmail" value="{{updateContact.Email}}">
+	<label for="updatedisEmployee">Are they an Employee?</label>
+	<select id="updatedisEmployee" name="updatedisEmployee" value="{{updateContact.isEmployee}}">
+		<option value="Y">Y</option>
+		<option value="N">N</option>
+	</select>
+    <input type="submit" value="Submit">
+  </form>
+  </div>
+  <script type="text/javascript" src="../../static/js/javascript.js"></script>
+  </body>
+</html>
