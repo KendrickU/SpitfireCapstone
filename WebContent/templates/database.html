@@ -74,6 +74,14 @@ input[type=text], select {
     box-sizing: border-box; 
     resize: vertical;
 }
+input[type=number], select {
+    width: 100%; 
+    padding: 12px;  
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; 
+    resize: vertical;
+}
 
 .FormContainer {
     border-radius: 5px;
@@ -136,12 +144,11 @@ input[type=text], select {
  <span class="close">&times;</span>
   <h1>Add an Item!</h1>
   <form action="/add" method="POST">
-	<label for="idItems">idItems</label>
-    <input type="text" id="idItems" name="idItems" placeholder="idItems...">
+    <input type="hidden" id="idItems" name="idItems" value="">
     <label for="name">Name</label>
     <input type="text" id="name" name="name" placeholder="Name..." required oninvalid="this.setCustomValidity('Enter Name Here')" oninput="setCustomValidity('')" />
     <label for="quantity">Quantity</label>
-    <input type="text" id="quantity" name="quantity" placeholder="Quantity..." required oninvalid="this.setCustomValidity('Enter Quantity Here')" oninput="setCustomValidity('')">
+    <input type="number" id="quantity" name="quantity" placeholder="Quantity..." required oninvalid="this.setCustomValidity('Enter Quantity Here')" oninput="setCustomValidity('')">
 	<div id="dropdown">
 	<label for="mastercategory">Master Category</label>
 	<select id="mastercategory" name="mastercategory" v-model="master_category" required>

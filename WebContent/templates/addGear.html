@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Update an Item</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Quicksand" />
+	<script src="https://unpkg.com/vue"></script>
+	<link rel="stylesheet" href="https://unpkg.com/vue-nav-tabs/themes/vue-tabs.css">
+		<script src="https://unpkg.com/vue-nav-tabs/dist/vue-tabs.js"></script>
+	<style>
+input[type=text], select {
+    width: 100%; 
+    padding: 12px;  
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; 
+    margin-top: 6px; 
+    margin-bottom: 16px; 
+    resize: vertical;
+}
+
+input[type=number], select {
+    width: 100%; 
+    padding: 12px;  
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; 
+    resize: vertical;
+	margin-bottom: 8px;
+}
+
+input[type=submit] {
+    cursor:pointer;
+	width:100%;
+	border:none;
+	background:grey;
+	color:#FFF;
+	margin:0 0 5px;
+	padding:10px;
+	font-size:15px;
+	font-family: Quicksand;
+	letter-spacing: 2px;
+}
+
+input[type=submit]:hover {
+    background:black;
+	-webkit-transition:background 0.3s ease-in-out;
+	-moz-transition:background 0.3s ease-in-out;
+	transition:background-color 0.3s ease-in-out;
+}
+
+.updateFormContainer {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    max-width:650px;
+    margin:0 auto;
+    position:relative;
+	font-family: Quicksand;
+}
+.updateFormContainer label, span {
+	color: #000000;
+}
+.updateFormContainer h1, p{
+	text-align: center;
+}
+
+.cancel{
+	cursor:pointer;
+	width:45%;
+	float: right;
+	border:none;
+	background:grey;
+	color:#FFF;
+	margin:0 0 5px;
+	padding:10px;
+	font-size:15px;
+	font-family: Quicksand;
+	letter-spacing: 2px;
+}
+
+.cancel:hover {
+    background:black;
+	-webkit-transition:background 0.3s ease-in-out;
+	-moz-transition:background 0.3s ease-in-out;
+	transition:background-color 0.3s ease-in-out;
+}
+</style>
+  </head>
+   <body>
+  <div class="updateFormContainer">
+  <h1>You are trying to add {{updateItem.name}} to {{updateShow.show}}!</h1>
+  <form action="/account/show/{{updateShow.idShows}}/addGear/{{updateItem.idItems}}" method="POST">
+   <input type="hidden" id="idallocation_table" name="idallocation_table" value="">
+    <input type="hidden" id="name" name="name" value="{{updateItem.name}}">
+	<input type="hidden" id="items_id" name="items_id" value="{{updateItem.idItems}}">
+	<input type="hidden" id="user" name="user" value="{{updateShow.created_by}}">
+	<input type="hidden" id="id_Shows" name="id_Shows" value="{{updateShow.idShows}}">
+    <label for="quantity">How many would you like to add?</label>
+    <input type="number" id="quantity" name="quantity" required>
+	<input type="hidden" id="start_date" name="start_date" value="{{updateShow.start}}">
+	<input type="hidden" id="end_date" name="end_date" value="{{updateShow.end}}">
+	<input type="hidden" id="Barcoded" name="Barcoded" value="{{updateItem.code}}">
+	<input type="hidden" id="quantity_available" name="quantity_available" value="{{updateItem.quantity}}">
+    <input style="width:45%;" type="submit" value="Submit"><button class="cancel" onclick="goBack()">Cancel</button>
+  </form>
+  </div>
+  <script type="text/javascript" src="../../static/js/javascript.js"></script>
+  <script>
+function goBack() {
+    window.history.back();
+}
+</script>
+  </body>
+</html>

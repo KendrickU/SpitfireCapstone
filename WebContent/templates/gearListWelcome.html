@@ -123,32 +123,12 @@ input[type=text], select {
     -webkit-animation: fadeIn .5s;
     animation: fadeIn 1s;
 }
-.halfLeft {
-	width: 50%;
-	float: left !important;
-	padding-right: 12px;
-	padding-left: 12px;
-	padding-bottom: 5px;
-	box-sizing: border-box;
-	resize: vertical;
-}
-.halfRight {
-	width: 50%;
-	float: right !important;
-	padding-right: 12px;
-	padding-left: 12px;
-	padding-bottom: 5px;
-	box-sizing: border-box;
-	resize: vertical;
-}
+
 
   </style>
   </head>
    <body class="container-fluid">
    <div id="showTabs">
-   <div class="btn-group">
-		<button id="addGear">Add Gear To {{updateShow.show}}</button>
-    	</div>
 	<form action="/account/show/{{updateShow.idShows}}" method="POST">
    <table style="width:100% !important">
 					<tr>
@@ -157,6 +137,7 @@ input[type=text], select {
 						<th>Id Items</th>
 						<th>Name</th>
 						<th>Quantity</th>
+            <th>Quantity Available</th>
 						<th>Barcode</th>
 					</tr>
 						{% for Gears in gearList %}
@@ -164,88 +145,11 @@ input[type=text], select {
 						<td>{{ Gears.items_id }}</td>
 						<td>{{ Gears.name }}</td>
 						<td>{{ Gears.quantity }}</td>
+            <td>{{ Gears.quantity_available }}</td>
 						<td>{{ Gears.Barcoded }}</td>
 					</tr>
 						{% endfor %}
 					</table>
 	</div>
-	<div id="addModal" class="modal">
- <div class="modal-content">
- <div class="FormContainer">
- <span class="close">&times;</span>
-  <h1>Add Gear to {{updateShow.show}}</h1>
-  <div class="row">
-    <div class="col col-3 left">
-      <div class="panel panel-left">
-   <form method="get" action="/searchGear" id="searchboxGear">
-		<input style="width:100% !important" id="searchShow" name="gear" type="text" size="40" placeholder="Search Gear to Add..." />
-	</form>
-	</div>
-	</div>
-	 <div class="col col-6">
-      <div class="row">
-        <div class="col col-12">
-          <div class="panel">
-  <table>
-<tr>
-	<th colspan="3">List of Items Available</th>
-<tr>
-    <th>Add</th>
-	<th>Name</th>
-    <th>Quantity</th>
-</tr>
-{% for items in itemList %}
-<tr>
-	<td>
-	 <a href="{{ url_for('addGear', idShows=updateShow.idShows, idItems=items.idItems) }}">Add Gear</a>
-	</td>
-	<td>{{ items.name }}</td>
-	<td>{{ items.quantity }}</td>
-</tr>
-{% endfor %}
-</table>
-</div>
-</div>
-</div>
-</div>
- <div class="col col-3 right">
-      <div class="panel panel-right">
- <table>
-<tr>
-	<th colspan="3">List of Items</th>
-<tr>
-    <th>Name</th>
-    <th>Quantity</th>
-</tr>
-{% for gears in gearList %}
-<tr>
-	<td>{{ gears.name }}</td>
-	<td>{{ gears.quantity }}</td>
-</tr>
-{% endfor %}
-</table>
-</div>
-</div>
-</div>
-  </form>
-  </div>
- </div>
- </div>
-<script>
-var modal = document.getElementById('addModal');
-var btn = document.getElementById("addGear");
-var span = document.getElementsByClassName("close")[0];
-btn.onclick = function() {
-    modal.style.display = "block";
-}
-span.onclick = function() {
-    modal.style.display = "none";
-}
-function myFunction() {
-    var popup = document.getElementById("myPopup");
-    popup.classList.toggle("show");
-}
-
-</script>
 </body>
 </html>

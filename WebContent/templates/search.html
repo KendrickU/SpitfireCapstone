@@ -142,23 +142,7 @@ input[type=text], select {
   <li style="float:right"><a href="/login">LOGOUT</a></li>
 </ul>
   </div>
-  <div class="container-fluid">
-    <div class="col left">
-      <div class="panel-left">
-	  <div id="showTabs">
-		<vue-tabs direction="vertical">
-		<v-tab v-for="tab in tabs" :key="tab">
-		<div slot="title">{% raw %}{{tab}}{% endraw %} &nbsp;<span v-if="tab !== 'Main View'" @click.stop="removeTab(tab)" class="ti-close tab-close"></span></div>
-	  <div v-if="tab === 'Main View'" class="row" style="width:1200px !important;left: 15px; !important; position: relative;"> 
-					<div class="fullPage">
-	  <form method="get" action="/searchShow">
-					<input id="searchShow" name="showName" type="text" size="40" placeholder="Search Shows..." />
-				</form>
-				<div class="btn-group">
-							<button id="addButton">Create New Job</button>
-							</div>
-	</div>
-					<table style="width:100% !important">
+				<table style="width:100% !important">
 					<tr>
 						<th colspan="10">List of Shows</th>
 					<tr>
@@ -173,7 +157,7 @@ input[type=text], select {
 						<th>Sales Person</th>
 						<th>Created By</th>
 					</tr>
-						{% for Shows in showList %}
+						{% for Shows in information %}
 					<tr>
 						<td>{{ Shows.idShows }}</td>
 						<td><div class="show-names">
@@ -191,98 +175,5 @@ input[type=text], select {
 					</tr>
 						{% endfor %}
 					</table>
-		</div>
-		{% for Shows in showList %}
-		<div v-if="tab === '{{ Shows.show }}'">
-			<object style="width:1200px !important; height:100vh !important" type="text/html" data="account/show/{{ Shows.idShows }}"></object>
-		</div>
-		{% endfor %}
-		</div>
-	  </v-tab>
-		</vue-tabs>
-		</div>
-	  </div>
-	  </div>
-	 </div>
-	</div>
-	<div id="addModal" class="modal">
- <div class="modal-content">
- <div class="FormContainer">
- <span class="close">&times;</span>
-  <h1>Add a Show!</h1>
-  <form action="/addShow" method="POST">
-  <div id="app">
-	<div class="halfLeft">
-    <input type="hidden" id="idShows" name="idShows" value="">
-	</div>
-	<div class="halfRight">
-    <label for="start">Start Date</label>
-      <date-picker style="height: 46px;" id="start" v-model="date1" name="start" placeholder="Start Date..." :config="config"></date-picker>
-	</div>
-	<div class="halfRight">
-    <label for="show">Show name</label>
-    <input type="text" id="show" name="show" placeholder="Name..." required oninvalid="this.setCustomValidity('Enter Show Name Here')" oninput="setCustomValidity('')">
-	</div>
-	<div class="halfLeft">
-	<label for="end">End Date</label>
-	<date-picker style="height: 46px;" id="end" v-model="date2" name="end" placeholder="Start Date..." :config="config"></date-picker>
-	</div>
-	<div class="halfRight">
-	<label for="show_start">Show Start</label>
-	<date-picker style="height: 46px;" id="show_start" v-model="date3" name="show_start" placeholder="Start Date..." :config="config"></date-picker>
-	</div>
-	<div class="halfLeft">
-	<label for="return">Return</label>
-	<date-picker style="height: 46px;" id="return" v-model="date4" name="return" placeholder="Start Date..." :config="config"></date-picker>
-	</div>
-	<div class="halfRight">
-	<label for="venue">Venue</label>
-    <input type="text" id="venue" name="venue" placeholder="Venue...">
-	</div>
-	<div class="halfLeft">
-	<label for="client">Client</label>
-    <input type="text" id="client" name="client" placeholder="Client...">
-	</div>
-	<div class="halfRight">
-	<label for="job_type">Job Type</label>
-    <input type="text" id="job_type" name="job_type" placeholder="Job Type...">
-	</div>
-	<div class="halfLeft">
-	<label for="status">Status</label>
-    <input type="text" id="status" name="status" placeholder="Status...">
-	</div>
-	<div class="halfRight">
-	<label for="handler">Handler</label>
-    <input type="text" id="handler" name="handler" placeholder="Handler...">
-	</div>
-	<div class="halfLeft">
-	<label for="salesperson">Sales Person</label>
-    <input type="text" id="salesperson" name="salesperson" placeholder="Sales Person...">
-	</div>
-	<div class="halfRight">
-	<label for="created_by">Created By</label>
-    <input type="text" id="created_by" name="created_by" placeholder="Created By..." required oninvalid="this.setCustomValidity('Enter Your Name Here')" oninput="setCustomValidity('')">
-    </div>
-	<input type="submit" value="Submit">
-	</div>
-  </form>
-  </div>
- </div>
-</div>
-<script type="text/javascript" src="static/js/javascript.js"></script>
-<script src="https://code.jquery.com/jquery-1.8.0.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
-    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
-<script>
-var modal = document.getElementById('addModal');
-var btn = document.getElementById("addButton");
-var span = document.getElementsByClassName("close")[0];
-btn.onclick = function() {
-    modal.style.display = "block";
-}
-span.onclick = function() {
-    modal.style.display = "none";
-}
-</script>
 </body>
 </html>
