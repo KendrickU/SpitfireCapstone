@@ -182,6 +182,14 @@ class allocation_table(db.Model):
         self.Barcoded = Barcoded
         self.quantity_available = quantity_available
 
+        @classmethod
+        def find_quantity(cls, items_id):
+            total_quantity = 0
+            for items_id in allocation_table:
+                if allocation_table['items_id'] == items_id:
+                    total_quantity = total_quantity + allocation_table['quantity']
+                return total_quantity
+
     def __repr(self):
         return '<allocation> %r' % self.name
 
