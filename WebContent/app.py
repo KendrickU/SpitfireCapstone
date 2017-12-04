@@ -180,8 +180,8 @@ def show(idShows):
 def showGear(idShows):
 	updateShow = c.Shows.query.get_or_404(idShows)
 	if request.method == 'GET':
-		itemList = c.items.query.with_entities(c.items.idItems, c.items.name, c.items.quantity, c.items.code)
-		gearList = c.allocation_table.query.filter_by(idallocation_table=idShows).with_entities(c.allocation_table.items_id, c.allocation_table.name, c.allocation_table.quantity, c.allocation_table.quantity_available, c.allocation_table.Barcoded)
+		itemList = c.items.query.with_entities(c.items.name, c.items.quantity)
+		#gearList = c.allocation_table.query.filter_by(idallocation_table=idShows).with_entities(c.allocation_table.items_id, c.allocation_table.name, c.allocation_table.quantity, c.allocation_table.quantity_available, c.allocation_table.Barcoded)
 		return render_template('gearListWelcome.html', updateShow=updateShow, itemList=itemList, gearList=gearList)
 		
 @app.route('/dailyTask')
