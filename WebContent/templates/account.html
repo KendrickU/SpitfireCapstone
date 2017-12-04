@@ -11,7 +11,16 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
 	<script src="https://unpkg.com/vue"></script>
 	<link rel="stylesheet" href="https://unpkg.com/vue-nav-tabs/themes/vue-tabs.css">
-		<script src="https://unpkg.com/vue-nav-tabs/dist/vue-tabs.js"></script>
+	<script src="https://unpkg.com/vue-nav-tabs/dist/vue-tabs.js"></script>
+	<!-- Date-picker dependency-->
+	<script src="https://unpkg.com/jquery@3.2.1/dist/jquery.min.js"></script>
+	<script src="https://unpkg.com/moment@2.18.1/min/moment.min.js"></script>
+	<link href="https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Date-picker itself -->
+	<script src="https://unpkg.com/eonasdan-bootstrap-datetimepicker@4.17.47/build/js/bootstrap-datetimepicker.min.js"></script>
+	<link href="https://unpkg.com/eonasdan-bootstrap-datetimepicker@4.17.47/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+	<!-- Lastly add this package -->
+	<script src="https://unpkg.com/vue-bootstrap-datetimepicker"></script>
   </head>
   <style>
   .modal {
@@ -27,10 +36,13 @@
     background-color: rgb(0,0,0); 
     background-color: rgba(0,0,0,0.4); 
 }
+
+th{
+	text-align: center !important;
+}
 .modal-content {
     margin: auto;
-	padding: 20px;
-    width: 80%;
+    width: 65%;
 }
 .close {
     color: grey;
@@ -120,8 +132,8 @@ input[type=text], select {
 }
 
   </style>
-   <body class="container-fluid">
-  <div id="header-wrapper">
+   <body>
+  <div id="header-wrapper" style="padding: 0 !important;">
 	    <ul class="top-nav">
   <li><a href="/welcome">HOME</a></li>
   <li><a href="/contacts">CONTACTS</a></li>
@@ -130,14 +142,14 @@ input[type=text], select {
   <li style="float:right"><a href="/login">LOGOUT</a></li>
 </ul>
   </div>
-  <div class="row">
+  <div class="container-fluid">
     <div class="col left">
       <div class="panel-left">
 	  <div id="showTabs">
 		<vue-tabs direction="vertical">
 		<v-tab v-for="tab in tabs" :key="tab">
 		<div slot="title">{% raw %}{{tab}}{% endraw %} &nbsp;<span v-if="tab !== 'Main View'" @click.stop="removeTab(tab)" class="ti-close tab-close"></span></div>
-	  <div v-if="tab === 'Main View'" class="row" style="width:1200px !important"> 
+	  <div v-if="tab === 'Main View'" class="row" style="width:1200px !important;left: 15px; !important; position: relative;"> 
 					<div class="fullPage">
 	  <form method="get" action="/search" id="searchbox5">
 					<input id="searchShow" name="q" type="text" size="40" placeholder="Search Shows..." />
@@ -190,6 +202,7 @@ input[type=text], select {
 		</vue-tabs>
 		</div>
 	  </div>
+	  </div>
 	 </div>
 	</div>
 	<div id="addModal" class="modal">
@@ -198,62 +211,68 @@ input[type=text], select {
  <span class="close">&times;</span>
   <h1>Add a Show!</h1>
   <form action="/addShow" method="POST">
+  <div id="app">
 	<div class="halfLeft">
-  	<label for="idShows">ID Show</label>
-    <input type="text" id="idShows" name="idShows" placeholder="Show ID...">
+    <input type="hidden" id="idShows" name="idShows" value="">
+	</div>
+	<div class="halfRight">
+    <label for="start">Start Date</label>
+      <date-picker style="height: 46px;" id="start" v-model="date1" name="start" placeholder="Start Date..." :config="config"></date-picker>
 	</div>
 	<div class="halfRight">
     <label for="show">Show name</label>
-    <input type="text" id="show" name="show" placeholder="Name...">
+    <input type="text" id="show" name="show" placeholder="Name..." required oninvalid="this.setCustomValidity('Enter Show Name Here')" oninput="setCustomValidity('')">
 	</div>
 	<div class="halfLeft">
-    <label for="start">Start Date</label>
-    <input type="text" id="start" name="start" placeholder="Start Date...">
-	</div>
-	<div class="halfRight">
 	<label for="end">End Date</label>
-    <input type="text" id="end" name="end" placeholder="End Date...">
-	</div>
-	<div class="halfLeft">
-	<label for="show_start">Show Start</label>
-    <input type="text" id="show_start" name="show_start" placeholder="Show Start...">
+	<date-picker style="height: 46px;" id="end" v-model="date2" name="end" placeholder="Start Date..." :config="config"></date-picker>
 	</div>
 	<div class="halfRight">
-	<label for="return">Return</label>
-    <input type="text" id="return" name="return" placeholder="Return...">
+	<label for="show_start">Show Start</label>
+	<date-picker style="height: 46px;" id="show_start" v-model="date3" name="show_start" placeholder="Start Date..." :config="config"></date-picker>
 	</div>
 	<div class="halfLeft">
+	<label for="return">Return</label>
+	<date-picker style="height: 46px;" id="return" v-model="date4" name="return" placeholder="Start Date..." :config="config"></date-picker>
+	</div>
+	<div class="halfRight">
 	<label for="venue">Venue</label>
     <input type="text" id="venue" name="venue" placeholder="Venue...">
 	</div>
-	<div class="halfRight">
+	<div class="halfLeft">
 	<label for="client">Client</label>
     <input type="text" id="client" name="client" placeholder="Client...">
 	</div>
-	<div class="halfLeft">
+	<div class="halfRight">
 	<label for="job_type">Job Type</label>
     <input type="text" id="job_type" name="job_type" placeholder="Job Type...">
 	</div>
-	<div class="halfRight">
+	<div class="halfLeft">
 	<label for="status">Status</label>
     <input type="text" id="status" name="status" placeholder="Status...">
 	</div>
-	<div class="halfLeft">
+	<div class="halfRight">
 	<label for="handler">Handler</label>
     <input type="text" id="handler" name="handler" placeholder="Handler...">
 	</div>
-	<div class="halfRight">
+	<div class="halfLeft">
 	<label for="salesperson">Sales Person</label>
     <input type="text" id="salesperson" name="salesperson" placeholder="Sales Person...">
 	</div>
+	<div class="halfRight">
 	<label for="created_by">Created By</label>
-    <input type="text" id="created_by" name="created_by" placeholder="Created By...">
-    <input type="submit" value="Submit">
+    <input type="text" id="created_by" name="created_by" placeholder="Created By..." required oninvalid="this.setCustomValidity('Enter Your Name Here')" oninput="setCustomValidity('')">
+    </div>
+	<input type="submit" value="Submit">
+	</div>
   </form>
   </div>
  </div>
 </div>
 <script type="text/javascript" src="static/js/javascript.js"></script>
+<script src="https://code.jquery.com/jquery-1.8.0.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
 <script>
 var modal = document.getElementById('addModal');
 var btn = document.getElementById("addButton");

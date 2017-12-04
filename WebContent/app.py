@@ -31,7 +31,8 @@ def welcome():
 	"""
 	showList = c.Shows.query.with_entities(c.Shows.idShows, c.Shows.show, c.Shows.start_date, c.Shows.end_date)
 	contactList = c.contacts.query.with_entities(c.contacts.contactName, c.contacts.contactAddress, c.contacts.contactCity, c.contacts.contactZip, c.contacts.Phone, c.contacts.Email)
-	return render_template('welcome.html', showList=showList, contactList=contactList)  # render a template
+	dailyTaskList = c.daily_task.query.with_entities(c.daily_task.iddaily_task, c.daily_task.task, c.daily_task.place, c.daily_task.note, c.daily_task.time, c.daily_task.date)
+	return render_template('welcome.html', showList=showList, contactList=contactList, dailyTaskList=dailyTaskList)  # render a template
 
 # route for handling the login page logic
 @app.route('/login', methods=['GET', 'POST'])
@@ -68,7 +69,7 @@ def add():
 	"""This function will be used to add new items into inventory
 	This ability will only be given to select personal.
 	"""
-	if reqeust.method == 'POST':
+	if request.method == 'POST':
 		item = c.items(request.form['idItems'], request.form['name'], request.form['quantity'], request.form['mastercategory'], request.form['subcategory'], request.form['pictures'], request.form['code'])
 		c.db.session.add(item)
 		c.db.session.commit()
@@ -167,18 +168,23 @@ def show(idShows):
 
 @app.route('/dailyTask')
 def dailyTask():
-    if request.method == 'POST':
-        task = c.daily_task(request.form['iddaily_task'], request.form['task'], request.form['place'], request.form['note'], request.form['time'], request.form['date'])
-        c.db.session.add(task)
-        c.db.session.commit()
-    else:
-        c.db.session.commit()
+	dailyTaskList = c.daily_task.query.with_entities(c.daily_task.iddaily_task, c.daily_task.task, c.daily_task.place, c.daily_task.note, c.daily_task.time, c.daily_task.date)
+	return render_template('dailyTask.html', dailyTaskList=dailyTaskList)
 
-    return render_template('dailyTask.html')
+@app.route('/addDailyTask', methods=['POST'])
+def addDailyTask():
+	if request.method == 'POST':
+		dailyTask = c.daily_task(request.form['iddaily_task'], request.form['task'], request.form['place'], request.form['note'], request.form['time'], request.form['date'])
+		c.db.session.add(dailyTask)
+		c.db.session.commit()
+		return redirect('/dailyTask')
 
-@app.route('/dailyTaskPanel')
-def dailyTaskPanel():
-	return render_template('dailyTaskPanel.html')
+@app.route('/dailyTask/deleteTask/<int:iddaily_task>', methods=['GET', 'POST'])
+def deleteTask(iddaily_task):
+	deleteTask = c.daily_task.query.get_or_404(iddaily_task)
+	c.db.session.delete(deleteTask)
+	c.db.session.commit()
+	return redirect('/dailyTask')
 
 @app.route('/ganttView')
 def ganttView():

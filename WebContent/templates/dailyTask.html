@@ -91,7 +91,6 @@ body{
     z-index: 5555;
     left: 0;
     top: 0;
-    bottom: 0;
     right: 0;
     display: none;
     border-top: 5px solid #222222;
@@ -1931,6 +1930,10 @@ position: absolute;
     stroke: #ea4c89;
   }
 } 
+
+td{
+	text-align: center !important;
+}
 </style>
   </head>
   <body>
@@ -1944,41 +1947,46 @@ position: absolute;
             <div id="overlay"></div>
             <div id="card-main">      
                  <button id='close-icon'><span class="close" title="Close">&times;</span></button> 
-                <div class='card-content'>
+               <form action="/addDailyTask" method="POST">
+			   <div class='card-content'>
                      <h1>Add a Task!</h1>
+					  <div class='test'>
+                        <label for="iddaily_task"></label>
+                        <input id='iddaily_task' type="hidden" name="iddaily_task" autocomplete="off" value="">
+                    </div>
                     <div class='test'>
-                        <label>Task</label>
-                        <input id='title' type="text" autocomplete="off" spellcheck="false" maxlength="50">
-                        <span data-count='title' class='textCounter'></span>
+                        <label for="task">Task</label>
+                        <input id='task' type="text" name="task" autocomplete="off" spellcheck="false" maxlength="50">
+                        <span data-count='task' name="task" class='textCounter'></span>
                         <span class='notice'></span>
                     </div>
                     <div class='test'>        
-                        <label>Place</label>
-                        <input id='location' type="text" maxlength="50">
-                        <span data-count='location'  class='textCounter'></span>
+                        <label for="place">Place</label>
+                        <input id='place' name="place" type="text" maxlength="25">
+                        <span data-count='place' name="place" class='textCounter'></span>
                         <span class='notice'></span>
                     </div>
                     
                     <div class='test'>
-                        <label>Note</label>
-                        <input id='description' type="text" maxlength="50">
-                        <span data-count='description' class='textCounter'></span>
+                        <label for="note">Note</label>
+                        <input id='note' name="note" type="text" maxlength="50">
+                        <span data-count='note' name="note" class='textCounter'></span>
                     </div>
                     </div>
                 <div class='card-content02'>
                     <div class='set-priority'>
-                        <h3>Set Time</h3>
-                        <input type='time'>
+                        <h3 for="time">Set Time</h3>
+                        <input id="time" name="time" type='time'>
                     </div>
                     <div class='set-priority'>
                         <h3>Set date</h3>
-                        <input id='datepicker' placeholder='dd/mm/yyyy' readonly>
+                        <input id='datepicker' name="date" placeholder='dd/mm/yyyy' readonly>
                     </div>
                     </div>
                     <button id='submit' role="button"><i class="fa fa-check"></i>
                         <span class='ripple'></span>
                     </button>
-             
+             </form>
             </div>
 
             <div class="head">
@@ -1992,46 +2000,33 @@ position: absolute;
                     </span>
                 </div>
             </div>
+			
             <div class="list-container">
-                <div class="pre-loading">
-                    <div class='simulate-container'>
-                    <div class="simulatepost">
-                        <div class="circle"></div>
-                        <div class="right-side">
-                        <div class="top-line"></div>
-                        <div class="center-line"></div>
-                        <div class="bottom-line"></div>
-                            </div>
-                        </div>
-                        <div class="sp_02"></div>
-                            <div class="sp_03"></div>
-                                <div class="sp_04"></div>
-                                   <div class="sp_05"></div>
-                    </div>
-                    <div class="main-cont">
-                    <i class="fa fa-signal"></i>
-                    <h1>No tasks for today</h1>
-                    <h3>Enjoy your <span class='wel-day'></span></h3>
-                    </div>
-                </div>
+				<table style="width:100% !important">
+					<tr>
+						<th>Task</th>
+						<th>Place</th>
+						<th>Note</th>
+						<th>Time</th>
+						<th>Date</th>
+						<th>Actions</th>
+					</tr>
+						{% for daily_task in dailyTaskList %}
+					<tr>
+						<td>{{ daily_task.task }}</td>
+						<td>{{ daily_task.place }}</td>
+						<td>{{ daily_task.note }}</td>
+						<td>{{ daily_task.time }}</td>
+						<td>{{ daily_task.date }}</td>
+						<td>
+		<a href="{{ url_for('deleteTask', iddaily_task=daily_task.iddaily_task) }}">Delete</a>
+	</td>
+					</tr>
+						{% endfor %}
+					</table>
                 <ul class="list">
                 </ul>
             </div>
-      <div class="main-message">
-    <div class="message">
-    <h3>Delete Task?</h3>
-    <p></p>
-      </div>  
-    <div class="answer">
-    <button id='yes'>Delete Task</button>
-      <button id='no'>Cancel</button>
-    
-    </div>
-     <svg class="circular" viewBox="25 25 50 50">
-      <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
-    </svg>
-    
-    </div>
         </div>
     </div>
    
@@ -2044,15 +2039,6 @@ position: absolute;
     $("a[href='#']").click(function(e) {
         e.preventDefault();
     });
-    $('.simulatepost').clone().css({
-        'opacity': '.6'
-    }).appendTo('.sp_02');
-    $('.sp_02').clone().css({
-        'opacity': '.6'
-    }).appendTo('.sp_03');
-    $('.sp_03').clone().css({
-        'opacity': '.6'
-    }).appendTo('.sp_04');
 
     $("#datepicker").datepicker();
   

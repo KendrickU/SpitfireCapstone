@@ -86,3 +86,19 @@ new Vue({
     }
   }
 })
+
+ Vue.component('date-picker', VueBootstrapDatetimePicker.default);
+  
+  new Vue({
+    el: '#app',
+    data: {
+      date1: null,
+	  date2: null,
+	  date3: null,
+	  date4: null,
+	  use24hours: true,
+	  config: {
+		format: 'YYYY-MM-DD HH:mm'
+		}
+    },    
+  });

@@ -66,10 +66,7 @@
 									<label for="adapters">Adapters</label>
 									<input type="checkbox" id="adapters"/>
 									<ol>
-										<li class="file"><a href="">hi</a></li>
-										<li class="file"><a href="">menu-1-1-2</a></li>
-										<li class="file"><a href="">menu-1-1-3</a></li>
-										<li class="file"><a href="">menu-1-1-4</a></li>
+										<li class="file"><a href="">test</a></li>
 									</ol> 
 								</li>
 								<li>
@@ -409,11 +406,28 @@
   				</div>
 		</div>
 		<div class="rightBlock">
-  				<input type="radio" name="right" id="option6" checked/>
+  				<input type="radio" name="right" id="option6"/>
   				<label for="option6"><span>Daily To Do</span></label>
   					<div class="info" style="padding: 0px !important;">
 					<a href="#" style="left:65px;position: relative;" class="DailyLink" @click="addDailyTab">Open Daily Task View</a>
-						<object style="width:100%; height:85%;" type="text/html" data="/dailyTaskPanel"></object>
+						<table style="width:100% !important">
+					<tr>
+						<th>Task</th>
+						<th>Place</th>
+						<th>Note</th>
+						<th>Time</th>
+						<th>Date</th>
+					</tr>
+						{% for daily_task in dailyTaskList %}
+					<tr>
+						<td>{{ daily_task.task }}</td>
+						<td>{{ daily_task.place }}</td>
+						<td>{{ daily_task.note }}</td>
+						<td>{{ daily_task.time }}</td>
+						<td>{{ daily_task.date }}</td>
+					</tr>
+						{% endfor %}
+					</table>
   					</div>
 		</div>
 		<div class="rightBlock">
@@ -427,7 +441,7 @@
 				</div>
 		</div>
 		<div class="rightBlock">
-  			<input type="radio" name="right" id="option4" />
+  			<input type="radio" name="right" id="option4" checked/>
   			<label for="option4"><span>Services</span></label>
   				<div class="info">
 				<a href="#" style="left:65px;position: relative;" class="DailyLink" @click="addItemTab">Open Item List View</a>
