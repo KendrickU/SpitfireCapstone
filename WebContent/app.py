@@ -272,7 +272,10 @@ def addGear(idShows,idItems):
 @app.route('/welcome/showGear/<int:idShows>/returnItem/<int:idallocation_table>', methods=['GET', 'POST'])
 def returnItem(idShows, idallocation_table):
 	updateGear = c.allocation_table.query.get_or_404(idallocation_table)
-	return redirect(url_for('showGear',idShows=idShows)) 
+	item = c.items.query.get_or_404(updateGear.items_id)
+	item.quantity = item.quantity + updateGear.quantity
+	c.db.session.commit()
+	return redirect(url_for('showGear',idShows=idShows))
 
 # start the server with the 'run()' method
 if __name__ == '__main__':
