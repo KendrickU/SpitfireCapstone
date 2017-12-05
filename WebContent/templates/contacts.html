@@ -103,7 +103,7 @@ input[type=text], select {
   </div>
     <table>
 <tr>
-	<th colspan="6">List of Contacts</th>
+	<th colspan="6">List of External Contacts</th>
 	<th>
 		<div class="btn-group">
 		<button id="addButton">Add Contact</button>
@@ -129,6 +129,20 @@ input[type=text], select {
 		&nbsp;||&nbsp;
 		<a href="{{ url_for('updateContact', contactName=contacts.contactName) }}">Update</a>
 	</td>
+</tr>
+{% endfor %}
+</table>
+<table style="margin-top: 15px">
+<tr>
+	<th colspan="6">List of Internal Contacts</th>
+<tr>
+    <th>Name</th>
+    <th>Email</th>
+</tr>
+{% for users in userList %}
+<tr>
+	<td>{{ users.username }}</td>
+	<td>{{ users.email }}</td>
 </tr>
 {% endfor %}
 </table>
