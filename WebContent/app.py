@@ -32,7 +32,9 @@ def welcome():
 	showList = c.Shows.query.with_entities(c.Shows.idShows, c.Shows.show, c.Shows.start_date, c.Shows.end_date)
 	contactList = c.contacts.query.with_entities(c.contacts.contactName, c.contacts.contactAddress, c.contacts.contactCity, c.contacts.contactZip, c.contacts.Phone, c.contacts.Email)
 	dailyTaskList = c.daily_task.query.with_entities(c.daily_task.iddaily_task, c.daily_task.task, c.daily_task.place, c.daily_task.note, c.daily_task.time, c.daily_task.date)
-	return render_template('welcome.html', showList=showList, contactList=contactList, dailyTaskList=dailyTaskList)  # render a template
+	venuesList = c.venues.query.with_entities(c.venues.venueName, c.venues.Address, c.venues.City, c.venues.Zip, c.venues.Phone, c.venues.contactName, c.venues.layout, c.venues.URL)
+	userList = c.users.query.with_entities(c.users.idUsers, c.users.username, c.users.password, c.users.department, c.users.email)
+	return render_template('welcome.html', showList=showList, contactList=contactList, dailyTaskList=dailyTaskList, venuesList=venuesList, userList=userList)  # render a template
 
 # route for handling the login page logic
 @app.route('/login', methods=['GET', 'POST'])
@@ -212,7 +214,8 @@ def ganttView():
 @app.route('/contacts')
 def contacts():
 	contactList = c.contacts.query.with_entities(c.contacts.contactName, c.contacts.contactAddress, c.contacts.contactCity, c.contacts.contactZip, c.contacts.Phone, c.contacts.Email)
-	return render_template('contacts.html', contactList=contactList)
+	userList = c.users.query.with_entities(c.users.idUsers, c.users.username, c.users.password, c.users.department, c.users.email)
+	return render_template('contacts.html', contactList=contactList, userList=userList)
 
 @app.route('/addContact', methods=['POST'])
 def addContact():

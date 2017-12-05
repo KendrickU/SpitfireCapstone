@@ -31,26 +31,55 @@
         <div class="leftBlock">
   			<input type="radio" name="left" id="option1" />   
   			<label for="option1"><span>Contacts</span></label>
-  				<div class="info" style="padding: 0px !important;">
-    				<table>
-					<tr>					
-						<th>Name</th>
-					</tr>
-						{% for contacts in contactList %}
-					<tr>
-						<td>
-							<a href="#" @click="addContactTab('{{ contacts.contactName }}')" style="color:#000">{{ contacts.contactName }}</a></td>
-						</td>
-					</tr>
-						{% endfor %}
-					</table>
+  				<div class="info">
+				<ol class="tree">
+						<li>
+							<label for="external">External Contacts</label>
+							<input type="checkbox" id="external" />
+							<ol>
+							{% for contacts in contactList %}
+								<li>
+									<label for="{{ contacts.contactName }}">{{ contacts.contactName }}</label>
+									<input type="checkbox" id="{{ contacts.contactName }}"/>
+									<ol>
+										<li class="file"><a href="/contacts">{{ contacts.Email }}</a></li>
+									</ol> 
+								</li>
+								{% endfor %}
+							</ol>
+						</li>
+						<li>
+							<label for="internal">Internal Contacts</label>
+							<input type="checkbox" id="internal" />
+							<ol>
+							{% for users in userList %}
+								<li>
+									<label for="{{ users.username }}">{{ users.username }}</label>
+									<input type="checkbox" id="{{ users.username }}"/>
+									<ol>
+										<li class="file"><a href="/contacts">{{ users.email}}</a></li>
+									</ol> 
+								</li>
+								{% endfor %}
+							</ol>
+						</li>
+				</ol>
   				</div>
 		</div>
 		<div class="leftBlock">
   				<input type="radio" name="left" id="option2"/>
   				<label for="option2"><span>Facilities</span></label>
-  					<div class="info">
-    					<p>Facilities Info</p>
+  					<div class="info" style="padding: 0px !important;">
+    					<table>
+					<tr>					
+						<th>Name</th>
+					</tr>
+						{% for venues in venuesList %}
+					<tr>
+						<td>{{ venues.venueName }}<td>
+					</tr>
+						{% endfor %}
+					</table>
   					</div>
 		</div>
 		<div class="leftBlock">
@@ -66,7 +95,7 @@
 									<label for="adapters">Adapters</label>
 									<input type="checkbox" id="adapters"/>
 									<ol>
-										<li class="file"><a href="">test</a></li>
+										<li class="file"><a href="/database">info</a></li>
 									</ol> 
 								</li>
 								<li>
