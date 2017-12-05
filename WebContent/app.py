@@ -182,7 +182,7 @@ def showGear(idShows):
 	updateShow = c.Shows.query.get_or_404(idShows)
 	if request.method == 'GET':
 		itemList = c.items.query.with_entities(c.items.idItems, c.items.name, c.items.quantity, c.items.code)
-		gearList = c.allocation_table.query.filter_by(idallocation_table=idShows).with_entities(c.allocation_table.items_id, c.allocation_table.name, c.allocation_table.quantity, c.allocation_table.quantity_available, c.allocation_table.Barcoded)
+		gearList = c.allocation_table.query.filter_by(id_Shows=idShows).with_entities(c.allocation_table.idallocation_table, c.allocation_table.items_id, c.allocation_table.name, c.allocation_table.quantity, c.allocation_table.quantity_available, c.allocation_table.Barcoded)
 		return render_template('gearListWelcome.html', updateShow=updateShow, itemList=itemList, gearList=gearList)
 
 @app.route('/dailyTask')
@@ -269,10 +269,10 @@ def addGear(idShows,idItems):
 		c.db.session.commit()
 		return redirect(url_for('show', idShows=idShows))
 
-@app.route('/account/show/<int:idShows>/returnItem/<int:idallocation_table>', methods=['GET', 'POST'])
+@app.route('/welcome/showGear/<int:idShows>/returnItem/<int:idallocation_table>', methods=['GET', 'POST'])
 def returnItem(idShows, idallocation_table):
 	updateGear = c.allocation_table.query.get_or_404(idallocation_table)
-	return redirect(url_for('show',idShows=idShows)) 
+	return redirect(url_for('showGear',idShows=idShows)) 
 
 # start the server with the 'run()' method
 if __name__ == '__main__':

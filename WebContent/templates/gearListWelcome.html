@@ -137,16 +137,17 @@ input[type=text], select {
 						<th>Id Items</th>
 						<th>Name</th>
 						<th>Quantity</th>
-            <th>Quantity Available</th>
 						<th>Barcode</th>
+						<th>Actions</th>
 					</tr>
 						{% for Gears in gearList %}
 					<tr>
 						<td>{{ Gears.items_id }}</td>
 						<td>{{ Gears.name }}</td>
 						<td>{{ Gears.quantity }}</td>
-            <td>{{ Gears.quantity_available }}</td>
 						<td>{{ Gears.Barcoded }}</td>
+						<td><a href="{{ url_for('returnItem', idShows=updateShow.idShows, idallocation_table=Gears.idallocation_table) }}">Return</a>
+						</td>
 					</tr>
 						{% endfor %}
 					</table>
