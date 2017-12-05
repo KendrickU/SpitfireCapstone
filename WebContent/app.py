@@ -167,14 +167,14 @@ def show(idShows):
 	updateShow = c.Shows.query.get_or_404(idShows)
 	if request.method == 'GET':
 		itemList = c.items.query.with_entities(c.items.idItems, c.items.name, c.items.quantity, c.items.code)
-		gearList = c.allocation_table.query.filter_by(id_Shows=idShows).with_entities(c.allocation_table.items_id, c.allocation_table.name, c.allocation_table.quantity, c.allocation_table.quantity_available, c.allocation_table.Barcoded)
+		gearList = c.allocation_table.query.filter_by(id_Shows=idShows).with_entities(c.allocation_table.idallocation_table, c.allocation_table.items_id, c.allocation_table.name, c.allocation_table.quantity, c.allocation_table.quantity_available, c.allocation_table.Barcoded)
 		return render_template('gearList.html', updateShow=updateShow, itemList=itemList, gearList=gearList)
 	if request.method == 'POST':
 		Gear = c.allocation_table(request.form['idallocation_table'], request.form['name'], request.form['items_id'], request.form['user'], request.form['id_Shows'], request.form['quantity'], request.form['start_date'], request.form['end_date'], request.form['Barcoded'], request.form['quantity_available'])
 		c.db.session.add(Gear)
 		c.db.session.commit()
 		itemList = c.items.query.with_entities(c.items.idItems, c.items.name, c.items.quantity, c.items.code)
-		gearList = c.allocation_table.query.filter_by(idallocation_table=idShows).with_entities(c.allocation_table.name, c.allocation_table.quantity) #complete this
+		gearList = c.allocation_table.query.filter_by(idallocation_table=idShows).with_entities(c.allocation_table.idallocation_table, c.allocation_table.name, c.allocation_table.quantity) #complete this
 		return render_template('gearList.html', updateShow=updateShow, itemList=itemList, gearList=gearList)
 
 @app.route('/welcome/showGear/<int:idShows>', methods=['GET', 'POST'])
@@ -268,6 +268,11 @@ def addGear(idShows,idItems):
 		c.db.session.add(Gear)
 		c.db.session.commit()
 		return redirect(url_for('show', idShows=idShows))
+
+@app.route('/account/show/<int:idShows>/returnItem/<int:idallocation_table>', methods=['GET', 'POST'])
+def returnItem(idShows, idallocation_table):
+	updateGear = c.allocation_table.query.get_or_404(idallocation_table)
+	return redirect(url_for('show',idShows=idShows)) 
 
 # start the server with the 'run()' method
 if __name__ == '__main__':
