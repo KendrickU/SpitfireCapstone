@@ -15,6 +15,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://Spitfire:12Reddoor34@tms-capsto
 db = SQLAlchemy(app)
 app.secret_key = "super secret key"
 
+IdList = []
 
 # use decorators to link the function to a url
 @app.route('/')
@@ -271,6 +272,10 @@ def addGear(idShows,idItems):
 
 @app.route('/welcome/showGear/<int:idShows>/returnItem/<int:idallocation_table>', methods=['GET', 'POST'])
 def returnItem(idShows, idallocation_table):
+	if idallocation_table in IdList:
+		return redirect(url_for('showGear', idShows=idShows))
+	else:
+		IdList.append(idallocation_table)
 	updateGear = c.allocation_table.query.get_or_404(idallocation_table)
 	item = c.items.query.get_or_404(updateGear.items_id)
 	item.quantity = item.quantity + updateGear.quantity
@@ -279,4 +284,4 @@ def returnItem(idShows, idallocation_table):
 
 # start the server with the 'run()' method
 if __name__ == '__main__':
-	app.run(debug=True)
+	app.run(debug=False)
