@@ -155,7 +155,7 @@ def addShow():
 @app.route('/gearList', methods=['POST'])
 def gearList():
 	return render_template("gearList.html")
-	
+
 @app.route('/gearListWelcome', methods=['POST'])
 def gearListWelcome():
 	return render_template("gearListWelcome.html")
@@ -168,7 +168,6 @@ def show(idShows):
 		gearList = c.allocation_table.query.filter_by(id_Shows=idShows).with_entities(c.allocation_table.items_id, c.allocation_table.name, c.allocation_table.quantity, c.allocation_table.quantity_available, c.allocation_table.Barcoded)
 		return render_template('gearList.html', updateShow=updateShow, itemList=itemList, gearList=gearList)
 	if request.method == 'POST':
-		#we need to do some recoding here.
 		Gear = c.allocation_table(request.form['idallocation_table'], request.form['name'], request.form['items_id'], request.form['user'], request.form['id_Shows'], request.form['quantity'], request.form['start_date'], request.form['end_date'], request.form['Barcoded'], request.form['quantity_available'])
 		c.db.session.add(Gear)
 		c.db.session.commit()
@@ -183,7 +182,7 @@ def showGear(idShows):
 		itemList = c.items.query.with_entities(c.items.idItems, c.items.name, c.items.quantity, c.items.code)
 		gearList = c.allocation_table.query.filter_by(idallocation_table=idShows).with_entities(c.allocation_table.items_id, c.allocation_table.name, c.allocation_table.quantity, c.allocation_table.quantity_available, c.allocation_table.Barcoded)
 		return render_template('gearListWelcome.html', updateShow=updateShow, itemList=itemList, gearList=gearList)
-		
+
 @app.route('/dailyTask')
 def dailyTask():
 	dailyTaskList = c.daily_task.query.with_entities(c.daily_task.iddaily_task, c.daily_task.task, c.daily_task.place, c.daily_task.note, c.daily_task.time, c.daily_task.date)
@@ -221,14 +220,14 @@ def addContact():
 		c.db.session.add(contacts)
 		c.db.session.commit()
 		return redirect('/contacts')
-		
+
 @app.route('/contacts/deleteContact/<string:contactName>', methods=['GET', 'POST'])
 def deleteContact(contactName):
 	deleteContact = c.contacts.query.get_or_404(contactName)
 	c.db.session.delete(deleteContact)
 	c.db.session.commit()
 	return redirect('/contacts')
-	
+
 @app.route('/contacts/updateContact/<string:contactName>', methods=['GET', 'POST'])
 def updateContact(contactName):
 	updateContact = c.contacts.query.get_or_404(contactName)
@@ -244,11 +243,13 @@ def updateContact(contactName):
 		updateContact.isEmployee = request.form['updatedisEmployee']
 		c.db.session.commit()
 		return redirect('/contacts')
-		
+
 @app.route('/itemList')
 def itemList():
 	itemList = c.items.query.with_entities(c.items.idItems, c.items.name, c.items.quantity, c.items.code)
 	return render_template('itemList.html', itemList=itemList)
+
+
 
 @app.route('/account/show/<int:idShows>/addGear/<int:idItems>', methods=['GET', 'POST'])
 def addGear(idShows,idItems):
@@ -258,6 +259,9 @@ def addGear(idShows,idItems):
 		return render_template('addGear.html', updateItem=updateItem, updateShow=updateShow)
 	else:
 		Gear = c.allocation_table(request.form['idallocation_table'], request.form['name'], request.form['items_id'], request.form['user'], request.form['id_Shows'], request.form['quantity'], request.form['start_date'], request.form['end_date'], request.form['Barcoded'], request.form['quantity_available'])
+		updateItem = c.items.query.get_or_404(request.form['items_id'])
+		updateItem.quantity = int(updateItem.quantity) - int(request.form['quantity'])
+		c.db.session.commit()
 		c.db.session.add(Gear)
 		c.db.session.commit()
 		return redirect(url_for('show', idShows=idShows))
