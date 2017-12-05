@@ -146,11 +146,22 @@ input[type=text], select {
 						<td>{{ Gears.name }}</td>
 						<td>{{ Gears.quantity }}</td>
 						<td>{{ Gears.Barcoded }}</td>
-						<td><a href="{{ url_for('returnItem', idShows=updateShow.idShows, idallocation_table=Gears.idallocation_table) }}">Return</a>
-						</td>
+						<td><a href="{{ url_for('returnItem', idShows=updateShow.idShows, idallocation_table=Gears.idallocation_table) }}" onclick="return check(this);">Return</a></td>
 					</tr>
 						{% endfor %}
 					</table>
 	</div>
+	<script> 
+  function check(link) {
+    if (link.className != "visited") {
+    alert("Item Has Been Returned");
+       link.className = "visited";
+       return true;     
+    }
+            alert("Item Has Already Been Returned");
+    return false;
+}
+
+</script>
 </body>
 </html>
