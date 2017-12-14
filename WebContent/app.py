@@ -111,7 +111,7 @@ def delete(idItems):
 def calendar():
 	"""Renders a calender.
 	The calender will make it easier to visualize
-	gear and their locations to aviod confilicts.
+	gear and their locations to avoid conflicts.
 	"""
 	showList = c.Shows.query.with_entities(c.Shows.idShows, c.Shows.show, c.Shows.start_date,
 										   c.Shows.end_date,c.Shows.client, c.Shows.job_type,
@@ -130,6 +130,10 @@ def search():
 
 @app.route('/searchShow')
 def searchShow():
+	"""This will let the users search
+	through the existing shows in the Shows table.
+	This page will only be available in the account view.
+	"""
 	showName = request.args.get('showName', '')
 	information = c.Shows.query.filter_by(show=showName)
 	return render_template('search.html', information=information)
@@ -149,6 +153,10 @@ def account():
 
 @app.route('/addShow', methods=['POST'])
 def addShow():
+	"""This function will be used to add a new show into the Shows Table
+	This ability will only be given to select personal and only shown on 
+	The account page. 
+	"""
 	if request.method == 'POST':
 		shows = c.Shows(request.form['idShows'],request.form['show'],request.form['start'],request.form['end'],request.form['show_start'],request.form['return'],request.form['venue'],request.form['client'],request.form['job_type'],request.form['status'],request.form['handler'],request.form['salesperson'],request.form['created_by'])
 		c.db.session.add(shows)
@@ -157,14 +165,26 @@ def addShow():
 
 @app.route('/gearList', methods=['POST'])
 def gearList():
+	"""Gives access to the inventory that is assigned to a certain show.
+	with the ability to add 
+	inventory only select users will have that privlege.
+	"""
 	return render_template("gearList.html")
 
 @app.route('/gearListWelcome', methods=['POST'])
 def gearListWelcome():
+	"""Gives access to the inventory that is assigned to a certain show.
+	This is for the welcome page and users will be able to 
+	return inventory on this page. 
+	"""
 	return render_template("gearListWelcome.html")
 
 @app.route('/account/show/<int:idShows>', methods=['GET', 'POST'])
 def show(idShows):
+	"""This page is unique to what show the users has selected and 
+	renders the GearList to show only the specific gear assigned
+	to that particular show. This is for the account page.
+	"""
 	updateShow = c.Shows.query.get_or_404(idShows)
 	if request.method == 'GET':
 		itemList = c.items.query.with_entities(c.items.idItems, c.items.name, c.items.quantity, c.items.code)
@@ -180,6 +200,10 @@ def show(idShows):
 
 @app.route('/welcome/showGear/<int:idShows>', methods=['GET', 'POST'])
 def showGear(idShows):
+	"""This page is unique to what show the users has selected and 
+	renders the GearList to show only the specific gear assigned
+	to that particular show. This is for the welcome page.
+	"""
 	updateShow = c.Shows.query.get_or_404(idShows)
 	if request.method == 'GET':
 		itemList = c.items.query.with_entities(c.items.idItems, c.items.name, c.items.quantity, c.items.code)
@@ -188,11 +212,17 @@ def showGear(idShows):
 
 @app.route('/dailyTask')
 def dailyTask():
+	"""Gives access to the daily Tasks
+	Users can see all daily tasks on the welcome page. 
+	"""
 	dailyTaskList = c.daily_task.query.with_entities(c.daily_task.iddaily_task, c.daily_task.task, c.daily_task.place, c.daily_task.note, c.daily_task.time, c.daily_task.date)
 	return render_template('dailyTask.html', dailyTaskList=dailyTaskList)
 
 @app.route('/addDailyTask', methods=['POST'])
 def addDailyTask():
+	"""This function will be used to add daily tasks.
+	To the daily task table in the database. 
+	"""
 	if request.method == 'POST':
 		dailyTask = c.daily_task(request.form['iddaily_task'], request.form['task'], request.form['place'], request.form['note'], request.form['time'], request.form['date'])
 		c.db.session.add(dailyTask)
@@ -201,6 +231,9 @@ def addDailyTask():
 
 @app.route('/dailyTask/deleteTask/<int:iddaily_task>', methods=['GET', 'POST'])
 def deleteTask(iddaily_task):
+	"""This function will be used to remove daily tasks.
+	To the daily task table in the database. 
+	"""
 	deleteTask = c.daily_task.query.get_or_404(iddaily_task)
 	c.db.session.delete(deleteTask)
 	c.db.session.commit()
@@ -208,17 +241,27 @@ def deleteTask(iddaily_task):
 
 @app.route('/ganttView')
 def ganttView():
+	"""Renders a ganntt view of shows.
+	The gantt view will make it easier to visualize
+	gear and their locations to avoid conflicts.
+	"""
 	showList = c.Shows.query.with_entities(c.Shows.idShows, c.Shows.show, c.Shows.start_date, c.Shows.end_date)
 	return render_template('ganttView.html', showList=showList)
 
 @app.route('/contacts')
 def contacts():
+	"""Gives access to the contacts
+	External and internal contacts in the database. 
+	"""
 	contactList = c.contacts.query.with_entities(c.contacts.contactName, c.contacts.contactAddress, c.contacts.contactCity, c.contacts.contactZip, c.contacts.Phone, c.contacts.Email)
 	userList = c.users.query.with_entities(c.users.idUsers, c.users.username, c.users.password, c.users.department, c.users.email)
 	return render_template('contacts.html', contactList=contactList, userList=userList)
 
 @app.route('/addContact', methods=['POST'])
 def addContact():
+	"""This function will be used to add contacts.
+	To the contacts table in the database. 
+	"""
 	if request.method == 'POST':
 		contacts = c.contacts(request.form['contactName'],request.form['contactAddress'],request.form['contactCity'],request.form['contactZip'],request.form['Phone'],request.form['Email'],request.form['isEmployee'])
 		c.db.session.add(contacts)
@@ -227,6 +270,9 @@ def addContact():
 
 @app.route('/contacts/deleteContact/<string:contactName>', methods=['GET', 'POST'])
 def deleteContact(contactName):
+	"""This function will be used to remove contacts.
+	To the contacts table in the database. 
+	"""
 	deleteContact = c.contacts.query.get_or_404(contactName)
 	c.db.session.delete(deleteContact)
 	c.db.session.commit()
@@ -234,6 +280,9 @@ def deleteContact(contactName):
 
 @app.route('/contacts/updateContact/<string:contactName>', methods=['GET', 'POST'])
 def updateContact(contactName):
+	"""This function will be used to update a selected contact.
+	To the contacts table in the database. 
+	"""
 	updateContact = c.contacts.query.get_or_404(contactName)
 	if request.method == 'GET':
 		return render_template('updateContact.html', updateContact=updateContact)
@@ -250,6 +299,9 @@ def updateContact(contactName):
 
 @app.route('/itemList')
 def itemList():
+	"""Gives access to the inventory list
+	This is for the welcome page alone.  
+	"""
 	itemList = c.items.query.with_entities(c.items.idItems, c.items.name, c.items.quantity, c.items.code)
 	return render_template('itemList.html', itemList=itemList)
 
@@ -257,6 +309,10 @@ def itemList():
 
 @app.route('/account/show/<int:idShows>/addGear/<int:idItems>', methods=['GET', 'POST'])
 def addGear(idShows,idItems):
+	"""This process an inventory item to be assigned to a certain show 
+	and subtracts the quantity that was taken out 
+	Users have this option only on the accounts page. 
+	"""
 	updateItem = c.items.query.get_or_404(idItems)
 	updateShow = c.Shows.query.get_or_404(idShows)
 	if request.method == 'GET':
@@ -272,6 +328,10 @@ def addGear(idShows,idItems):
 
 @app.route('/welcome/showGear/<int:idShows>/returnItem/<int:idallocation_table>', methods=['GET', 'POST'])
 def returnItem(idShows, idallocation_table):
+	"""This process an inventory item that is assigned to a show
+	to be returned and adds the quantity that was taken out 
+	to be added back in. Users have this option only on the welcome page. 
+	"""
 	if idallocation_table in IdList:
 		return redirect(url_for('showGear', idShows=idShows))
 	else:
